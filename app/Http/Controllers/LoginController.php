@@ -51,7 +51,7 @@ class LoginController extends Controller
 	public function postUpdate(Request $request)
 	{
 		pracownik::loginupdate($request);		
-		return redirect()->route('emp'); 
+		return redirect()->route('dashboard'); 
 	}
 
 	public function postLogin(Request $request)
@@ -67,7 +67,7 @@ class LoginController extends Controller
 					return view('empUpdate');
 				}
 
-			return redirect()->route('emp');	
+			return redirect()->route('dashboard');	
         }
         return redirect()->back();
 	}
