@@ -1,0 +1,43 @@
+body.login {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-image: url("http://i.imgur.com/LOl3YpE.jpg");
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+
+.login-center {
+	width: 400px;
+	margin: 0 auto;
+}
+
+
+.form-l {
+	width: 400px;
+	margin: 0 auto;
+	height: 100%;
+	display: table;
+}
+
+.login-form {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+} 
+
+.form-bg {
+	height: auto !important;
+	padding: 10px;
+	background: #efefef;
+	background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #f4f5f6), color-stop(100%, #e2e3e5));
+	background: -moz-linear-gradient(#f4f5f6, #e2e3e5);
+	background: -webkit-linear-gradient(#f4f5f6, #e2e3e5);
+	background: linear-gradient(#f4f5f6, #e2e3e5);
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	-moz-box-shadow: rgba(255, 255, 255, 0.5) 0 0 0 1px inset, rgba(0, 0, 0, 0.35) 0 2px 5px 1px;
+	-webkit-box-shadow: rgba(255, 255, 255, 0.5) 0 0 0 1px inset, rgba(0, 0, 0, 0.35) 0 2px 5px 1px;
+	box-shadow: rgba(255, 255, 255, 0.5) 0 0 0 1px inset, rgba(0, 0, 0, 0.35) 0 2px 5px 1px;
+}

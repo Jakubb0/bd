@@ -27,10 +27,6 @@ class LoginController extends Controller
 
 	public function home()
 	{
-		if(Auth::check())
-		{
-			Auth::logout();
-		}
 		return view("welcome");
 	}
 
@@ -42,7 +38,6 @@ class LoginController extends Controller
 
 	public function postAdd(Request $request)
 	{
-		
 		pracownik::empnew($request);
 		return redirect()->route('empList'); 
 	}

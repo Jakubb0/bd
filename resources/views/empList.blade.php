@@ -7,16 +7,11 @@
 
 @section('content')
 
-
-
 	<h1>Lista pracowników</h1>
 
 	<?php
 
- 
-
-
-		$pracownicy = DB::table('pracownicy')->get(); ?>
+$pracownicy = DB::table('pracownicy')->get(); ?>
 
 	<table class="table">
       <th scope="col">#</th>
