@@ -17,15 +17,18 @@
       </li>
     </ul>
 
+<?php
+ $witaj = DB::table('pracownicy')->where('id', Auth::id())->pluck('name'); 
+?>
 
     <ul class="navbar-nav">
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> Sebastian Cebula <span class="caret"></span></a>
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> <?=$witaj[0]?> <span class="caret"></span></a>
         <div class="dropdown-menu">
           <a class="dropdown-item" href="#"><i class="fa fa-cogs"></i> Panel Użytkownika</a>
           <a class="dropdown-item" href="#"><i class="fa fa-history"></i> Historia</a></a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{{ route('home') }}"><i class="fa fa-sign-out-alt"></i> Wyloguj się</a>
+          <a class="dropdown-item" href="{{ route('user.logout') }}"><i class="fa fa-sign-out-alt"></i> Wyloguj się</a>
         </div>
       </li>
     </ul>

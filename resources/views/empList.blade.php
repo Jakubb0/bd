@@ -6,9 +6,16 @@
 @endsection
 
 @section('content')
+
+
+
 	<h1>Lista pracowników</h1>
 
 	<?php
+
+ 
+
+
 		$pracownicy = DB::table('pracownicy')->get(); ?>
 
 	<table class="table">

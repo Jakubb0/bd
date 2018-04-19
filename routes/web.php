@@ -37,6 +37,11 @@ Route::group(['middleware' => 'auth'], function() {
 		'as' => 'dashboard'
 	]);
 
+	Route::get('/logout', [
+			'uses' => 'LoginController@getLogout',
+			'as' => 'user.logout'
+		]);
+
 	Route::get('/pracownik',[
 		'uses' => 'LoginController@empView',
 		'as' => 'emp',
