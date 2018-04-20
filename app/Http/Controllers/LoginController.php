@@ -38,13 +38,16 @@ class LoginController extends Controller
 
 	public function postAdd(Request $request)
 	{
-<<<<<<< HEAD
+		$request->validate([
+    		'login' => 'required|unique:pracownicy',
+    		'pass' => 'required|min:8',
+    		'name' => 'required',
+    		'surn' => 'required',
+    		'tel' =>  'required|regex:/[1-9]{1}[0-9]{8}/|max:9'
+    		
+		]);
 		pracownik::employeeNew($request);
 		return redirect()->route('employeeList'); 
-=======
-		pracownik::empnew($request);
-		return redirect()->route('empList'); 
->>>>>>> 17e336bcf9759ccf23edde0ad6a173944d96bffd
 	}
 
 
@@ -56,6 +59,11 @@ class LoginController extends Controller
 
 	public function postLogin(Request $request)
 	{
+		$request->validate([
+    		'login' => 'required',
+    		'pass' => 'required'
+    	]);
+    	
 		if (Auth::attempt(['login' => $request['login'], 'password' => $request['pass']])) {
 			
 			DB::update('update pracownicy set login_date = ? where login = ?' , [date("Y-m-d H:i:s") ,$request['login']]);
