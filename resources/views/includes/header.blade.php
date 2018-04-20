@@ -11,9 +11,15 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Pracownicy</a>
         <div class="dropdown-menu">
+<<<<<<< HEAD
           <a class="dropdown-item" href="{{route('employeeAdd')}}">Dodaj pracownika</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="{{route('employeeList')}}">Lista pracowników</a>
+=======
+          <a class="dropdown-item" href="{{route('empAdd')}}">Dodaj pracownika</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{{route('empList')}}">Lista pracowników</a>
+>>>>>>> 17e336bcf9759ccf23edde0ad6a173944d96bffd
         </div>
       </li>
     </ul>

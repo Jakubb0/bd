@@ -38,8 +38,13 @@ class LoginController extends Controller
 
 	public function postAdd(Request $request)
 	{
+<<<<<<< HEAD
 		pracownik::employeeNew($request);
 		return redirect()->route('employeeList'); 
+=======
+		pracownik::empnew($request);
+		return redirect()->route('empList'); 
+>>>>>>> 17e336bcf9759ccf23edde0ad6a173944d96bffd
 	}
 
 
