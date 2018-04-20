@@ -11,49 +11,64 @@
 |
 */
 
-Route::get('/', [
-'uses' => 'LoginController@home',
-'as' => 'home'
-]);
+Route::group(['middleware' => 'guest'], function() {
 
-Route::post('/signup',[
-'uses' => 'LoginController@postAdd',
-'as' => 'add'
-]);
+	Route::get('/', [
+		'uses' => 'LoginController@home',
+		'as' => 'home'
+		]);
 
-Route::post('/signin',[
-'uses' => 'LoginController@postLogin',
-'as' => 'signin'
-]);
+	Route::post('/signin',[
+		'uses' => 'LoginController@postLogin',
+		'as' => 'signin'
+	]);
+}); 
 
-Route::get('/pracownik',[
-'uses' => 'LoginController@empView',
-'as' => 'emp',
-'middleware' => 'block'
-]);
 
-Route::get('/pracownik/dodajpracownika',[
-'uses' => 'LoginController@empAdd',
-'as' => 'empAdd',
-'middleware' => 'not_admin'
-]);
+Route::group(['middleware' => 'auth'], function() {
 
-Route::get('/pracownik/listapracownikow',[
-'uses' => 'LoginController@empList',
-'as' => 'empList',
-'middleware' => 'not_admin'
-]);
+	Route::get('/dashboard', [
+		'uses' => 'StationController@getDashboard',
+		'as' => 'dashboard'
+	]);
 
-Route::get('/usun',[
-'uses' => 'LoginController@empDelete',
-'as' => 'empDelete',
-'middleware' => 'not_admin'
-]);
+		Route::post('/signup',[
+		'uses' => 'LoginController@postAdd',
+		'as' => 'add'
+	]);
 
-Route::post('/admin/zmiendane',[
-'uses' => 'LoginController@postUpdate',
-'as' => 'empUpdate'
-]);
+	Route::get('/logout', [
+			'uses' => 'LoginController@getLogout',
+			'as' => 'user.logout'
+		]);
 
-Auth::routes();
+	Route::get('/pracownik',[
+		'uses' => 'LoginController@employeeView',
+		'as' => 'employee',
+		'middleware' => 'block'
+	]);
+
+	Route::get('/pracownik/dodajpracownika',[
+		'uses' => 'LoginController@employeeAdd',
+		'as' => 'employeeAdd',
+		'middleware' => 'not_admin'
+	]);
+
+	Route::get('/pracownik/listapracownikow',[
+		'uses' => 'LoginController@employeeList',
+		'as' => 'employeeList',
+		'middleware' => 'not_admin'
+	]);
+
+	Route::get('/usun',[
+	'uses' => 'LoginController@employeeDelete',
+	'as' => 'employeeDelete',
+	'middleware' => 'not_admin'
+	]);
+
+	Route::post('/admin/zmiendane',[
+	'uses' => 'LoginController@postUpdate',
+	'as' => 'employeeUpdate'
+	]);
+});
 

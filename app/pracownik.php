@@ -15,7 +15,7 @@ class pracownik extends Model implements Authenticatable
 	public $timestamps = false;
     protected $table = "pracownicy";
    
-   public static function empdelete(Request $request)
+   public static function employeeDelete(Request $request)
    {
    		$id = $request["delete"];
 		if(Auth::id()!=$id and $id!=1)
@@ -27,7 +27,7 @@ class pracownik extends Model implements Authenticatable
 	
 
 
-	public static function empnew(Request $request)
+	public static function employeeNew(Request $request)
 	{
 
 		$login = $request["login"];

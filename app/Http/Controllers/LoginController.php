@@ -10,48 +10,43 @@ use DB;
 class LoginController extends Controller
 {
 
-	public function empView()
+	public function employeeView()
 	{
-		return view("emp");
+		return view("employee");
 	}
 
-	public function empAdd()
+	public function employeeAdd()
 	{
-		return view("empAdd");
+		return view("employeeAdd");
 	}
 	
-	public function empList()
+	public function employeeList()
 	{
-		return view("empList");
+		return view("employeeList");
 	}
 
 	public function home()
 	{
-		if(Auth::check())
-		{
-			Auth::logout();
-		}
 		return view("welcome");
 	}
 
-	public function empDelete(Request $request)
+	public function employeeDelete(Request $request)
 	{
-		pracownik::empdelete($request);
-		return view("empList");
+		pracownik::employeeDelete($request);
+		return view("employeeList");
 	}
 
 	public function postAdd(Request $request)
 	{
-		
-		pracownik::empnew($request);
-		return redirect()->route('empList'); 
+		pracownik::employeeNew($request);
+		return redirect()->route('employeeList'); 
 	}
 
 
 	public function postUpdate(Request $request)
 	{
 		pracownik::loginupdate($request);		
-		return redirect()->route('emp'); 
+		return redirect()->route('dashboard'); 
 	}
 
 	public function postLogin(Request $request)
@@ -64,12 +59,18 @@ class LoginController extends Controller
 
 				if($root[0]=="root")
 				{		
-					return view('empUpdate');
+					return view('employeeUpdate');
 				}
 
-			return redirect()->route('emp');	
+			return redirect()->route('dashboard');	
         }
         return redirect()->back();
+	}
+
+	public function getLogout()
+	{
+		Auth::logout();
+		return redirect()->route('home');
 	}
 }
 
