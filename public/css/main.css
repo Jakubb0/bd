@@ -1,3 +1,18 @@
 .center {
 	text-align: center;
 }
+
+.small-icon-product {
+	max-height: 50px;
+}
+
+.image-product-desc {
+	height: auto; 
+    width: auto; 
+    max-width: 300px; 
+    max-height: 300px;
+}
+
+.card > img {
+	text-align: center;
+}

@@ -8,7 +8,7 @@
 
 	<h1>Lista pracowników</h1>
 
-	<?php
+	<?php 
 
 $pracownicy = DB::table('pracownicy')->get(); ?>
 
@@ -32,7 +32,7 @@ $pracownicy = DB::table('pracownicy')->get(); ?>
       <td>{{$data->login_date}}</td>
       @if($data->id != 1)
       <td>
-        <form action="{{route('empDelete')}}">
+        <form action="{{route('employeeDelete')}}">
           <button type="submit" class="btn btn-primary" value="{{$data->id}}" name="delete">Usuń</button>
         </form>
       </td>  

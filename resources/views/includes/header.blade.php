@@ -8,12 +8,12 @@
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 
-      <li class="nav-item dropdown">
+      <li class={{ DB::table('pracownicy')->where('id', Auth::id())->pluck('status')[0]=='kierownik' ? "nav-item dropdown" : "d-none" }}>
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Pracownicy</a>
         <div class="dropdown-menu">
-          <a class="dropdown-item" href="{{route('empAdd')}}">Dodaj pracownika</a>
+          <a class="dropdown-item" href="{{route('employeeAdd')}}">Dodaj pracownika</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{{route('empList')}}">Lista pracowników</a>
+          <a class="dropdown-item" href="{{route('employeeList')}}">Lista pracowników</a>
         </div>
       </li>
     </ul>
@@ -38,7 +38,3 @@
   </div>
 </nav>
 @endif
-
-
-
-

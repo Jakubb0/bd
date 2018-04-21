@@ -12,63 +12,68 @@
 */
 
 Route::group(['middleware' => 'guest'], function() {
-
 	Route::get('/', [
 		'uses' => 'LoginController@home',
 		'as' => 'home'
 		]);
-
-	Route::post('/signup',[
-		'uses' => 'LoginController@postAdd',
-		'as' => 'add'
-	]);
-
 	Route::post('/signin',[
 		'uses' => 'LoginController@postLogin',
 		'as' => 'signin'
 	]);
 }); 
 
-
 Route::group(['middleware' => 'auth'], function() {
-
 	Route::get('/dashboard', [
 		'uses' => 'StationController@getDashboard',
 		'as' => 'dashboard'
 	]);
-
+		Route::post('/signup',[
+		'uses' => 'LoginController@postAdd',
+		'as' => 'add'
+	]);
 	Route::get('/logout', [
 			'uses' => 'LoginController@getLogout',
 			'as' => 'user.logout'
 		]);
-
 	Route::get('/pracownik',[
-		'uses' => 'LoginController@empView',
-		'as' => 'emp',
+		'uses' => 'LoginController@employeeView',
+		'as' => 'employee',
 		'middleware' => 'block'
 	]);
-
 	Route::get('/pracownik/dodajpracownika',[
-		'uses' => 'LoginController@empAdd',
-		'as' => 'empAdd',
+		'uses' => 'LoginController@employeeAdd',
+		'as' => 'employeeAdd',
 		'middleware' => 'not_admin'
 	]);
-
 	Route::get('/pracownik/listapracownikow',[
-		'uses' => 'LoginController@empList',
-		'as' => 'empList',
+		'uses' => 'LoginController@employeeList',
+		'as' => 'employeeList',
 		'middleware' => 'not_admin'
 	]);
-
 	Route::get('/usun',[
-	'uses' => 'LoginController@empDelete',
-	'as' => 'empDelete',
+	'uses' => 'LoginController@employeeDelete',
+	'as' => 'employeeDelete',
 	'middleware' => 'not_admin'
 	]);
-
 	Route::post('/admin/zmiendane',[
 	'uses' => 'LoginController@postUpdate',
-	'as' => 'empUpdate'
+	'as' => 'employeeUpdate'
 	]);
+
+	Route::get('/product-list', [
+		'uses' => 'ProductController@getProduct',
+		'as' => 'getProduct'
+	]);
+
+	Route::get('/new-product', [
+		'uses' => 'ProductController@getNewProduct',
+		'as' => 'getNewProduct'
+	]);
+
+	Route::post('/new-product', [
+		'uses' => 'ProductController@postNewProduct',
+		'as' => 'postNewProduct'
+	]);
+
 });
 
