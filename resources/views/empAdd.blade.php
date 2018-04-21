@@ -7,6 +7,16 @@
 
 @section('content')
 
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 	<h1>Dodaj pracownika</h1>
 	<div class="col-sm-12">
 	    <form action="{{route('add')}}" method="post">
@@ -28,7 +38,7 @@
 	      </div>
 	      <div class="form-group">
 	        <label for="tel">Telefon</label>
-	        <input type="number" class="form-control" name="tel" id="tel">
+	        <input type="text" class="form-control" name="tel" id="tel">
 	      </div>
 	      <div class="form-group">
 	        <label for="kierownik">Kierownik</label>
@@ -40,7 +50,3 @@
 	    </form>
 	</div>
 @endsection
-
-
-
-

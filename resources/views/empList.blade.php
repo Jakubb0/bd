@@ -1,6 +1,5 @@
 @extends('layouts.master')
 
-
 @section('title')
     Stacja benzynowa
 @endsection
@@ -32,7 +31,11 @@ $pracownicy = DB::table('pracownicy')->get(); ?>
       <td>{{$data->join_date}}</td>   
       <td>{{$data->login_date}}</td>
       @if($data->id != 1)
-      <td><form action="{{route('empDelete')}}"><button type="submit" class="btn btn-primary" value="{{$data->id}}" name="delete">Usuń</button></form></td>  
+      <td>
+        <form action="{{route('empDelete')}}">
+          <button type="submit" class="btn btn-primary" value="{{$data->id}}" name="delete">Usuń</button>
+        </form>
+      </td>  
       @endif                 
     </tr>
 	@endforeach
