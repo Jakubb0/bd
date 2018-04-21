@@ -6,18 +6,13 @@ use Illuminate\Support\Facades\Auth;
 use DB;
 class LoginController extends Controller
 {
-<<<<<<< HEAD
-=======
 
->>>>>>> 2735900fc881ed556e3373494abc5696268691be
+
 	public function employeeView()
 	{
 		return view("employee");
 	}
-<<<<<<< HEAD
-=======
 
->>>>>>> 2735900fc881ed556e3373494abc5696268691be
 	public function employeeAdd()
 	{
 		return view("employeeAdd");
@@ -31,10 +26,7 @@ class LoginController extends Controller
 	{
 		return view("welcome");
 	}
-<<<<<<< HEAD
-=======
 
->>>>>>> 2735900fc881ed556e3373494abc5696268691be
 	public function employeeDelete(Request $request)
 	{
 		pracownik::employeeDelete($request);

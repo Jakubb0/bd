@@ -20,11 +20,6 @@ class pracownik extends Model implements Authenticatable
 		}
    }
 	
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 2735900fc881ed556e3373494abc5696268691be
 	public static function employeeNew(Request $request)
 	{
 		$login = $request["login"];

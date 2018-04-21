@@ -21,7 +21,7 @@
 
 <div class="row">
 	<div class="col-sm-6">
-		<a href="#">
+		<a href="{{ route('getProduct') }}">
 			<div class="card">
 				<div class="card-body">
 					<h5 class="card-title">Produkty</h5>

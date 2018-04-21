@@ -16,10 +16,7 @@ Route::group(['middleware' => 'guest'], function() {
 		'uses' => 'LoginController@home',
 		'as' => 'home'
 		]);
-<<<<<<< HEAD
-=======
 
->>>>>>> 2735900fc881ed556e3373494abc5696268691be
 	Route::post('/signin',[
 		'uses' => 'LoginController@postLogin',
 		'as' => 'signin'
@@ -31,18 +28,11 @@ Route::group(['middleware' => 'auth'], function() {
 		'uses' => 'StationController@getDashboard',
 		'as' => 'dashboard'
 	]);
-<<<<<<< HEAD
-=======
-
->>>>>>> 2735900fc881ed556e3373494abc5696268691be
 		Route::post('/signup',[
 		'uses' => 'LoginController@postAdd',
 		'as' => 'add'
 	]);
-<<<<<<< HEAD
-=======
 
->>>>>>> 2735900fc881ed556e3373494abc5696268691be
 	Route::get('/logout', [
 			'uses' => 'LoginController@getLogout',
 			'as' => 'user.logout'
@@ -70,7 +60,7 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::post('/admin/zmiendane',[
 	'uses' => 'LoginController@postUpdate',
 	'as' => 'employeeUpdate'
-<<<<<<< HEAD
+
 	]);
 
 	Route::get('/product-list', [
@@ -81,8 +71,7 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('/new-product', [
 		'uses' => 'ProductController@getNewProduct',
 		'as' => 'getNewProduct'
-=======
->>>>>>> 2735900fc881ed556e3373494abc5696268691be
+
 	]);
 
 	Route::post('/new-product', [
