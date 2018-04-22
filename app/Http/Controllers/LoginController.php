@@ -1,14 +1,12 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\pracownik;
 use Illuminate\Support\Facades\Auth;
 use DB;
-
 class LoginController extends Controller
 {
+
 
 	public function employeeView()
 	{
@@ -24,7 +22,6 @@ class LoginController extends Controller
 	{
 		return view("employeeList");
 	}
-
 	public function home()
 	{
 		return view("welcome");
@@ -35,7 +32,6 @@ class LoginController extends Controller
 		pracownik::employeeDelete($request);
 		return view("employeeList");
 	}
-
 	public function postAdd(Request $request)
 	{
 		$request->validate([
@@ -49,14 +45,21 @@ class LoginController extends Controller
 		pracownik::employeeNew($request);
 		return redirect()->route('employeeList'); 
 	}
-
-
 	public function postUpdate(Request $request)
 	{
+		/*
+		$request->validate([
+    		'login' => 'required|unique:pracownicy',
+    		'pass' => 'required|min:8',
+    		'name' => 'required',
+    		'surn' => 'required',
+    		'tel' =>  'required|regex:/[1-9]{1}[0-9]{8}/|max:9'
+    		
+		]);*/
+
 		pracownik::loginupdate($request);		
 		return redirect()->route('dashboard'); 
 	}
-
 	public function postLogin(Request $request)
 	{
 		$request->validate([
@@ -66,11 +69,14 @@ class LoginController extends Controller
     	
 		if (Auth::attempt(['login' => $request['login'], 'password' => $request['pass']])) {
 			
-			DB::update('update pracownicy set login_date = ? where login = ?' , [date("Y-m-d H:i:s") ,$request['login']]);
 
-			$root = DB::table('pracownicy')->where('id', 1)->pluck('login');
+			DB::table('pracownicy')->where('id', Auth::id())->update(array(
+                                 'login_date'=>date("Y-m-d H:i:s"),
+			));
 
-				if($root[0]=="root")
+			$password_changed = DB::table('pracownicy')->where('id', Auth::id())->pluck('password_changed');
+				
+				if($password_changed[0]==0)
 				{		
 					return view('employeeUpdate');
 				}
@@ -79,11 +85,9 @@ class LoginController extends Controller
         }
         return redirect()->back();
 	}
-
 	public function getLogout()
 	{
 		Auth::logout();
 		return redirect()->route('home');
 	}
 }
-

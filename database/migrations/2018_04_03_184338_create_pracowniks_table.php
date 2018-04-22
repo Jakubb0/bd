@@ -23,10 +23,11 @@ class CreatePracowniksTable extends Migration
             $table->dateTime("join_date"); 
             $table->dateTime("login_date");
             $table->string("status");
+            $table->boolean("password_changed");
             $table->rememberToken();
         });
 
-        DB::insert('insert into pracownicy (id, login, password, name, surname, phone, join_date, login_date, status) values (?, ?, ?, ?, ?, ?, ?, ?, ?)', array(1, "root", bcrypt("root"), "root","root", 000000000, date("Y-m-d H:i:s"), date("Y-m-d H:i:s"), "kierownik"));
+        DB::insert('insert into pracownicy (id, login, password, name, surname, phone, join_date, login_date, status, password_changed) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', array(1, "root", bcrypt("root"), "root","root", 000000000, date("Y-m-d H:i:s"), date("Y-m-d H:i:s"), "kierownik", false));
 
     }
 
