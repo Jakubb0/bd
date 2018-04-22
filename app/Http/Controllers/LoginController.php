@@ -69,6 +69,7 @@ class LoginController extends Controller
     	
 		if (Auth::attempt(['login' => $request['login'], 'password' => $request['pass']])) {
 			
+<<<<<<< HEAD
 
 			DB::table('pracownicy')->where('id', Auth::id())->update(array(
                                  'login_date'=>date("Y-m-d H:i:s"),
@@ -77,10 +78,14 @@ class LoginController extends Controller
 			$password_changed = DB::table('pracownicy')->where('id', Auth::id())->pluck('password_changed');
 				
 				if($password_changed[0]==0)
+=======
+			DB::update('update pracownicy set login_date = ? where login = ?' , [date("Y-m-d H:i:s") ,$request['login']]);
+			$root = DB::table('pracownicy')->where('id', 1)->pluck('login');
+				if($root[0]=="root")
+>>>>>>> 1ac10dd1c7dab92145de50dcf402eddc57b565d9
 				{		
 					return view('employeeUpdate');
 				}
-
 			return redirect()->route('dashboard');	
         }
         return redirect()->back();
