@@ -21,13 +21,13 @@
 		<div class="left-menu">
 			<ul>
 				<li>
-					<a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+					<a href="{{ route('dashboard') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
 				</li>
 				<li>
-					<a href="{{route('employeeList')}}"><i class="fas fa-users"></i> Pracownicy</a>
+					<a href="{{ route('employeeList') }}"><i class="fas fa-users"></i> Pracownicy</a>
 				</li>
 				<li>
-					<a href="#"><i class="fas fa-shopping-basket"></i> Produkty</a>
+					<a href="{{ route('getProduct') }}"><i class="fas fa-shopping-basket"></i> Produkty</a>
 				</li>
 				<li>
 					<a href="#"><i class="fas fa-file-alt"></i> Zamówienia</a>
