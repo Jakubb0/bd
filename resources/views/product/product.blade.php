@@ -1,3 +1,7 @@
+<?php 
+	use Illuminate\Support\Facades\Storage;
+?>
+
 @extends('layouts.master')
 
 @section('title')
@@ -22,10 +26,11 @@
 	</thead>
 	<?php $i = 0; ?>
 	@foreach($products as $product => $data)
+		
 		<tr>
 			<td><?php echo ++$i ?></td>
 			<td><a href="#" class="edit" data-toggle="modal" data-target="#myModal{{$data->id}}">{{$data->name}}</a></td>
-			<td><img src="{{$data->image}}" class="small-icon-product"></td>
+			<td><img src="images/product/{{ $data->image }}" class="small-icon-product"></td>
 			<td>{{$data->price}} zł</td>
 			<td>{{$data->category}}</td>
 		</tr>

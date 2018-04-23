@@ -6,7 +6,7 @@
 
 @section('content')
 
-<form action="{{ route('postNewProduct') }}" method="POST">
+<form action="{{ route('postNewProduct') }}" method="POST" enctype="multipart/form-data">
 	
 	<div class="form-group">
 		<label for="name">Nazwa produktu: </label>
@@ -20,9 +20,13 @@
 
 	<div class="form-group">
 		<label for="category">Kategoria: </label>
-		<input type="text" name="category" id="category" class="form-control" placeholder="Cena produktu">
+		<select name="category" id="category" class="form-control">
+			<option value="Napój">Napój</option>
+			<option value="Czekolada">Czekolada</option>
+			<option value="Inne">Inne</option>
+		</select>
 	</div>
-
+	
 	<div class="form-group">
 		<label for="description">Opis produktu: </label>
 		<textarea name="description" id="description" cols="30" rows="10" class="form-control"></textarea>
@@ -30,12 +34,17 @@
 
 	<div class="form-group">
 		<label for="image">Zdjęcie produktu: </label>
-		<input type="text" name="image" id="image" class="form-control" placeholder="Zdjęcie produktu">
+		<input type="file" name="file" id="image" class="form-control">
 	</div>
+
+	
 
 	<div class="form-group">
 		<button type="submit" class="btn btn-success">Dodaj produkt!</button>
 	</div>
+	
+
+
 	<input type="hidden" value="{{ Session::token() }}" name="_token">
 </form>
 
