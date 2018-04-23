@@ -7,9 +7,21 @@
 
 @section('content')
 
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+
+@endif
+
 	<div class="alert alert-danger">
   		<strong>Uwaga!</strong> Zaktualizuj swoje dane
 	</div>
+	
 	<h1>Zmień dane</h1>
 	<div class="col-sm-6">
 	    <form action="{{route('empUpdate')}}" method="post">
