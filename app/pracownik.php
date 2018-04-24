@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Auth;
+
 class pracownik extends Model implements Authenticatable
 {
 	use \Illuminate\Auth\Authenticatable;  

@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\pracownik;
+use App\logs;
 use Illuminate\Support\Facades\Auth;
 use DB;
 class LoginController extends Controller
@@ -29,6 +30,7 @@ class LoginController extends Controller
 
 	public function employeeDelete(Request $request)
 	{
+		logs::addLog("Usunięto użytkownika", "bad");
 		pracownik::employeeDelete($request);
 		return view("employeeList");
 	}
@@ -43,6 +45,8 @@ class LoginController extends Controller
     		
 		]);
 		pracownik::employeeNew($request);
+		logs::addLog("Dodano użytkownika", "good");
+
 		return redirect()->route('employeeList'); 
 	}
 	public function postUpdate(Request $request)
@@ -57,7 +61,9 @@ class LoginController extends Controller
     		
 		]);*/
 
-		pracownik::loginupdate($request);		
+		pracownik::loginupdate($request);	
+		logs::addLog("Zaktualizowano dane", "good");	
+
 		return redirect()->route('dashboard'); 
 	}
 	public function postLogin(Request $request)
@@ -77,18 +83,26 @@ class LoginController extends Controller
 
 			$password_changed = DB::table('pracownicy')->where('id', Auth::id())->pluck('password_changed');
 				
-				if($password_changed[0]==0)
+			if($password_changed[0]==0)
+			{
+				$root = DB::table('pracownicy')->where('id', 1)->pluck('login');
 
-			DB::update('update pracownicy set login_date = ? where login = ?' , [date("Y-m-d H:i:s") ,$request['login']]);
-			$root = DB::table('pracownicy')->where('id', 1)->pluck('login');
-				if($root[0]=="root")
-
-				{		
-					return view('employeeUpdate');
-				}
-			return redirect()->route('dashboard');	
-        }
-        return redirect()->back();
+					if($root[0]=="root")
+					{		
+						return view('employeeUpdate');
+					}
+				
+					
+        	}
+        	logs::addLog("Udana próba logowania", "good");
+    		return redirect()->route('dashboard');
+        	
+		}
+		else 
+		{
+			logs::addLog("Nieudana próba logowania", "bad");
+			return redirect()->back();
+		}
 	}
 	public function getLogout()
 	{
