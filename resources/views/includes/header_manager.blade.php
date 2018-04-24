@@ -30,7 +30,7 @@
 					<a href="#"><i class="fas fa-file-alt"></i> Zamówienia</a>
 				</li>
 				<li>
-					<a href="#"><i class="fas fa-chart-bar"></i> Statystyki</a>
+					<a href="{{ route('logs') }}"><i class="fas fa-chart-bar"></i> Statystyki</a>
 				</li>
 			</ul>
 		</div>

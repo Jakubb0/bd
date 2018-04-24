@@ -79,5 +79,10 @@ Route::group(['middleware' => 'auth'], function() {
 		'as' => 'postNewProduct'
 	]);
 
+	Route::get('/logs', [
+		'uses' => 'LogsController@viewLogs',
+		'as' => 'logs',
+		'middleware'=>'not_admin'
+	]);
 });
 

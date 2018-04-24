@@ -117,3 +117,11 @@ hr.medium-hr {
 	border-top-left-radius: 50%;
 	border-top-right-radius: 50%;
 }
+
+.bgbadlog{
+	background-color: #f2dede;
+}
+
+.bggoodlog{
+	background-color: #dff0d8;
+}
