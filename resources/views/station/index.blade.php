@@ -10,6 +10,22 @@
 
 @if(DB::table('pracownicy')->where('id', Auth::id())->pluck('status')[0]=='kierownik')
 
+
+<h2>ON</h2>
+ <div class="progress" style="width: 300px;">
+    <div class="progress-bar bg-warning progress-bar-animated" style="width:30%"></div>
+  </div>
+
+<h2>BP 95</h2>
+ <div class="progress" style="width: 300px;">
+    <div class="progress-bar bg-success progress-bar-animated" style="width:50%"></div>
+  </div>  
+
+<h2>BP Ultimate</h2>
+ <div class="progress" style="width: 300px;">
+    <div class="progress-bar bg-danger progress-bar-animated" style="width:10%"></div>
+  </div>   
+
 	
 	@else
 	<div class="row">

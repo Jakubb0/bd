@@ -15,7 +15,7 @@
 <a href="{{ route('getNewProduct') }}" class="btn btn-info">Nowy produkt</a>
 
 <table class="table">
-	<thead class="thead-light">
+	<thead class="table-th">
 		<tr>
 			<th scope="col">#</th>
 			<th scope="col">Nazwa produktu</th>

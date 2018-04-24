@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-
+ 
 	<h1><i class="fas fa-users"></i> Lista pracowników</h1>
 
   <a href="{{route('employeeAdd')}}" class="btn btn-info">Dodaj pracownika</a>

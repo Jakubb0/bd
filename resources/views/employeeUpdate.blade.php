@@ -24,7 +24,7 @@
 	
 	<h1>Zmień dane</h1>
 	<div class="col-sm-6">
-	    <form action="{{route('empUpdate')}}" method="post">
+	    <form action="{{route('employeeUpdate')}}" method="post">
 	      <div class="form-group">
 	        <label for="login">Login</label>
 	        <input type="text" class="form-control" name="login" id="login">

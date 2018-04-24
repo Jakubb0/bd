@@ -7,7 +7,7 @@
 		<div class="name-welcome">
 			<h3>Witaj</h3>
 			<div class="user-image-round">
-				<img src="http://veraicon.pl/zaplecze/images/users/1/profil.jpg">
+				<img src="/images/users/Person-icon-grey.jpg">
 			</div>
 			<div class="user-info">
 				<?=$witaj[0]?>
