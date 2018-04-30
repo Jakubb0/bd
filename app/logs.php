@@ -20,7 +20,7 @@ class logs extends Model implements Authenticatable
 				$ip  = $_SERVER['REMOTE_ADDR'];
 
 				$log = new logs();
-				$log->login = isset($login[0])?$login[0]:$POST_['login'];
+				$log->login = isset($login[0])?$login[0]:$_POST['login'];
 				$log->ip = $ip;
 				$log->message = $action;
 				$log->value = $value;

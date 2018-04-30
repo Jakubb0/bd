@@ -20,18 +20,27 @@
 			<th scope="col">#</th>
 			<th scope="col">Nazwa produktu</th>
 			<th scope="col">Zdjęcie</th>
-			<th scope="col">Cena</th>
+			<th scope="col">Cena netto</th>
+			<th scope="col">Stawka VAT</th>
+			<th scope="col">Cena brutto</th>
 			<th scope="col">Kategoria</th>
 		</tr>
 	</thead>
 	<?php $i = 0; ?>
 	@foreach($products as $product => $data)
-		
+
+		<?php
+			if( $data->vat == "8" ) { $p = ($data->price * 0.8) + $data->price; }
+			else { $p = ($data->price * 0.23) + $data->price; }
+
+		?>
 		<tr>
 			<td><?php echo ++$i ?></td>
 			<td><a href="#" class="edit" data-toggle="modal" data-target="#myModal{{$data->id}}">{{$data->name}}</a></td>
 			<td><img src="/images/product/{{ $data->image }}" class="small-icon-product"></td>
 			<td>{{$data->price}} zł</td>
+			<td>{{$data->vat}}%</td>
+			<td>{{round($p,2)}} zł</td>
 			<td>{{$data->category}}</td>
 		</tr>
 
@@ -56,7 +65,7 @@
 						  </div>
 						  <ul class="list-group list-group-flush">
 						  	<li class="list-group-item"><b>Kategoria: </b> {{ $data->category }}</li>
-						    <li class="list-group-item"><b>Cena: </b>{{ $data->price }}</li>
+						    <li class="list-group-item"><b>Cena: </b>{{ round($p,2) }}</li>
 						    <li class="list-group-item"><b>Ilość w magazynie: </b> ...</li>
 						  </ul>
 						</div>

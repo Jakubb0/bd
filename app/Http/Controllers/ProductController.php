@@ -44,9 +44,11 @@ class ProductController extends Controller
         DB::table('products')->insert([
             ['name' => $request['name'], 
              'price' => $request['price'],
+             'vat' => $request['vat'],
              'category' => $request['category'],
              'description' => $request['description'],
              'image' => $fileName,
+             'barcode' => $request['barcode'],
              'created_at' => date("Y-m-d H:i:s"),
              'updated_at' => date("Y-m-d H:i:s")
              ]

@@ -16,8 +16,21 @@
 	</div>
 
 	<div class="form-group">
-		<label for="price">Cena: </label>
+		<label for="barcode">Kod kreskowy: </label>
+		<input type="text" name="barcode" id="barcode" class="form-control" placeholder="Kod kreskowy" required>
+	</div>
+
+	<div class="form-group">
+		<label for="price">Cena netto: </label>
 		<input type="text" name="price" id="price" class="form-control" placeholder="Cena produktu" required>
+	</div>
+
+	<div class="form-group">
+		<label for="vat">Stawka VAT: </label>
+		<select name="vat" id="vat" class="form-control">
+			<option value="8">8%</option>
+			<option value="23">23%</option>
+		</select>
 	</div>
 
 	<div class="form-group">
