@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Storage;
 use File;
+use App\logs;
 
 class ProductController extends Controller
 {
@@ -20,41 +21,25 @@ class ProductController extends Controller
     	return view("product.newProduct");
     }
 
-    public function postNewProduct(request $request)
+    public function postNewProduct(Request $request)
     {
 
+        $request->validate([
+            'name' => 'required|min:3'           
+         ]);
 
         if ($request->hasFile('file')) {
-
-          //  $file = $request->file;
-          //  $fileName = $file->getClientOriginalName();
-          // Storage::disk('local')->put('images/product/', $file->name);
-
-          /*  $file = $request->file;
-            $name = $request->file->getClientOriginalName();
-            $ext = $request->file->getClientOriginalExtension();
-
-            $path = "images/product/";
-
-            $fileName = time().'-'.$name;
-
-            Storage::disk('local')->put($path.$fileName, file_get_contents($file));
-        */
 
             $file = $request->file;
             $name = $request->file->getClientOriginalName();
             $path = "images/product/";
-
             $fileName = $name;
-
             $file->move('images/product/', $file->getClientOriginalName());
-
         }
         else 
         {
             $fileName = '';
         }
-
 
         DB::table('products')->insert([
             ['name' => $request['name'], 
@@ -66,6 +51,8 @@ class ProductController extends Controller
              'updated_at' => date("Y-m-d H:i:s")
              ]
         ]);
+
+        logs::addLog("Dodano nowy produkt ". $request['name'], "good");
 
         return redirect()->route('getProduct');  
 

@@ -12,8 +12,8 @@
 
 <?php $products = DB::table('products')->get(); ?>
 
+<h2><i class="fas fa-shopping-basket"></i> Produkty</h2>
 <a href="{{ route('getNewProduct') }}" class="btn btn-info">Nowy produkt</a>
-
 <table class="table">
 	<thead class="table-th">
 		<tr>
@@ -30,7 +30,7 @@
 		<tr>
 			<td><?php echo ++$i ?></td>
 			<td><a href="#" class="edit" data-toggle="modal" data-target="#myModal{{$data->id}}">{{$data->name}}</a></td>
-			<td><img src="images/product/{{ $data->image }}" class="small-icon-product"></td>
+			<td><img src="/images/product/{{ $data->image }}" class="small-icon-product"></td>
 			<td>{{$data->price}} zł</td>
 			<td>{{$data->category}}</td>
 		</tr>
@@ -49,7 +49,7 @@
 					<!-- Modal body -->
 					<div class="modal-body">
 						<div class="card">
-						  <img class="card-img-top image-product-desc" src="{{ $data->image }}" alt="Card image cap">
+						  <img class="card-img-top image-product-desc" src="/images/product/{{ $data->image }}" alt="Card image cap">
 						  <div class="card-body">
 						    <h5 class="card-title">{{ $data->name }}</h5>
 						    <p class="card-text">{{ $data->description }}</p>

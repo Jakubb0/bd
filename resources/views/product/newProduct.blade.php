@@ -6,16 +6,18 @@
 
 @section('content')
 
+<h1>Dodaj nowy produkt</h1>
+
 <form action="{{ route('postNewProduct') }}" method="POST" enctype="multipart/form-data">
 	
 	<div class="form-group">
 		<label for="name">Nazwa produktu: </label>
-		<input type="text" name="name" id="name" class="form-control" placeholder="Nazwa produktu">
+		<input type="text" name="name" id="name" class="form-control" placeholder="Nazwa produktu" required>
 	</div>
 
 	<div class="form-group">
 		<label for="price">Cena: </label>
-		<input type="text" name="price" id="price" class="form-control" placeholder="Cena produktu">
+		<input type="text" name="price" id="price" class="form-control" placeholder="Cena produktu" required>
 	</div>
 
 	<div class="form-group">
@@ -29,7 +31,7 @@
 	
 	<div class="form-group">
 		<label for="description">Opis produktu: </label>
-		<textarea name="description" id="description" cols="30" rows="10" class="form-control"></textarea>
+		<textarea name="description" id="description" cols="30" rows="10" class="form-control" required></textarea>
 	</div>
 
 	<div class="form-group">
