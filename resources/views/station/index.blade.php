@@ -66,7 +66,7 @@
 
 	<div class="row">
 		<div class="col-sm-6 small-card-menu">
-			<a href="#" class="menu-link">
+			<a href="{{route('loyalView')}}" class="menu-link">
 				<div class="card menu-bg">
 					<div class="card-body center">
 						<i class="fas fa-id-card"></i>

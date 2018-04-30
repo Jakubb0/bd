@@ -37,6 +37,8 @@ Route::group(['middleware' => 'auth'], function() {
 			'uses' => 'LoginController@getLogout',
 			'as' => 'user.logout'
 		]);
+
+//EMPLOYEE 
 	Route::get('/pracownik',[
 		'uses' => 'LoginController@employeeView',
 		'as' => 'employee',
@@ -63,6 +65,8 @@ Route::group(['middleware' => 'auth'], function() {
 
 	]);
 
+
+//PRODUCTS
 	Route::get('/product-list', [
 		'uses' => 'ProductController@getProduct',
 		'as' => 'getProduct'
@@ -79,10 +83,34 @@ Route::group(['middleware' => 'auth'], function() {
 		'as' => 'postNewProduct'
 	]);
 
+
+
+//LOGS
 	Route::get('/logs', [
 		'uses' => 'LogsController@viewLogs',
 		'as' => 'logs',
 		'middleware'=>'not_admin'
+	]);
+
+// LOYAL CLIENT
+	Route::get('/loyalclients', [
+		'uses' => 'LoyalController@loyalclientView',
+		'as' => 'loyalView'
+	]);
+
+	Route::get('/loyalclients/add', [
+		'uses' => 'LoyalController@add',
+		'as' => 'loyalAdd'
+	]);
+
+	Route::get('/loyalclients/delete', [
+		'uses' => 'LoyalController@loyalclientDelete',
+		'as' => 'loyalDelete'
+	]);
+
+	Route::post('/loyalclients/postAdd', [
+		'uses' => 'LoyalController@loyalclientAdd',
+		'as' => 'loyalpostAdd'
 	]);
 });
 
