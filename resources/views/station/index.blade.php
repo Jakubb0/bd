@@ -127,7 +127,9 @@
 					<div class="modal-body">
 						<div class="card">
 							<div class="form-group">
-								<input type="text" class="form-control" id="search" name="search">
+								<form action="" method="GET">
+									<input type="text" class="form-control" id="search" name="search">
+								</form>
 							</div>
 
 							<table>
@@ -154,14 +156,14 @@
 
 <script type="text/javascript">
 	$('#search').on('keyup', function(){
-		
+		$value=$(this).val();
 		$.ajax({
 			type :  'get',
 			url  :  'search',
-			data :  {text: $('#search').val()},
+			data :  {'search': $value},
 			success:function(data){
 				
-					console.log(data);
+					$('tbody').html(data);
 				
 			}
 		});
