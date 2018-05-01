@@ -54,7 +54,7 @@ class ProductController extends Controller
              ]
         ]);
 
-        logs::addLog("Dodano nowy produkt ". $request['name'], "good");
+        logs::addLog("Dodano nowy produkt ". $request['name'], "good", "product");
 
         return redirect()->route('getProduct');  
 

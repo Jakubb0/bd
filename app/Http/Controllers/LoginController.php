@@ -30,7 +30,7 @@ class LoginController extends Controller
 
 	public function employeeDelete(Request $request)
 	{
-		logs::addLog("Usunięto użytkownika", "bad");
+		logs::addLog("Usunięto użytkownika", "bad", "employee");
 		pracownik::employeeDelete($request);
 		return view("employeeList");
 	}
@@ -45,7 +45,7 @@ class LoginController extends Controller
     		
 		]);
 		pracownik::employeeNew($request);
-		logs::addLog("Dodano użytkownika", "good");
+		logs::addLog("Dodano użytkownika", "good", "employee");
 
 		return redirect()->route('employeeList'); 
 	}
@@ -62,7 +62,7 @@ class LoginController extends Controller
 		]);*/
 
 		pracownik::loginupdate($request);	
-		logs::addLog("Zaktualizowano dane", "good");	
+		logs::addLog("Zaktualizowano dane", "good", "employee");	
 
 		return redirect()->route('dashboard'); 
 	}
@@ -94,18 +94,19 @@ class LoginController extends Controller
 				
 					
         	}
-        	logs::addLog("Udana próba logowania", "good");
+        	logs::addLog("Udana próba logowania", "good", "login");
     		return redirect()->route('dashboard');
         	
 		}
 		else 
 		{
-			logs::addLog("Nieudana próba logowania", "bad");
+			logs::addLog("Nieudana próba logowania", "bad", "login");
 			return redirect()->back();
 		}
 	}
 	public function getLogout()
 	{
+		logs::addLog("Wylogowano", "bad", "login");
 		Auth::logout();
 		return redirect()->route('home');
 	}

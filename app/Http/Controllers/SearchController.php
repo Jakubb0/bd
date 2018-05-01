@@ -13,7 +13,7 @@ class SearchController extends Controller
     	{
     		$output = "";
 
-    		$products = DB::table('products')->where('name','LIKE','%'.$request->search.'%')
+    		$products = DB::table('products')->where('name','LIKE','%Pepsi%')
     		                                 ->orWhere('barcode', 'LIKE', '%'.$request->search.'%')->get();
 
     		if($products)
@@ -22,7 +22,7 @@ class SearchController extends Controller
     			{
     				$output .= '<tr>
     								<td>'. $prod->id .'</td>
-    								<td>'. $prod->name .'</td>
+    								<td>'. $prod->nazwa .'</td>
     								<td>'. $prod->price .'</td>
     							</tr>';
     			}

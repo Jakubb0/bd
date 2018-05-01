@@ -14,7 +14,7 @@ class logs extends Model implements Authenticatable
 
     public $timestamps = false;
 
-    public static function addLog(string $action, string $value)
+    public static function addLog(string $action, string $value, string $category)
     {
 				$login = DB::table('pracownicy')->where('id', Auth::id())->pluck('login');
 				$ip  = $_SERVER['REMOTE_ADDR'];
@@ -25,6 +25,7 @@ class logs extends Model implements Authenticatable
 				$log->message = $action;
 				$log->value = $value;
 				$log->time = date("Y-m-d H:i:s");
+				$log->category = $category;
 
 				$log->save();
     }

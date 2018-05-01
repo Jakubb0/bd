@@ -19,7 +19,8 @@ class CreateLogsTable extends Migration
             $table->string('ip');
             $table->string('login');
             $table->string('message');
-            $table->string('value');           
+            $table->string('value');
+            $table->string('category');           
             $table->dateTime('time');         
         });
     }

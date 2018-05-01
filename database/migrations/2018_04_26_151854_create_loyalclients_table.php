@@ -19,6 +19,7 @@ class CreateLoyalclientsTable extends Migration
             $table->string('surname');
             $table->string('city');
             $table->integer('phone');
+            $table->integer('points')->unsigned()->default(0);
         });
     }
 
