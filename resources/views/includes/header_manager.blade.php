@@ -32,6 +32,9 @@
 				<li>
 					<a href="{{ route('logs') }}"><i class="fas fa-chart-bar"></i> Statystyki</a>
 				</li>
+				<li>
+					<a href="{{ route('cashboxes') }}"><i class="fas fa-chart-bar"></i>Kasa</a>
+				</li>
 			</ul>
 		</div>
 
