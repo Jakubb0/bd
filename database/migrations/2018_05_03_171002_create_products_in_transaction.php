@@ -19,8 +19,8 @@ class CreateProductsInTransaction extends Migration
             $table->integer('transactions_id')->unsigned();
             $table->integer('products_id')->unsigned();
             $table->integer('amount');
-            $table->foreign('transactions_id')->references('transactions')->on('id');
-            $table->foreign('products_id')->references('products')->on('id');
+            $table->foreign('transactions_id')->references('id')->on('transactions');
+            $table->foreign('products_id')->references('id')->on('products');
         });
     }
 

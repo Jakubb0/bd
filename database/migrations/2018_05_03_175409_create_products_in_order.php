@@ -20,8 +20,8 @@ class CreateProductsInOrder extends Migration
             $table->integer('products_id')->unsigned();
             $table->float('buying_price');
             $table->integer('amount');
-            $table->foreign('orders_id')->references('orders')->on('id');
-            $table->foreign('products_id')->references('products')->on('id');
+            $table->foreign('orders_id')->references('id')->on('orders');
+            $table->foreign('products_id')->references('id')->on('products');
             
         });
     }

@@ -18,8 +18,8 @@ class CreateOrdersTable extends Migration
             $table->timestamps();
             $table->integer('providers_id')->unsigned();
             $table->integer('pracownicy_id')->unsigned();
-            $table->foreign('providers_id')->references('providers')->on('id');
-            $table->foreign('pracownicy_id')->references('pracownicy')->on('id');
+            $table->foreign('providers_id')->references('id')->on('providers');
+            $table->foreign('pracownicy_id')->references('id')->on('pracownicy');
         });
     }
 

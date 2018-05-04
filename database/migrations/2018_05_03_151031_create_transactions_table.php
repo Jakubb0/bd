@@ -23,10 +23,10 @@ class CreateTransactionsTable extends Migration
             $table->enum('payment_method',['cash','credit_card']);
             $table->enum('proof',['receipt','invoice']);
             $table->integer('cashboxes_id')->unsigned();
-            $table->foreign('client_id')->references('client')->on('id');
-            $table->foreign('loyalclients_id')->references('loyalclients')->on('id');
-            $table->foreign('distributor_id')->references('distributor')->on('id');
-            $table->foreign('cashboxes_id')->references('cashboxes')->on('id');
+            $table->foreign('client_id')->references('id')->on('client');
+            $table->foreign('loyalclients_id')->references('id')->on('loyalclients');
+            $table->foreign('distributor_id')->references('id')->on('distributors');
+            $table->foreign('cashboxes_id')->references('id')->on('cashboxes');
         });
     }
 

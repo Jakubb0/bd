@@ -19,8 +19,8 @@ class CreateProductsInDepotsTable extends Migration
             $table->integer('products_id')->unsigned();
             $table->integer('amount_in_depot');
             $table->integer('depots_id')->unsigned();
-            $table->foreign('products_id')->references('products')->on('id');
-            $table->foreign('depots_id')->references('depots')->on('id');
+            $table->foreign('products_id')->references('id')->on('products');
+            $table->foreign('depots_id')->references('id')->on('depots');
         });
     }
 

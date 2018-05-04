@@ -18,8 +18,8 @@ class CreateTransactionsInvoicesTable extends Migration
             $table->timestamps();
             $table->integer('transactions_id')->unsigned();
             $table->integer('invoices_id')->unsigned();
-            $table->foreign('transactions_id')->references('transactions')->on('id');
-            $table->foreign('invoices_id')->references('invoices')->on('id');
+            $table->foreign('transactions_id')->references('id')->on('transactions');
+            $table->foreign('invoices_id')->references('id')->on('invoices');
         });
     }
 

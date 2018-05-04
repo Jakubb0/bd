@@ -18,8 +18,8 @@ class CreateInternalAdmissionsTable extends Migration
             $table->timestamps();
             $table->integer('pracownicy_id')->unsigned();
             $table->integer('orders_id')->unsigned();
-            $table->foreign('pracownicy_id')->references('pracownicy')->on('id');
-            $table->foreign('orders_id')->references('orders')->on('id');
+            $table->foreign('pracownicy_id')->references('id')->on('pracownicy');
+            $table->foreign('orders_id')->references('id')->on('orders');
         });
     }
 

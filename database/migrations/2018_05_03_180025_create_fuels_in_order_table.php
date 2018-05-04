@@ -16,12 +16,12 @@ class CreateFuelsInOrderTable extends Migration
         Schema::create('fuels_in_order', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->integer('orders_id')->unassigned();
-            $table->integer('fuels_id')->unassigned();
+            $table->integer('orders_id')->unsigned();
+            $table->integer('fuels_id')->unsigned();
             $table->float('buying_price');
             $table->float('amount');
-            $table->foreign('orders_id')->references('orders')->on('id');
-            $table->foreign('fuels_id')->references('fuels')->on('id');
+            $table->foreign('orders_id')->references('id')->on('orders');
+            $table->foreign('fuels_id')->references('id')->on('fuels');
         });
     }
 

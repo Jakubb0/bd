@@ -20,9 +20,9 @@ class CreateDepotShiftTable extends Migration
             $table->integer('products_in_depots_id')->unsigned();
             $table->integer('amount');
             $table->integer('pracownicy_id')->unsigned();
-            $table->foreign('products_id')->references('products')->on('id');
-            $table->foreign('products_in_depots_id')->references('products_in_depots')->on('id');
-            $table->foreign('pracownicy_id')->references('pracownicy')->on('id');
+            $table->foreign('products_id')->references('id')->on('products');
+            $table->foreign('products_in_depots_id')->references('id')->on('products_in_depots');
+            $table->foreign('pracownicy_id')->references('id')->on('pracownicy');
         });
     }
 

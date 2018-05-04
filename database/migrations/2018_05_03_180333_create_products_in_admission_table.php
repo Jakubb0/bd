@@ -20,10 +20,10 @@ class CreateProductsInAdmissionTable extends Migration
             $table->integer('products_in_order_products_id')->unsigned();
             $table->integer('internal_admissions_id')->unsigned();
             $table->integer('products_in_depots_id')->unsigned();
-            $table->foreign('products_in_order_orders_id')->references('products_in_order')->on('orders_id');
-            $table->foreign('products_in_order_products_id')->references('products_in_order')->on('products_id');
-            $table->foreign('internal_admissions_id')->references('internal_admissions')->on('id');
-            $table->foreign('products_in_depots_id')->references('products_in_depots')->on('id');
+            $table->foreign('products_in_order_orders_id')->references('orders_id')->on('products_in_order');
+            $table->foreign('products_in_order_products_id')->references('products_id')->on('products_in_order');
+            $table->foreign('internal_admissions_id')->references('id')->on('internal_admissions');
+            $table->foreign('products_in_depots_id')->references('id')->on('products_in_depots');
         });
     }
 
