@@ -28,7 +28,7 @@
 	@else
 	<div class="row">
 		<div class="col-sm-12 small-card-menu">
-			<a href="#" class="menu-link">
+			<a href="{{route('selectCashbox')}}" class="menu-link">
 				<div class="card menu-bg">
 					<div class="card-body center">
 						<i class="fas fa-cart-arrow-down"></i>

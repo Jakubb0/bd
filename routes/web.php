@@ -113,7 +113,34 @@ Route::group(['middleware' => 'auth'], function() {
 		'as' => 'loyalpostAdd'
 	]);
 
+
+// SEARCH
+
 	Route::get('/search', 'SearchController@search');
+
+// CASHBOXES
+	
+	Route::get('/cashboxes', [
+		'uses' => 'CashboxController@view',
+		'as' => 'cashboxes',
+		'middleware' => 'not_admin'
+	]);
+	
+	Route::post('/cashboxes/add', [
+		'uses' => 'CashboxController@add',
+		'as' => 'addCashbox', 
+		'middleware' => 'not_admin'
+	]);
+
+	Route::get('/cashboxes/select', [
+		'uses' => 'CashboxController@select',
+		'as' => 'selectCashbox'
+	]);
+
+	Route::post('/cashboxes/select/use', [
+		'uses' => 'CashboxController@use',
+		'as' => 'useCashbox'
+	]);
 
 });
 
