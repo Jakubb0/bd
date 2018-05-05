@@ -125,3 +125,8 @@ hr.medium-hr {
 .bggoodlog{
 	background-color: #dff0d8;
 }
+
+.select-s {
+	width: 100%;
+	height: 70px !important;
+}

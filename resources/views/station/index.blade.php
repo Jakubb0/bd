@@ -141,18 +141,22 @@
 	</div>
 <script type="text/javascript">
 	$('#search').on('keyup', function(){
-		
+		$value=$(this).val();
 		$.ajax({
 			type :  'get',
-			url  :  'search',
-			data :  {text: $('#search').val()},
+			url  :  '{{URL::to('search')}}',
+			data :  {'search': $value},
 			success:function(data){
-				
-					console.log(data);
-				
+					$('tbody').html(data);
 			}
 		});
 	})
+</script>
+
+<script type="text/javascript">
+ 
+$.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+ 
 </script>
 	@endif
 @endsection
