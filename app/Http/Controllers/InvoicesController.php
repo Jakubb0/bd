@@ -22,7 +22,7 @@ class InvoicesController extends Controller
 		]);
 
     	invoices::add($request);
-    	logs::addLog("Dodano dane do faktury", "good", "invoices")
+    	logs::addLog("Dodano dane do faktury", "good", "invoices");
     	return redirect()->route("viewInvoices");
     }
 
