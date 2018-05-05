@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cart;
 use App\Products;
+use App\Order;
 use DB;
 use Illuminate\Support\Facades\Storage;
 use File;
@@ -85,5 +86,21 @@ class ProductController extends Controller
         return view('product.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
 
     }
+
+    public function postCart(Request $request)
+    {
+        if(!Session::has('cart')) {
+            return redirect()->route('product.shoppingCart');
+        }
+
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+
+        //$order = new Order();
+        //$order->cart = serialize($cart);
+        //$order->
+    }
+
+
 
 } 
