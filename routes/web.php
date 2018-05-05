@@ -144,6 +144,7 @@ Route::group(['middleware' => 'auth'], function() {
 		'as' => 'useCashbox'
 	]);
 
+<<<<<<< HEAD
 // CART
 
 	Route::get('/add-to-cart/{id}', [
@@ -156,5 +157,28 @@ Route::group(['middleware' => 'auth'], function() {
 		'as' => 'product.getCart'
 	]);
 
+=======
+
+
+// INVOICES
+
+	Route::get('/invoices', [
+		'uses' => 'InvoicesController@view',
+		'as' => 'viewInvoices'
+	]);
+
+	Route::get('/invoices/add', [
+		'uses' => 'InvoicesController@add',
+		'as' => 'addInvoices'
+	]);
+
+	Route::post('/invoices/new', [
+		'uses' => 'InvoicesController@new',
+		'as' => 'newInvoices'
+	]);
+
+
+
+>>>>>>> 398458eb2c5513e8d26b266f7d643603e6f1de1f
 });
 

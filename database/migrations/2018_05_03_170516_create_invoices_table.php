@@ -15,9 +15,8 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
             $table->string('name');
-            $table->integer('NIP');
+            $table->string('NIP');
             $table->float('tax_percent');
         });
     }
