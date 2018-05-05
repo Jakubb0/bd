@@ -142,5 +142,26 @@ Route::group(['middleware' => 'auth'], function() {
 		'as' => 'useCashbox'
 	]);
 
+
+
+// INVOICES
+
+	Route::get('/invoices', [
+		'uses' => 'InvoicesController@view',
+		'as' => 'viewInvoices'
+	]);
+
+	Route::get('/invoices/add', [
+		'uses' => 'InvoicesController@add',
+		'as' => 'addInvoices'
+	]);
+
+	Route::post('/invoices/new', [
+		'uses' => 'InvoicesController@new',
+		'as' => 'newInvoices'
+	]);
+
+
+
 });
 

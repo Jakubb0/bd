@@ -21,6 +21,7 @@
       <option value="employee">pracownik</option>
       <option value="product">produkt</option>
       <option value="login">logowanie</option>
+      <option value="invoices">faktura</option>
     </select>
 
     <input type="date" name="date_from">
