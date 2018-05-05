@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use DB;
-use File;
-use App\Products;
 use App\Cart;
+use App\Products;
+use DB;
+use Illuminate\Support\Facades\Storage;
+use File;
 use App\logs;
+use Illuminate\Http\Request;
 use Session;
 
 class ProductController extends Controller
@@ -69,21 +69,20 @@ class ProductController extends Controller
         $cart = new Cart($oldCart);
         $cart->add($product, $product->id);
 
-        dd($request->session()->get('cart'));
         $request->session()->put('cart', $cart);
+       // dd($request->session()->get('cart'));
         return redirect()->route('getProduct');
     }
 
-
     public function getCart() {
-        if (!Session::has('cart'))
+        if (!Session::has('cart')) 
         {
-            return view('product.shopping-cart', ['products' => null]); 
+            return view('product.shopping-cart', ['products' => null]);
         }
 
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
-        return view('product.shopping-cart', ['products' => $cart->items, 'totalPrice' =>$cart->totalPrice]);
+        return view('product.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
 
     }
 

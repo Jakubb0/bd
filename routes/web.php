@@ -144,7 +144,7 @@ Route::group(['middleware' => 'auth'], function() {
 		'as' => 'useCashbox'
 	]);
 
-<<<<<<< HEAD
+
 // CART
 
 	Route::get('/add-to-cart/{id}', [
@@ -157,7 +157,7 @@ Route::group(['middleware' => 'auth'], function() {
 		'as' => 'product.getCart'
 	]);
 
-=======
+
 
 
 // INVOICES
@@ -178,7 +178,5 @@ Route::group(['middleware' => 'auth'], function() {
 	]);
 
 
-
->>>>>>> 398458eb2c5513e8d26b266f7d643603e6f1de1f
 });
 
