@@ -75,7 +75,7 @@
 			</a>
 		</div>
 		<div class="col-sm-6 small-card-menu">
-			<a href="{{route('viewInvoices')}}" class="menu-link">
+			<a href="#" class="menu-link">
 				<div class="card menu-bg">
 					<div class="card-body center">
 						<i class="fas fa-file-alt"></i>
@@ -154,22 +154,18 @@
 
 <script type="text/javascript">
 	$('#search').on('keyup', function(){
-		$value=$(this).val();
+		
 		$.ajax({
 			type :  'get',
-			url  :  '{{URL::to('search')}}',
-			data :  {'search': $value},
+			url  :  'search',
+			data :  {text: $('#search').val()},
 			success:function(data){
-					$('tbody').html(data);
+				
+					console.log(data);
+				
 			}
 		});
 	})
-</script>
-
-<script type="text/javascript">
- 
-$.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
- 
 </script>
 	@endif
 @endsection

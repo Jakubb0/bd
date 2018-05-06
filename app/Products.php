@@ -6,9 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Products extends Model
 {
-
-	protected $fillable = ['name', 'price', 'description', 'category', 'image', 'barcode']; 
-
 	public static function newProduct(Request $request)
 	{
 		$name = $request["name"];

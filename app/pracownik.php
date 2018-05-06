@@ -71,8 +71,4 @@ class pracownik extends Model implements Authenticatable
 
 	}
     
-    public function orders() 
-    {
-    	return $this->hasMany('App\Order');
-    }
 }
