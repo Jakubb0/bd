@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDepotsTable extends Migration
+class CreateFuelsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,13 @@ class CreateDepotsTable extends Migration
      */
     public function up()
     {
-        Schema::create('depots', function (Blueprint $table) {
+        Schema::create('fuels', function (Blueprint $table) {
             $table->increments('id');
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
             $table->timestamps();
->>>>>>> 17d82192b00c6af2e5145b83e7856f6e6d14680a
-=======
->>>>>>> parent of afbdd60... Revert "Update 1.4.5 - added depot"
-            $table->string('name');
-            $table->string('description');
+            $table->string('type');
+            $table->float('price');
+            $table->float('amount');
+            
         });
     }
 
@@ -34,6 +30,8 @@ class CreateDepotsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('depots');
+        Schema::table('fuels', function (Blueprint $table) {
+            //
+        });
     }
 }

@@ -118,6 +118,8 @@ Route::group(['middleware' => 'auth'], function() {
 
 	Route::get('/search', 'SearchController@search');
 
+	Route::get('/searchLog', 'SearchController@searchLogs');
+
 // CASHBOXES
 	
 	Route::get('/cashboxes', [
@@ -143,7 +145,10 @@ Route::group(['middleware' => 'auth'], function() {
 	]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of afbdd60... Revert "Update 1.4.5 - added depot"
 
 // CART
 
@@ -178,6 +183,9 @@ Route::group(['middleware' => 'auth'], function() {
 	]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of afbdd60... Revert "Update 1.4.5 - added depot"
 // DEPOTS
 
 	Route::get('/depots', [
@@ -200,9 +208,13 @@ Route::group(['middleware' => 'auth'], function() {
 		'uses' => 'DepotsController@new',
 		'as' => 'depotsNew'
 	]);
+<<<<<<< HEAD
 =======
 >>>>>>> 17d82192b00c6af2e5145b83e7856f6e6d14680a
 
 >>>>>>> parent of 5e12fba... Revert "Update 1.4.5 - added depot"
+=======
+
+>>>>>>> parent of afbdd60... Revert "Update 1.4.5 - added depot"
 });
 

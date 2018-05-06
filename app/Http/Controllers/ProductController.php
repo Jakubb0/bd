@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Cart;
 use App\Products;
-use Illuminate\Http\Request;
+use App\Order;
 use DB;
 use Illuminate\Support\Facades\Storage;
 use File;
 use App\logs;
+use Illuminate\Http\Request;
+use Session;
 
 class ProductController extends Controller
 {
     public function getProduct()
     {
-    	return view("product.product");
+        $products = Products::all();
+    	return view("product.product", ['products' => $products]);
     }
 
     public function getNewProduct()
@@ -65,7 +69,10 @@ class ProductController extends Controller
 
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of afbdd60... Revert "Update 1.4.5 - added depot"
 
     public function getAddToCart(Request $request, $id) {
         $product = Products::find($id);
@@ -87,6 +94,7 @@ class ProductController extends Controller
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
         echo '<pre>';
@@ -94,6 +102,8 @@ class ProductController extends Controller
         echo '</pre>';
 
 >>>>>>> 17d82192b00c6af2e5145b83e7856f6e6d14680a
+=======
+>>>>>>> parent of afbdd60... Revert "Update 1.4.5 - added depot"
         return view('product.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
 
     }
@@ -108,10 +118,13 @@ class ProductController extends Controller
         $cart = new Cart($oldCart);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 
 >>>>>>> 17d82192b00c6af2e5145b83e7856f6e6d14680a
+=======
+>>>>>>> parent of afbdd60... Revert "Update 1.4.5 - added depot"
         //$order = new Order();
         //$order->cart = serialize($cart);
         //$order->
@@ -119,5 +132,8 @@ class ProductController extends Controller
 
 
 
+<<<<<<< HEAD
 >>>>>>> parent of 5e12fba... Revert "Update 1.4.5 - added depot"
+=======
+>>>>>>> parent of afbdd60... Revert "Update 1.4.5 - added depot"
 } 

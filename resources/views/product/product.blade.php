@@ -42,6 +42,7 @@
 			<td>{{$data->vat}}%</td>
 			<td>{{round($p,2)}} zł</td>
 			<td>{{$data->category}}</td>
+			<td><a href="{{ route('product.addToCart', ['id' => $data->id]) }}" class="btn btn-success" role="button">Zamów</a></td>
 		</tr>
 
 

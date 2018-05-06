@@ -13,6 +13,9 @@
 	@if(Session::has('cart'))
 		<div class="row">
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of afbdd60... Revert "Update 1.4.5 - added depot"
 			<div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
 				<ul class="list-group">
 
@@ -29,6 +32,7 @@
 						</li>
 					@endforeach
 				</ul>
+<<<<<<< HEAD
 =======
 			<div class="col-sm-12 col-md-12 col-md-offset-3 col-sm-offset-3">
 				<table class="table table-hover">
@@ -58,15 +62,21 @@
 					@endforeach
 				</table>
 >>>>>>> 17d82192b00c6af2e5145b83e7856f6e6d14680a
+=======
+>>>>>>> parent of afbdd60... Revert "Update 1.4.5 - added depot"
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
 <<<<<<< HEAD
+<<<<<<< HEAD
 				<strong>Cena łącznie: {{ $totalPrice }}</strong>
 =======
 				<strong>Razem: {{ $totalPrice }}</strong>
 >>>>>>> 17d82192b00c6af2e5145b83e7856f6e6d14680a
+=======
+				<strong>Cena łącznie: {{ $totalPrice }}</strong>
+>>>>>>> parent of afbdd60... Revert "Update 1.4.5 - added depot"
 			</div>
 		</div>
 		<div class="row">
