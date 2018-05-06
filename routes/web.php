@@ -144,11 +144,6 @@ Route::group(['middleware' => 'auth'], function() {
 		'as' => 'useCashbox'
 	]);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> parent of afbdd60... Revert "Update 1.4.5 - added depot"
 
 // CART
 
@@ -160,6 +155,11 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('/shopping-cart', [
 		'uses' => 'ProductController@getCart',
 		'as' => 'product.getCart'
+	]);
+
+	Route::get('/shopping-cart/order', [
+		'uses' => 'ProductController@order',
+		'as' => 'product.order'
 	]);
 
 
@@ -182,10 +182,6 @@ Route::group(['middleware' => 'auth'], function() {
 		'as' => 'newInvoices'
 	]);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> parent of afbdd60... Revert "Update 1.4.5 - added depot"
 // DEPOTS
 
 	Route::get('/depots', [
@@ -208,13 +204,5 @@ Route::group(['middleware' => 'auth'], function() {
 		'uses' => 'DepotsController@new',
 		'as' => 'depotsNew'
 	]);
-<<<<<<< HEAD
-=======
->>>>>>> 17d82192b00c6af2e5145b83e7856f6e6d14680a
-
->>>>>>> parent of 5e12fba... Revert "Update 1.4.5 - added depot"
-=======
-
->>>>>>> parent of afbdd60... Revert "Update 1.4.5 - added depot"
 });
 

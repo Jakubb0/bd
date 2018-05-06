@@ -68,11 +68,7 @@ class ProductController extends Controller
         return redirect()->route('getProduct');  
 
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> parent of afbdd60... Revert "Update 1.4.5 - added depot"
+
 
     public function getAddToCart(Request $request, $id) {
         $product = Products::find($id);
@@ -93,17 +89,12 @@ class ProductController extends Controller
 
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
+        /*
         echo '<pre>';
         print_r($cart);
-        echo '</pre>';
+        echo '</pre>';*/
 
->>>>>>> 17d82192b00c6af2e5145b83e7856f6e6d14680a
-=======
->>>>>>> parent of afbdd60... Revert "Update 1.4.5 - added depot"
         return view('product.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
 
     }
@@ -117,23 +108,31 @@ class ProductController extends Controller
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 17d82192b00c6af2e5145b83e7856f6e6d14680a
-=======
->>>>>>> parent of afbdd60... Revert "Update 1.4.5 - added depot"
         //$order = new Order();
         //$order->cart = serialize($cart);
         //$order->
     }
 
+    public function order(Request $request)
+    {
+
+        
+
+        if (Session::has('cart'))
+        {
+
+            $value = $request->session()->get('cart');
+
+            echo $qty = $value->items[1]['qty'];
+            echo $price = $value->items[1]['price'];
+            echo $item = $value->items[1]['item']->name;
+            dd($value);
+            
+            dd($value);
+        }
+    }
 
 
-<<<<<<< HEAD
->>>>>>> parent of 5e12fba... Revert "Update 1.4.5 - added depot"
-=======
->>>>>>> parent of afbdd60... Revert "Update 1.4.5 - added depot"
+
 } 

@@ -18,7 +18,6 @@
         <th scope="col">#</th>
         <th scope="col">Nazwa</th>
         <th scope="col">Opis</th>
-        <th scope="col">Dodaj do magazynu</th>
         <th scope="col">Usuń</th>
       </tr>
     </thead>
