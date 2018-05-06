@@ -15,10 +15,6 @@ class CreateDepotsTable extends Migration
     {
         Schema::create('depots', function (Blueprint $table) {
             $table->increments('id');
-<<<<<<< HEAD
-=======
-            $table->timestamps();
->>>>>>> 17d82192b00c6af2e5145b83e7856f6e6d14680a
             $table->string('name');
             $table->string('description');
         });
