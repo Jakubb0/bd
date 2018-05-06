@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Cart;
 use App\Products;
-use Illuminate\Http\Request;
+use App\Order;
 use DB;
 use Illuminate\Support\Facades\Storage;
 use File;
 use App\logs;
+use Illuminate\Http\Request;
+use Session;
 
 class ProductController extends Controller
 {
     public function getProduct()
     {
-    	return view("product.product");
+        $products = Products::all();
+    	return view("product.product", ['products' => $products]);
     }
 
     public function getNewProduct()
@@ -59,4 +63,44 @@ class ProductController extends Controller
         return redirect()->route('getProduct');  
 
     }
+
+    public function getAddToCart(Request $request, $id) {
+        $product = Products::find($id);
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->add($product, $product->id);
+
+        $request->session()->put('cart', $cart);
+       // dd($request->session()->get('cart'));
+        return redirect()->route('getProduct');
+    }
+
+    public function getCart() {
+        if (!Session::has('cart')) 
+        {
+            return view('product.shopping-cart', ['products' => null]);
+        }
+
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        return view('product.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
+
+    }
+
+    public function postCart(Request $request)
+    {
+        if(!Session::has('cart')) {
+            return redirect()->route('product.shoppingCart');
+        }
+
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+
+        //$order = new Order();
+        //$order->cart = serialize($cart);
+        //$order->
+    }
+
+
+
 } 

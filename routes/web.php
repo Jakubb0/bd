@@ -118,6 +118,8 @@ Route::group(['middleware' => 'auth'], function() {
 
 	Route::get('/search', 'SearchController@search');
 
+	Route::get('/searchLog', 'SearchController@searchLogs');
+
 // CASHBOXES
 	
 	Route::get('/cashboxes', [
@@ -140,6 +142,62 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::post('/cashboxes/select/use', [
 		'uses' => 'CashboxController@use',
 		'as' => 'useCashbox'
+	]);
+
+
+// CART
+
+	Route::get('/add-to-cart/{id}', [
+		'uses' => 'ProductController@getAddToCart',
+		'as' => 'product.addToCart'
+	]);
+
+	Route::get('/shopping-cart', [
+		'uses' => 'ProductController@getCart',
+		'as' => 'product.getCart'
+	]);
+
+
+
+
+// INVOICES
+
+	Route::get('/invoices', [
+		'uses' => 'InvoicesController@view',
+		'as' => 'viewInvoices'
+	]);
+
+	Route::get('/invoices/add', [
+		'uses' => 'InvoicesController@add',
+		'as' => 'addInvoices'
+	]);
+
+	Route::post('/invoices/new', [
+		'uses' => 'InvoicesController@new',
+		'as' => 'newInvoices'
+	]);
+
+// DEPOTS
+
+	Route::get('/depots', [
+		'uses' => 'DepotsController@view',
+		'as' => 'depots'
+	]);
+
+	Route::get('/depots/add', [
+		'uses' => 'DepotsController@add',
+		'as' => 'depotsAdd'
+	]);
+
+	Route::get('/depots/delete', [
+		'uses' => 'DepotsController@delete',
+		'as' => 'depotsDelete'
+	]);
+
+
+	Route::post('/depots/new', [
+		'uses' => 'DepotsController@new',
+		'as' => 'depotsNew'
 	]);
 
 });
