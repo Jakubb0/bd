@@ -17,7 +17,11 @@
     </div>
 @endif
 
+<<<<<<< HEAD
 	<h1>Dodaj dane do faktury</h1>
+=======
+	<h1>Dodaj pracownika</h1>
+>>>>>>> 17d82192b00c6af2e5145b83e7856f6e6d14680a
 	<div class="col-sm-12">
 	    <form action="{{route('newInvoices')}}" method="post">
 	      <div class="form-group">
