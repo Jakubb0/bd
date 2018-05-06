@@ -24,9 +24,14 @@ class ProductController extends Controller
     public function postNewProduct(Request $request)
     {
 
-        $request->validate([
-            'name' => 'required|min:3'           
-         ]);
+        $this->validate($request, [
+            'name'=>'required|min:1',
+            'price'=>'required',
+            'vat'=>'required',
+            'category'=>'required',
+            'description'=>'required',
+            'barcode'=>'required|min:5'
+        ]);
 
         if ($request->hasFile('file')) {
 
@@ -59,4 +64,60 @@ class ProductController extends Controller
         return redirect()->route('getProduct');  
 
     }
+<<<<<<< HEAD
+=======
+
+    public function getAddToCart(Request $request, $id) {
+        $product = Products::find($id);
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->add($product, $product->id);
+
+        $request->session()->put('cart', $cart);
+       // dd($request->session()->get('cart'));
+        return redirect()->route('getProduct');
+    }
+
+    public function getCart() {
+        if (!Session::has('cart')) 
+        {
+            return view('product.shopping-cart', ['products' => null]);
+        }
+
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+<<<<<<< HEAD
+=======
+
+        echo '<pre>';
+        print_r($cart);
+        echo '</pre>';
+
+>>>>>>> 17d82192b00c6af2e5145b83e7856f6e6d14680a
+        return view('product.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
+
+    }
+
+    public function postCart(Request $request)
+    {
+        if(!Session::has('cart')) {
+            return redirect()->route('product.shoppingCart');
+        }
+
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 17d82192b00c6af2e5145b83e7856f6e6d14680a
+        //$order = new Order();
+        //$order->cart = serialize($cart);
+        //$order->
+    }
+
+
+
+>>>>>>> parent of 5e12fba... Revert "Update 1.4.5 - added depot"
 } 

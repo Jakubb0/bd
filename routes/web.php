@@ -142,5 +142,67 @@ Route::group(['middleware' => 'auth'], function() {
 		'as' => 'useCashbox'
 	]);
 
+<<<<<<< HEAD
+=======
+
+// CART
+
+	Route::get('/add-to-cart/{id}', [
+		'uses' => 'ProductController@getAddToCart',
+		'as' => 'product.addToCart'
+	]);
+
+	Route::get('/shopping-cart', [
+		'uses' => 'ProductController@getCart',
+		'as' => 'product.getCart'
+	]);
+
+
+
+
+// INVOICES
+
+	Route::get('/invoices', [
+		'uses' => 'InvoicesController@view',
+		'as' => 'viewInvoices'
+	]);
+
+	Route::get('/invoices/add', [
+		'uses' => 'InvoicesController@add',
+		'as' => 'addInvoices'
+	]);
+
+	Route::post('/invoices/new', [
+		'uses' => 'InvoicesController@new',
+		'as' => 'newInvoices'
+	]);
+
+<<<<<<< HEAD
+// DEPOTS
+
+	Route::get('/depots', [
+		'uses' => 'DepotsController@view',
+		'as' => 'depots'
+	]);
+
+	Route::get('/depots/add', [
+		'uses' => 'DepotsController@add',
+		'as' => 'depotsAdd'
+	]);
+
+	Route::get('/depots/delete', [
+		'uses' => 'DepotsController@delete',
+		'as' => 'depotsDelete'
+	]);
+
+
+	Route::post('/depots/new', [
+		'uses' => 'DepotsController@new',
+		'as' => 'depotsNew'
+	]);
+=======
+>>>>>>> 17d82192b00c6af2e5145b83e7856f6e6d14680a
+
+>>>>>>> parent of 5e12fba... Revert "Update 1.4.5 - added depot"
 });
 
