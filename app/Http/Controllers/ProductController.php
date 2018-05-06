@@ -28,9 +28,14 @@ class ProductController extends Controller
     public function postNewProduct(Request $request)
     {
 
-        $request->validate([
-            'name' => 'required|min:3'           
-         ]);
+        $this->validate($request, [
+            'name'=>'required|min:1',
+            'price'=>'required',
+            'vat'=>'required',
+            'category'=>'required',
+            'description'=>'required',
+            'barcode'=>'required|min:5'
+        ]);
 
         if ($request->hasFile('file')) {
 
@@ -83,6 +88,11 @@ class ProductController extends Controller
 
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
+
+        echo '<pre>';
+        print_r($cart);
+        echo '</pre>';
+
         return view('product.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
 
     }
@@ -95,6 +105,8 @@ class ProductController extends Controller
 
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
+
+
 
         //$order = new Order();
         //$order->cart = serialize($cart);
