@@ -83,18 +83,18 @@ class ProductController extends Controller
     public function getCart() {
         if (!Session::has('cart')) 
         {
-            return view('product.shopping-cart', ['products' => null]);
+            return view('orders.shopping-cart', ['products' => null]);
         }
 
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
 
-        echo '<pre>';
-        print_r($cart);
-        echo '</pre>';
+        if (Session::has('cart'))
+        {
+            $value = session()->get('cart');
+        }
 
-        return view('product.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
-
+        return view('orders.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
     }
 
     public function postCart(Request $request)
@@ -103,14 +103,55 @@ class ProductController extends Controller
             return redirect()->route('product.shoppingCart');
         }
 
-        $oldCart = Session::get('cart');
-        $cart = new Cart($oldCart);
+       $oldCart = Session::get('cart');
+       $cart = new Cart($oldCart);
+
+        $id = DB::table('orders')->insertGetId([     
+                'providers_id' => 1,
+                'pracownicy_id' => 1,
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s")    
+        ]);
+
+
+        if (Session::has('cart'))
+        {
+            $value = session()->get('cart');
+
+            for( $i=1; $i <= count($value->items); ++$i )
+            {
+
+                $price = $value->items[$i]['price'];
+                $amount = $value->items[$i]['qty'];
+
+                $productNAME = $value->items[$i]['item']->name;
+                $productID = DB::table('products')->select('id')->where('name', $productNAME)
+                             ->get();
+
+                foreach($productID as $key => $s)
+                {
+                    $productID = $s->id;
+                }
+
+                DB::table('products_in_order')->insert([
+                    [
+                        'created_at' => date("Y-m-d H:i:s"),
+                        'updated_at' => date("Y-m-d H:i:s"),
+                        'orders_id' => $id,
+                        'products_id' => $productID,
+                        'buying_price' => $price,
+                        'amount' => $amount
+                    ]
+                ]);
+            }
+
+            session()->forget('cart');
+        }
+        
 
 
 
-        //$order = new Order();
-        //$order->cart = serialize($cart);
-        //$order->
+        return redirect()->route('product.getCart');
     }
 
 

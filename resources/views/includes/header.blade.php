@@ -30,7 +30,7 @@
 					<a href="{{ route('getProduct') }}"><i class="fas fa-shopping-basket"></i> Produkty</a>
 				</li>
 				<li>
-					<a href="#"><i class="fas fa-file-alt"></i> Zamówienia</a>
+					<a href="{{ route('product.getCart') }}"><i class="fas fa-file-alt"></i> Zamówienia</a>
 				</li>
 				<li>
 					<a href="{{ route('loyalView') }}"><i class="fas fa-address-card"></i> Numer stałego klienta</a>

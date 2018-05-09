@@ -32,7 +32,10 @@
 		<?php
 			if( $data->vat == "8" ) { $p = ($data->price * 0.8) + $data->price; }
 			else { $p = ($data->price * 0.23) + $data->price; }
-
+			//echo __DIR__ ;
+			list($wi,$he)=getimagesize(__DIR__.'/../../../public/images/product/'.($data->image));
+			if( $wi>$he ) { $he *= 300/$wi; $wi = 300; }
+			else { $wi *= 300/$he; $he = 300; }
 		?>
 		<tr>
 			<td><?php echo ++$i ?></td>
@@ -59,7 +62,7 @@
 					<!-- Modal body -->
 					<div class="modal-body">
 						<div class="card">
-						  <img class="card-img-top image-product-desc" src="/images/product/{{ $data->image }}" alt="Card image cap">
+						  <img width="{{$wi}}" height="{{$he}}" style="margin: auto;" src="/images/product/{{ $data->image }}" alt="Card image cap">
 						  <div class="card-body">
 						    <h5 class="card-title">{{ $data->name }}</h5>
 						    <p class="card-text">{{ $data->description }}</p>

@@ -39,11 +39,13 @@ class SearchController extends Controller
     	{
     		$output = "";
     		$i = 1;	
-    		$logsAll = DB::table('logs')->get();
 
     		if($request->category != "selectAll")
     		{
-    			$logs = DB::table('logs')->where('category','LIKE','%'.$request->category.'%')->get();
+    			$logs = DB::table('logs')
+                ->where('category','LIKE','%'.$request->category.'%')
+                ->orderBy('id', 'desc')
+                ->get();
     			
     			if($logs)
 	    		{

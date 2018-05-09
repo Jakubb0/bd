@@ -11,6 +11,7 @@
 @section('content')
 
 	@if(Session::has('cart'))
+		<h1>Zamówienia</h1>
 		<div class="row">
 			<div class="col-sm-12 col-md-12 col-md-offset-3 col-sm-offset-3">
 				<table class="table table-hover">
@@ -48,7 +49,7 @@
 		</div>
 		<div class="row">
 			<div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-				<button type="button" class="btn btn-success">Zamów</button>
+				<a href="{{ route('tCart') }}" class="btn btn-success">Zamów</a>
 			</div>
 		</div>
 	@else
