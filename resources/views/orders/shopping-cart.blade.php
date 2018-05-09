@@ -12,6 +12,24 @@
 
 	@if(Session::has('cart'))
 		<div class="row">
+
+			<div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+				<ul class="list-group">
+
+					@foreach($products as $product)
+						<li class="list-group-item">
+							<span class="badge badge-secondary">{{ $product['qty'] }}</span>
+							<strong>{{ $product['item']['name'] }}</strong>
+							<span class="label label-success">{{ $product['price'] }}</span>
+							
+							<a href="#" class="btn btn-info">Usuń 1 szukę</a>
+							<a href="#" class="btn btn-info">Usuń wszystko</a>
+
+								
+						</li>
+					@endforeach
+				</ul>
+
 			<div class="col-sm-12 col-md-12 col-md-offset-3 col-sm-offset-3">
 				<table class="table table-hover">
 					<thead class="table-th">
@@ -39,16 +57,29 @@
 						</tr>
 					@endforeach
 				</table>
+
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+
+				<strong>Cena łącznie: {{ $totalPrice }}</strong>
+
 				<strong>Razem: {{ $totalPrice }}</strong>
+
+				<strong>Cena łącznie: {{ $totalPrice }}</strong>
+
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+<<<<<<< HEAD:resources/views/orders/shopping-cart.blade.php
 				<a href="{{ route('tCart') }}" class="btn btn-success">Zamów</a>
+=======
+				<form action="{{route('product.order')}}" method="get">
+					<button type="submit" name="test" value="1" class="btn btn-success">Zamów</button>
+				</form>
+>>>>>>> a1a2b442521e7a8ccadfdab8fe2de5ff79f0dc88:resources/views/product/shopping-cart.blade.php
 			</div>
 		</div>
 	@else

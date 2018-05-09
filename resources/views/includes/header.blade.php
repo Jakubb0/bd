@@ -41,6 +41,9 @@
 				<li>
 					<a href="{{ route('cashboxes') }}"><i class="fas fa-desktop"></i>Kasa</a>
 				</li>
+				<li>
+					<a href="{{ route('depots') }}"><i class="fas fa-box"></i>Magazyn</a>
+				</li>
 			</ul>
 		</div>
 

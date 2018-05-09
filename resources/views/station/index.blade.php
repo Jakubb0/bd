@@ -89,7 +89,7 @@
 	<div class="row">
 
 		<div class="col-sm-6 small-card-menu">
-			<a href="#" class="menu-link">
+			<a href="{{route('product.getCart')}}" class="menu-link">
 				<div class="card menu-bg">
 					<div class="card-body center">
 						<i class="fas fa-shipping-fast"></i>

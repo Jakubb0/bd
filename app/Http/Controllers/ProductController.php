@@ -69,6 +69,7 @@ class ProductController extends Controller
 
     }
 
+
     public function getAddToCart(Request $request, $id) {
         $product = Products::find($id);
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
@@ -89,10 +90,19 @@ class ProductController extends Controller
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
 
+<<<<<<< HEAD
         if (Session::has('cart'))
         {
             $value = session()->get('cart');
         }
+=======
+        /*
+        echo '<pre>';
+        print_r($cart);
+        echo '</pre>';*/
+
+        return view('product.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
+>>>>>>> a1a2b442521e7a8ccadfdab8fe2de5ff79f0dc88
 
         return view('orders.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
     }
@@ -150,8 +160,33 @@ class ProductController extends Controller
         
 
 
+<<<<<<< HEAD
 
         return redirect()->route('product.getCart');
+=======
+        //$order = new Order();
+        //$order->cart = serialize($cart);
+        //$order->
+>>>>>>> a1a2b442521e7a8ccadfdab8fe2de5ff79f0dc88
+    }
+
+    public function order(Request $request)
+    {
+
+        
+
+        if (Session::has('cart'))
+        {
+
+            $value = $request->session()->get('cart');
+
+            echo $qty = $value->items[1]['qty'];
+            echo $price = $value->items[1]['price'];
+            echo $item = $value->items[1]['item']->name;
+            dd($value);
+            
+            dd($value);
+        }
     }
 
 
