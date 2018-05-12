@@ -157,7 +157,7 @@ Route::group(['middleware' => 'auth'], function() {
 		'as' => 'product.getCart'
 	]);
 
-<<<<<<< HEAD
+
 	Route::get('/test', [
 		'uses' => 'ProductController@postCart',
 		'as' => 'tCart'
@@ -174,13 +174,12 @@ Route::group(['middleware' => 'auth'], function() {
 		'uses' => 'OrderController@getOrder',
 		'as' => 'orders.index'
 	]);
-=======
+
 	Route::get('/shopping-cart/order', [
 		'uses' => 'ProductController@order',
 		'as' => 'product.order'
 	]);
 
->>>>>>> a1a2b442521e7a8ccadfdab8fe2de5ff79f0dc88
 
 
 
