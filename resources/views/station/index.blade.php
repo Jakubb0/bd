@@ -101,7 +101,7 @@
 
 
 		<div class="col-sm-6 small-card-menu">
-			<a href="#" class="menu-link">
+			<a href="#" class="menu-link" id="call">
 				<div class="card menu-bg">
 					<div class="card-body center">
 						<i class="fas fa-male"></i>
@@ -164,6 +164,7 @@
 			}
 		});
 	})
+
 </script>
 
 <script type="text/javascript">

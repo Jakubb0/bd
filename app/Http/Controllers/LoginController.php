@@ -107,8 +107,13 @@ class LoginController extends Controller
 	}
 	public function getLogout()
 	{
+		DB::table('cashboxes')->where('employee_id', Auth::id())->update(array(
+                     'employee_id'=>null,
+    	));
+    	
 		logs::addLog("Wylogowano", "bad", "login");
 		Auth::logout();
 		return redirect()->route('home');
 	}
+
 }

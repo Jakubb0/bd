@@ -6,7 +6,6 @@
 
 @section('content')
 
-<<<<<<< HEAD
 <h1><i class="fas fa-newspaper"></i> Dziennik wydarzeń </h1>
 
   <select id="category" name="category" class="myCategory select-s">

@@ -28,14 +28,24 @@ class CashboxController extends Controller
 
     public function select()
     {
-    	return view("cashboxes.cashboxesSelect");
+        return view("cashboxes.cashboxesSelect");
     }
 
     public function use()
     {
-		DB::table('cashboxes')->where('id', $_POST['cashbox_number'])->update(array(
+    	DB::table('cashboxes')->where('id', $_POST['cashbox_number'])->update(array(
                      'employee_id'=>Auth::Id(),
-		));
-    	return view("cashboxes.cashboxesUse");
+    	));
+
+        return view("cashboxes.cashboxesUse");   
+    }
+
+    public function transaction()
+    {
+        DB::transaction(function () {
+            
+        });
+
+        return redirect()->back();
     }
 }

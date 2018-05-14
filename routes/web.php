@@ -118,7 +118,10 @@ Route::group(['middleware' => 'auth'], function() {
 
 	Route::get('/search', 'SearchController@search');
 
+	Route::get('/searchcashbox', 'SearchController@searchCashbox');
+	
 	Route::get('/searchLog', 'SearchController@searchLogs');
+	
 
 // CASHBOXES
 	
@@ -144,12 +147,22 @@ Route::group(['middleware' => 'auth'], function() {
 		'as' => 'useCashbox'
 	]);
 
+	Route::post('/cashboxes/transaction', [
+		'uses' => 'CashboxController@transaction',
+		'as' => 'transactionCashbox'
+	]);
+
 
 // CART
 
 	Route::get('/add-to-cart/{id}', [
 		'uses' => 'ProductController@getAddToCart',
 		'as' => 'product.addToCart'
+	]);
+
+	Route::get('/add-to-cashbox/{id}', [
+		'uses' => 'ProductController@getAddToCashbox',
+		'as' => 'product.addToCashbox'
 	]);
 
 	Route::get('/shopping-cart', [
