@@ -10,6 +10,6 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-    'failed' => 'Nieprawid³owe dane.',
-    'throttle' => 'Zbyt wiele prób logowania. Spróbuj ponownie w ci¹gu :seconds sekund.',
+    'failed' => 'NieprawidÅ‚owe dane.',
+    'throttle' => 'Zbyt wiele prÃ³b logowania. SprÃ³buj ponownie w ciÄ…gu :seconds sekund.',
 ];
