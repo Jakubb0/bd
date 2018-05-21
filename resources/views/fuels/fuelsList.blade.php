@@ -18,7 +18,8 @@
         <th scope="col">#</th>
         <th scope="col">Typ</th>
         <th scope="col">Cena</th>
-        <th scope="col">Ilość</th>
+        <th scope="col">Ilość (litry)</th>
+        <th scope="col"></th>        
       </tr>
     </thead>
 	@foreach($loyal as $i => $data)

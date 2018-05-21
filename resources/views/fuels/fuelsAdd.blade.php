@@ -29,7 +29,7 @@
 	        <input type="text" class="form-control" name="price" id="price">
 	      </div>
 	      <div class="form-group">
-	        <label for="amount">Ilość</label>
+	        <label for="amount">Ilość (litry)</label>
 	        <input type="text" class="form-control" name="amount" id="amount">
 	      </div>
 	      

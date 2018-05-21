@@ -1,7 +1,7 @@
 @if(Auth::check())
 
   @if(DB::table('pracownicy')->where('id', Auth::id())->pluck('status')[0]=='kierownik')
-   	<?php $witaj = DB::table('pracownicy')->where('id', Auth::id())->pluck('name'); ?>
+   	<?php $witaj = DB::table('pracownicy')->where('id', Auth::id())->pluck('name');  ?>
 
 	<div class="left-bar">
 		<div class="name-welcome">
@@ -43,6 +43,9 @@
 				</li>
 				<li>
 					<a href="{{ route('depots') }}"><i class="fas fa-box"></i> Magazyn</a>
+				</li>
+				<li>
+					<a href="{{ route('fuelsView') }}"><i class="fas fa-thermometer-full"></i> Paliwo</a>
 				</li>
 			</ul>
 		</div>

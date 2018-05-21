@@ -1,6 +1,7 @@
 <?php 
 	use Illuminate\Support\Facades\Storage;
 	$products = session()->get('cashbox');
+	//dd($products['item']['name']);
 ?>
 
 @extends('layouts.master')
@@ -34,15 +35,16 @@
 							<th></th>
 						</tr>
 					</thead>
-					<?php $i=1; ?>
+					<?php $i=0; ?>
 					@foreach($products as $product)
+
 						<tr>
-							<td>{{$i}}</td>
+							<td>{{$i++}}</td>
 							<td>{{$product[$i]['item']['name']}}</td>
 							<td>{{$product[$i]['qty']}}</td>
 							<td>{{$product[$i]['item']['price']}} zł</td>
 							<td>{{$product[$i]['price']}} zł</td>
-							<?php $i++; ?>
+							
 						</tr>
 					@endforeach
 				</table>
