@@ -35,20 +35,17 @@
 							<th></th>
 						</tr>
 					</thead>
-					<?php $i=0; ?>
-					@foreach($products as $product)
-
+					<?php $i=1; ?>
+					@foreach( $products->items as $product )
 						<tr>
 							<td>{{$i++}}</td>
-							<td>{{$product[$i]['item']['name']}}</td>
-							<td>{{$product[$i]['qty']}}</td>
-							<td>{{$product[$i]['item']['price']}} zł</td>
-							<td>{{$product[$i]['price']}} zł</td>
-							
+							<td>{{$product['item']['name']}}</td>
+							<td>{{$product['qty']}}</td>
+							<td>{{$product['item']['price']}} zł</td>
+							<td>{{$product['price']}} zł</td>	
 						</tr>
 					@endforeach
 				</table>
-
 			</div>
 		</div>
 	@else
@@ -63,17 +60,15 @@
 
 	<div class="col-sm-12">
 	    <form action="{{route('transactionCashbox')}}" method="post">
-	      <div class="form-group">
-	        <label for="product">Produkty</label>
-	        <input type="text" class="form-control" name="product" id="product">
-	      </div>
 
-			<select id="category" name="category" class="myCategory select-s">
-		        <optgroup label = "Wybierz potwiedzenie">
-		          <option value="receipt" selected>Paragon</option>
-		          <option value="invoice">Faktura</option>
-		        </optgroup>
-			</select>
+			<div class="form-group">
+				<select id="category" name="category" class="form-control">
+			        <optgroup label = "Wybierz potwiedzenie">
+			          <option value="receipt" selected>Paragon</option>
+			          <option value="invoice">Faktura</option>
+			        </optgroup>
+				</select>
+			</div>
 
 		  <button type="submit" class="btn btn-primary">Gotowe</button>
 	      <button type="submit" class="btn btn-primary">Wyjdz z kasy</button>
@@ -118,7 +113,7 @@
 
 						  </div>
 								</thead>
-								<tbody>
+								<tbody id="prod-list">
 								</tbody>
 							</table>
 						</div>
@@ -131,7 +126,6 @@
 
 			</div>
 		</div>
-		
 
 <script type="text/javascript">
 	$('#search').on('keyup', function(){
@@ -141,7 +135,7 @@
 			url  :  '{{URL::to('searchcashbox')}}',
 			data :  {'search': $value},
 			success:function(data){
-					$('tbody').html(data);
+					$('#prod-list').html(data);
 			}
 		});
 	})

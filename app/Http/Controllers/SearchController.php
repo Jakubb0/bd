@@ -51,9 +51,9 @@ class SearchController extends Controller
                                     <td>'. $prod->id .'</td>
                                     <td>'. $prod->name .'</td>
                                     <td>'. $prod->price .'</td>
-                                    <td><input type="number" name="qty" id="qty"></input></td>'.
-                                     "<td><a href=" . '"' . route('product.addToCashbox', ['id' => $prod->id]) . '"' . "class='btn btn-success' role='button'>Zamów</a></td>" .
-                                '</tr>';
+                                    <td><input type="number" name="qty" id="qty"></input></td>
+                                    <td><a href="'. route('product.addToCashbox', ['id' => $prod->id]) .'" class="btn btn-success" role="button">Zamów</a></td>
+                                </tr>';
                 }
 
                 return Response($output);

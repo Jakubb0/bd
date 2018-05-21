@@ -236,5 +236,22 @@ Route::group(['middleware' => 'auth'], function() {
 		'uses' => 'DepotsController@new',
 		'as' => 'depotsNew'
 	]);
+
+// FUELS
+
+	Route::get('/fuels', [
+		'uses' => 'FuelsController@fuelsView',
+		'as' => 'fuelsView'
+	]);	
+
+	Route::get('/fuels/add', [
+		'uses' => 'FuelsController@add',
+		'as' => 'fuelsAdd'
+	]);
+
+	Route::post('/fuels/add/new', [
+		'uses' => 'FuelsController@fuelsAdd',
+		'as' => 'fuelspostAdd'
+	]);
 });
 

@@ -84,9 +84,24 @@ class ProductController extends Controller
 
 
     public function getAddToCashbox(Request $request, $id) {
+      
         $product = Products::find($id);
         $oldCart = Session::has('cashbox') ? Session::get('cashbox') : null;
         $cart = new Cart($oldCart);
+        $cart->add($product, $product->id);
+
+        $request->session()->put('cashbox', $cart);
+
+        return redirect()->route('useCashbox');
+
+        //dd($cart);
+
+
+
+       /* $product = Products::find($id);
+        $oldCart = Session::has('cashbox') ? Session::get('cashbox') : null;
+        $cart = new Cart($oldCart);
+        dd($product);
         $qty = $cart->items[$id]['qty'];
 
         $cart->add($product, $product->id);
@@ -96,6 +111,7 @@ class ProductController extends Controller
         $_POST['cashbox_number'] = DB::table('cashboxes')->where('employee_id', Auth::id())->pluck('id')->first();
         
         return redirect()->route('useCashbox');
+        */
     }
 
     public function getCart() {

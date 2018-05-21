@@ -1,17 +1,15 @@
 @if(Auth::check())
 
   @if(DB::table('pracownicy')->where('id', Auth::id())->pluck('status')[0]=='kierownik')
-<<<<<<< HEAD
+
    	<?php $witaj = DB::table('pracownicy')->where('id', Auth::id())->pluck('name');  ?>
-=======
+
    	<?php 
    		$witaj = DB::table('pracownicy')->where('id', Auth::id())->pluck('name'); 
    		$test = App\logs::where('category', 'call')->orderBy('time', 'desc')->first();
    	?>
 
 
-
->>>>>>> f7fa92d3c6bdd3b568816530ea4ab17bd31276d4
 
 	<div class="left-bar">
 		<div class="name-welcome">
