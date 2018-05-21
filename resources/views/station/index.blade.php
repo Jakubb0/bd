@@ -165,9 +165,18 @@
 		});
 	})
 
-</script>
+	$('#call').on('click', function(){
+		$value=1;
+		$.ajax({
+			type :  'get',
+			url  :  '{{URL::to('call')}}',
+			data :  {'call': $value},
+			success:function(data){
+					$('#call').html(data);
+			}
+		});
+	})
 
-<script type="text/javascript">
  
 $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
  

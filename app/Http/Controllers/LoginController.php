@@ -116,4 +116,16 @@ class LoginController extends Controller
 		return redirect()->route('home');
 	}
 
+
+	public function call(Request $request)
+	{
+		if($request->ajax())
+    	{
+    		logs::addLog("Wezwano kierownika", "bad", "call");
+    		$output = "<script>alert('wezwanie do kasy nr.".$request->call."')</script>";
+
+			return Response($output);
+    	}
+	}
+
 }
