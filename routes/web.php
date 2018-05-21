@@ -44,26 +44,27 @@ Route::group(['middleware' => 'auth'], function() {
 		'as' => 'employee',
 		'middleware' => 'block'
 	]);
+
 	Route::get('/pracownik/dodajpracownika',[
 		'uses' => 'LoginController@employeeAdd',
 		'as' => 'employeeAdd',
 		'middleware' => 'not_admin'
 	]);
+
 	Route::get('/pracownik/listapracownikow',[
 		'uses' => 'LoginController@employeeList',
 		'as' => 'employeeList',
 		'middleware' => 'not_admin'
 	]);
+
 	Route::get('/usun',[
 	'uses' => 'LoginController@employeeDelete',
 	'as' => 'employeeDelete',
 	'middleware' => 'not_admin'
 	]);
-	Route::post('/admin/zmiendane',[
-	'uses' => 'LoginController@postUpdate',
-	'as' => 'employeeUpdate'
 
-	]);
+	Route::get('/call', 'LoginController@call');
+
 
 
 //PRODUCTS
@@ -235,28 +236,5 @@ Route::group(['middleware' => 'auth'], function() {
 		'uses' => 'DepotsController@new',
 		'as' => 'depotsNew'
 	]);
-	
-//FUELS
-
-	Route::get('/fuels', [
-		'uses' => 'fuelsController@fuelsView',
-		'as' => 'fuelsView'
-	]);
-
-	Route::get('/fuels/add', [
-		'uses' => 'fuelsController@add',
-		'as' => 'fuelsAdd'
-	]);
-
-	Route::get('/fuels/delete', [
-		'uses' => 'fuelsController@fuelsDelete',
-		'as' => 'fuelsDelete'
-	]);
-
-	Route::post('/fuels/postAdd', [
-		'uses' => 'fuelsController@fuelsAdd',
-		'as' => 'fuelspostAdd'
-	]);
-	
 });
 

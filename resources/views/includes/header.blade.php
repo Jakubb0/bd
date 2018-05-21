@@ -1,7 +1,17 @@
 @if(Auth::check())
 
   @if(DB::table('pracownicy')->where('id', Auth::id())->pluck('status')[0]=='kierownik')
+<<<<<<< HEAD
    	<?php $witaj = DB::table('pracownicy')->where('id', Auth::id())->pluck('name');  ?>
+=======
+   	<?php 
+   		$witaj = DB::table('pracownicy')->where('id', Auth::id())->pluck('name'); 
+   		$test = App\logs::where('category', 'call')->orderBy('time', 'desc')->first();
+   	?>
+
+
+
+>>>>>>> f7fa92d3c6bdd3b568816530ea4ab17bd31276d4
 
 	<div class="left-bar">
 		<div class="name-welcome">
@@ -51,7 +61,19 @@
 		</div>
 
 	</div>
+
+
+	<span id="test">
+		@if($test['value']=='bad')
+			<script type="text/javascript">alert("Wezwno do kasy")</script>
+			<?php App\logs::where('category', 'call')->where('value', 'bad')->update(['value' => 'good']); ?>
+		@endif
+	</span>
+
+
 	<div class="admin-content">
+
+
   @else
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,9 +110,21 @@
             </div>
           </li>
         </ul>
-
       </div>
     </nav>
   @endif
 
 @endif
+
+
+
+
+
+<script type="text/javascript">
+
+	setInterval(function(){
+	      $("#test").load("#test");
+	 },5000);
+
+</script>
+<script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
