@@ -10,9 +10,9 @@ return [
     | has failed, such as for an invalid token or invalid new password.
     |
     */
-    'password' => 'Has≥o musi zawieraÊ co najmniej szeúÊ znakÛw oraz identyczne w obu polach.',
-    'reset' => 'Twoje has≥o zosta≥o zresetowane.',
-    'sent' => 'Link s≥uøπcy do resetowania has≥a zosta≥ wys≥any na TwÛj adres e-mail.',
-    'token' => 'Øeton resetujπcy has≥o jest niepoprawny.',
-    'user' => "Nie znaleziono uøytkownika z takim adresem e-mail.",
+    'password' => 'Has≈Ço musi zawieraƒá co najmniej sze≈õƒá znak√≥w oraz identyczne w obu polach.',
+    'reset' => 'Twoje has≈Ço zosta≈Ço zresetowane.',
+    'sent' => 'Link s≈Çu≈ºƒÖcy do resetowania has≈Ça zosta≈Ç wys≈Çany na Tw√≥j adres e-mail.',
+    'token' => '≈ªeton resetujƒÖcy has≈Ço jest niepoprawny.',
+    'user' => "Nie znaleziono u≈ºytkownika z takim adresem e-mail.",
 ];

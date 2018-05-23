@@ -11,5 +11,5 @@ return [
     |
     */
     'previous' => '&laquo; Wstecz',
-    'next' => 'NaprzÛd &raquo;',
+    'next' => 'Naprz√≥d &raquo;',
 ];

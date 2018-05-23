@@ -61,12 +61,12 @@
 	</div>
 
 
-	<span id="test">
+	<script id="test" type="text/javascript">
 		@if($test['value']=='bad')
-			<script type="text/javascript">alert("Wezwno do kasy")</script>
+			alert("Wezwano do kasy")
 			<?php App\logs::where('category', 'call')->where('value', 'bad')->update(['value' => 'good']); ?>
 		@endif
-	</span>
+	</script>
 
 
 	<div class="admin-content">
@@ -122,7 +122,7 @@
 
 	setInterval(function(){
 	      $("#test").load("#test");
-	 },5000);
+	 },10000);
 
 </script>
 <script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
