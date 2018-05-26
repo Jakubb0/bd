@@ -20,7 +20,7 @@ class fuelsController extends Controller
 		$id = $request["delete"];
 		DB::table('fuels')->where('id', '=', $id)->delete();
 
-		logs::addLog("Usuniêto paliwo", "bad", "fuels");
+		logs::addLog("UsuniÄ™to paliwo", "bad", "fuels");
 
 		return view("fuels.fuelsList");
     }

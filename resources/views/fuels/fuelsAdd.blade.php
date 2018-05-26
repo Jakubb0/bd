@@ -26,6 +26,7 @@
 					<option value="Pb98" selected>Pb98</option>
 					<option value="Pb95">Pb95</option>
 					<option value="ON">ON</option>
+					<option value="LPG">LPG</option>
 				</select>
 	      </div>
 	      <div class="form-group">
@@ -38,7 +39,7 @@
 	      </div>
 	      
 		  
-	      <button type="submit" class="btn btn-primary">Zarejestruj</button>
+	      <button type="submit" class="btn btn-primary">Dodaj</button>
 	      <input type="hidden" name="_token" value="{{ Session::token() }}" />
 	    </form>
 	</div>

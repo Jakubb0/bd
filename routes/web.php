@@ -263,5 +263,27 @@ Route::group(['middleware' => 'auth'], function() {
 		'uses' => 'FuelsController@fuelsAdd',
 		'as' => 'fuelspostAdd'
 	]);
+
+	Route::get('/fuels/delete', [
+		'uses' => 'FuelsController@fuelsDelete',
+		'as' => 'fuelsDelete'
+	]);
+
+
+// DISTRIBUTORS
+	Route::get('/fuels/distributors', [
+		'uses' => 'DistributorsController@distributorsView',
+		'as' => 'distributorsView'
+	]);	
+
+	Route::get('/fuels/distributors/add', [
+		'uses' => 'DistributorsController@distributorsAdd',
+		'as' => 'distributorsAdd'
+	]);	
+
+	Route::post('/fuels/distributors/new', [
+		'uses' => 'DistributorsController@distributorsNew',
+		'as' => 'distributorsNew'
+	]);	
 });
 

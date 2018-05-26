@@ -9,6 +9,7 @@
 	<h1><i class="fas fa-users"></i> Lista paliw</h1>
 
   <a href="{{route('fuelsAdd')}}" class="btn btn-info">Dodaj paliwo</a>
+  <a href="{{route('distributorsView')}}" class="btn btn-info">Zarządzaj dystrybutorami</a>
 
 	<?php $loyal = DB::table('fuels')->get(); ?>
 

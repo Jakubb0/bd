@@ -16,27 +16,25 @@
         </ul>
     </div>
 @endif
+<?php $fuels = App\fuels::get(); ?>
 
-
-	<h1>Dodaj dane do faktury</h1>
+	<h1>Nowy dystrybutor</h1>
 
 	<div class="col-sm-12">
-	    <form action="{{route('newInvoices')}}" method="post">
+	    <form action="{{route('distributorsNew')}}" method="post">
 	      <div class="form-group">
-	        <label for="name">Nazwa</label>
-	        <input type="text" class="form-control" name="name" id="name">
+	        <label for="distributor_id">Numer dystrybutora</label>
+	        <input type="number" class="form-control" name="distributor_id" id="distributor_id"/>
 	      </div>
 	      <div class="form-group">
-	        <label for="nip">NIP</label>
-	        <input type="text" class="form-control" name="nip" id="nip">
+			<h4>Paliwa</h4>
+				@foreach($fuels as $i => $data)
+					<label for="{{$data->type}}">{{$data->type}}</label>
+					<input type="checkbox" name="fuel[]" value="{{$data->type}}">
+					<br/>
+				@endforeach
 	      </div>
-	      <div class="form-group">
-		    <label for="category">Podatek: </label>
-		    <select name="tax" class="custom-select">
-		      <option value="8">8%</option>
-		      <option value="23">23%</option>
-		    </select>
-	      </div>
+
 		  
 	      <button type="submit" class="btn btn-primary">Dodaj</button>
 	      <input type="hidden" name="_token" value="{{ Session::token() }}" />
