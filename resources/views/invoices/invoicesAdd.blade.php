@@ -8,7 +8,7 @@
 @section('content')
 
 @if ($errors->any())
-    <div class="alert alert-danger">
+    <div class="validate">
         <ul>
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>

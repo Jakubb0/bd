@@ -32,6 +32,12 @@ class fuelsController extends Controller
 
 	public function fuelsAdd(Request $request)
 	{
+		$request->validate([
+    		'type' => 'required|unique:fuels',
+    		'price' => 'required',
+    		'amount' => 'required'
+		]);
+
 		fuels::fuelsAdd($request);
 		logs::addLog("Dodano paliwo", "good", "fuels");
 

@@ -80,27 +80,37 @@ class SearchController extends Controller
     		{
     			$logs = DB::table('logs')
                 ->where('category','LIKE','%'.$request->category.'%')
-                ->orderBy('id', 'desc')
+                ->orderBy('time', 'desc')
                 ->get();
     			
+
+
     			if($logs)
 	    		{
 	    			foreach($logs as $key => $log)
 	    			{
+                        $bgcolor = DB::table('logs')
+                        ->where('id', $log->id)
+                        ->pluck('value')->first();
+
+                        
+
 	    				$output .= '<tr>
 	    								<td>'. $i++ .'</td>
 	    								<td>'. $log->ip .'</td>
 	    								<td>'. $log->login .'</td>
-	    								<td>'. $log->category .'</td>
+	    								<td>'. $log->message .'</td>
 	    								<td>'. $log->time .'</td>
+
 	    							</tr>';
+                                    
 	    			}
 	    			return Response($output);
 	    		}
     		}	
     		else
     		{
-    			$logs = DB::table('logs')->get();
+    			$logs = DB::table('logs')->orderBy('time', 'desc')->get();
     			
     			if($logs)
 	    		{
@@ -110,7 +120,7 @@ class SearchController extends Controller
 	    								<td>'. $i++ .'</td>
 	    								<td>'. $log->ip .'</td>
 	    								<td>'. $log->login .'</td>
-	    								<td>'. $log->category .'</td>
+	    								<td>'. $log->message .'</td>
 	    								<td>'. $log->time .'</td>
 	    							</tr>';
 	    			}

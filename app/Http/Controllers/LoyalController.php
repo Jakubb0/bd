@@ -32,6 +32,14 @@ class LoyalController extends Controller
 
 	public function loyalclientAdd(Request $request)
 	{
+		$request->validate([
+    		'name' => 'required',
+    		'surn' => 'required',
+    		'city' => 'required',
+    		'tel' => 'required|regex:/[1-9]{1}[0-9]{8}/|max:9|unique: loyalclients'
+		]);
+
+
 		loyalclient::loyalAdd($request);
 		logs::addLog("Dodano stałego klienta", "good", "loyal");
 

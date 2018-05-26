@@ -7,6 +7,16 @@
 
 @section('content')
 
+@if ($errors->any())
+    <div class="validate">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 
 	<h1>Dodaj magazyn</h1>
 	<div class="col-sm-12">
