@@ -20,7 +20,9 @@ class SearchController extends Controller
     		{
     			foreach($products as $key => $prod)
     			{
-    				$output .= '<tr>
+
+
+                    $output .= '<tr>
     								<td>'. $prod->id .'</td>
     								<td>'. $prod->name .'</td>
     								<td>'. $prod->price .'</td>
@@ -43,24 +45,29 @@ class SearchController extends Controller
                                              ->orWhere('barcode', 'LIKE', '%'.$request->search.'%')->get();
             if($products)
             {
+                $i = 0;
 
                 foreach($products as $key => $prod)
                 {
-                    
-                    $output .= '<tr>
-                                    <td>'. $prod->id .'</td>
-                                    <td>'. $prod->name .'</td>
-                                    <td>'. $prod->price .'</td>
-                                    <td><input type="number" name="qty" id="qty"></input></td>
-                                    <td><a href="'. route('product.addToCashbox', ['id' => $prod->id]) .'" class="btn btn-success" role="button">Zamów</a></td>
-                                </tr>';
+                        
+                    if( $prod->vat == "8" ) { $p = ($prod->price * 0.08) + $prod->price; }
+                    else { $p = ($prod->price * 0.23) + $prod->price; }
+
+                    $output .= '
+                        <form action="'. route('product.addToCashbox', ['id' => $prod->id]) .'" method="GET">
+                                '. $prod->id .'
+                                '. $prod->name .'
+                                '. $p .'
+                                <input type="number" name="qty" id="qty">
+                                <input type="submit" name="add_product" class="btn btn-success product-list" role="button" value="Zamów">  
+                        </form>
+                    ';
                 }
 
-                return Response($output);
+                return $output;
             }
         }
     }
-
 
     public function searchLogs(Request $request)
     {

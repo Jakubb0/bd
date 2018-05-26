@@ -10,4 +10,24 @@ class OrderController extends Controller
     {
     	return view("orders.index");
     }
+
+    public function getReceiptCashBox()
+    {
+
+    }
+
+    public function postReceiptCashBox()
+    {
+
+    }
+
+    public function getInvoiceCashBox()
+    {
+
+    }
+
+    public function postInvoiceCashBox()
+    {
+    	
+    }
 }

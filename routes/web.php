@@ -143,13 +143,18 @@ Route::group(['middleware' => 'auth'], function() {
 		'as' => 'selectCashbox'
 	]);
 
-	Route::post('/cashboxes/select/use', [
+	Route::get('/cashboxes/select/use', [
 		'uses' => 'CashboxController@use',
 		'as' => 'useCashbox'
 	]);
 
-	Route::post('/cashboxes/transaction', [
-		'uses' => 'CashboxController@transaction',
+	Route::post('/cashboxes/select/cash', [
+		'uses' => 'CashboxController@selectPOST',
+		'as' => 'selectPOSTCashbox'
+	]);
+
+	Route::post('/cashboxes/transation', [
+		'uses' => 'CashboxController@postTransaction',
 		'as' => 'transactionCashbox'
 	]);
 
@@ -192,6 +197,11 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('/shopping-cart/order', [
 		'uses' => 'ProductController@order',
 		'as' => 'product.order'
+	]);
+
+	Route::post('/storeitems', [
+		'uses' => 'CashboxController@storeItems',
+		'as' => 'storeItems'
 	]);
 
 
