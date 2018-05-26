@@ -60,10 +60,10 @@
 
 	</div>
 
-
 	<script id="test" type="text/javascript">
+
 		@if($test['value']=='bad')
-			alert("Wezwano do kasy")
+			alert("Wezwano do kasy") 
 			<?php App\logs::where('category', 'call')->where('value', 'bad')->update(['value' => 'good']); ?>
 		@endif
 	</script>
@@ -102,7 +102,7 @@
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> <?=$witaj[0]?> <span class="caret"></span></a>
             <div class="dropdown-menu">
               <a class="dropdown-item" href="#"><i class="fa fa-cogs"></i> Panel Użytkownika</a>
-              <a class="dropdown-item" href="#"><i class="fa fa-history"></i> Historia</a></a>
+              <a class="dropdown-item" href="#"><i class="fa fa-history"></i> Historia</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="{{ route('user.logout') }}"><i class="fa fa-sign-out-alt"></i> Wyloguj się</a>
             </div>
@@ -120,9 +120,15 @@
 
 <script type="text/javascript">
 
-	setInterval(function(){
-	      $("#test").load("#test");
-	 },10000);
+	$("#test").empty();
+
+	var myInterval;
+	clearInterval(myInterval);
+
+	myInterval = setInterval(function() {
+    	$("#test").load("#test");
+    	console.log("test");
+    	clearInterval(myInterval);
+	}, 10000);
 
 </script>
-<script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
