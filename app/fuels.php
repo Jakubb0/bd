@@ -14,7 +14,6 @@ class fuels extends Model
 		$type = $request["type"];
 		$price = $request["price"];
 		$amount = $request["amount"];
-		$city = $request["city"];
 		$fuels = new fuels();
 		$fuels->type = $type;
 		$fuels->price = $price;

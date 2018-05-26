@@ -130,3 +130,13 @@ hr.medium-hr {
 	width: 100%;
 	height: 70px !important;
 }
+
+.validate > ul{
+	margin-left: auto;
+	margin-right: auto; 
+	background-color: #f2dede;
+	list-style-type: none;
+	width: auto;
+	text-align: center;
+	font-weight: bold;
+}

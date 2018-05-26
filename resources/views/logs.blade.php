@@ -31,7 +31,6 @@
     </tbody>
   </table>
 
-
 <script>
   $(".myCategory").select2();
 </script>

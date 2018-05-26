@@ -8,7 +8,7 @@
 @section('content')
 
 @if ($errors->any())
-    <div class="alert alert-danger">
+    <div class="validate">
         <ul>
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
@@ -21,16 +21,20 @@
 	<div class="col-sm-12">
 	    <form action="{{route('fuelspostAdd')}}" method="post">
 	      <div class="form-group">
-	        <label for="name">Typ</label>
-	        <input type="text" class="form-control" name="type" id="type">
+	        <label for="type">Typ</label>
+				<select id="type" name="type" class="form-control">
+					<option value="Pb98" selected>Pb98</option>
+					<option value="Pb95">Pb95</option>
+					<option value="ON">ON</option>
+				</select>
 	      </div>
 	      <div class="form-group">
 	        <label for="price">Cena</label>
-	        <input type="text" class="form-control" name="price" id="price">
+	        <input type="text" class="form-control" name="price" id="price"/>
 	      </div>
 	      <div class="form-group">
 	        <label for="amount">Ilość (litry)</label>
-	        <input type="text" class="form-control" name="amount" id="amount">
+	        <input type="text" class="form-control" name="amount" id="amount"/>
 	      </div>
 	      
 		  
