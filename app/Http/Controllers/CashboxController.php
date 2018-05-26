@@ -31,21 +31,62 @@ class CashboxController extends Controller
         return view("cashboxes.cashboxesSelect");
     }
 
+    public function selectPOST() 
+    {
+        if(!session()->has('cashbox_actie'))
+        {
+            session()->put('cashbox_active', $_POST['cashbox_number']);
+            return redirect()->route("useCashbox");
+        }
+        else
+        {
+            return redirect()->route("useCashbox");
+        }
+    }
+
     public function use()
     {
-    	DB::table('cashboxes')->where('id', $_POST['cashbox_number'])->update(array(
+        if(session()->has('cashbox_active'))
+        {
+            DB::table('cashboxes')->where('id', session()->get('cashbox_active'))->update(array(
                      'employee_id'=>Auth::Id(),
-    	));
+            ));
+        }
+        else
+        {
+            session()->put('cashbox_active', $_POST['cashbox_number']);
+        }
+
+    	
 
         return view("cashboxes.cashboxesUse");   
     }
 
-    public function transaction()
+    public function postTransaction()
     {
-        DB::transaction(function () {
-            
-        });
+        if($_POST['category'] == 1)
+        {
+           return view("cashboxes.receipt");
+        }
+        elseif ($_POST['category'] == 2)
+        {
+            return view("cashboxes.invoice");
+        }
+        else 
+        {
+            return view("cashboxes.cashboxesUse"); 
+        }
+    }
 
-        return redirect()->back();
+    public function saveTransaction()
+    {
+        if($_GET['category'] == 1)
+        {
+            
+        }
+        else 
+        {
+
+        }
     }
 }

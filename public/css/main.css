@@ -126,11 +126,6 @@ hr.medium-hr {
 	background-color: #dff0d8;
 }
 
-.select-s {
-	width: 100%;
-	height: 70px !important;
-}
-
 .validate > ul{
 	margin-left: auto;
 	margin-right: auto; 
@@ -140,3 +135,166 @@ hr.medium-hr {
 	text-align: center;
 	font-weight: bold;
 }
+
+.select-s {
+	width: 100%;
+	height: 70px !important;
+}
+
+.print-show {
+	visibility: hidden !important;
+}
+
+@media print {
+
+	.print-show {
+		visibility: visible !important;
+	}
+
+	.receipt {
+		width: 300px;
+		height: 100%;
+		margin: 0 auto;
+	}
+
+	.receipt > * {
+		font-family: 'Anonymous Pro';
+	}
+
+	.receipt-center {
+		text-align: center;
+	}
+
+	.receipt-product {
+		width: 100%;
+		min-height: 100px;
+		margin-bottom: 5px;
+	}
+
+	.receipt-product-list {
+		width: 100%;
+		float: left;
+	}
+
+	.receipt-product-name {
+		margin-left: 10px;
+		width: 140px;
+		float: left;
+	}
+
+	.receipt-product-qty {
+		width: 75px;
+		float: left;
+	}
+
+	.receipt-product-price {
+		width: 75px;
+		float: left;
+	}
+
+	.receipt-summary {
+		width: 300px;
+		float: left;
+		font-weight: bold;
+		text-transform: uppercase;
+	}
+
+	.receipt-sum {
+		float: left;
+	}
+
+	.totalPrice {
+		float: right;
+	}
+
+	.receipt-other {
+		width: 300px;
+		float: left;
+	}
+
+	.receipt-other > .left {
+		float: left;
+	}
+
+	.receipt-other > .right {
+		float: right;
+	}
+
+	hr.receipt-line {
+	    border: 0;
+	    border-bottom: 1px dashed #ccc;
+	    background: #999;
+	}
+
+	.myPrint {
+		background-color: white;
+		height: 100%;
+		width: 100%;
+		position: fixed;
+		top: 0;
+		left: 0;
+		margin: 0;
+		padding: 20px;
+	}
+
+	.totalPrice {
+		float: right;
+	}
+
+
+	.invoice {
+		width: 100%;
+		min-height: 100%;
+		background-color: white;
+	}
+
+	.invoice > * {
+		z-index: 10000;
+	}
+
+	.invoice-view {
+		width: 100%;
+		margin: 10px;
+	}
+
+	.invoice-data {
+		width: 100%;
+		text-align: right;
+	}
+
+	.invoice-center {
+		text-align: center;
+	}
+
+	.invoice-date {
+		margin-top: 100px;
+		width: 100%;
+		height: 300px;
+	}
+
+	.invoice-date > .invoice-left-bar {
+		width: 45%;
+		float: left;
+		background-color: white !important;
+	}
+
+	.invoice-date > .invoice-right-bar {
+		width: 45%;
+		float: right;
+		text-align: right;
+	}
+
+	.invoice-product-list {
+		width: 100%;
+		float: left;
+	}
+
+	.td-right {
+		text-align: right;
+		border-top: none !important;
+	}
+
+	.signature > .invoice-left-bar, .signature > .invoice-right-bar {
+		margin-top: 100px;
+	}
+

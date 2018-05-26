@@ -143,13 +143,18 @@ Route::group(['middleware' => 'auth'], function() {
 		'as' => 'selectCashbox'
 	]);
 
-	Route::post('/cashboxes/select/use', [
+	Route::get('/cashboxes/select/use', [
 		'uses' => 'CashboxController@use',
 		'as' => 'useCashbox'
 	]);
 
-	Route::post('/cashboxes/transaction', [
-		'uses' => 'CashboxController@transaction',
+	Route::post('/cashboxes/select/cash', [
+		'uses' => 'CashboxController@selectPOST',
+		'as' => 'selectPOSTCashbox'
+	]);
+
+	Route::post('/cashboxes/transation', [
+		'uses' => 'CashboxController@postTransaction',
 		'as' => 'transactionCashbox'
 	]);
 
@@ -192,6 +197,11 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('/shopping-cart/order', [
 		'uses' => 'ProductController@order',
 		'as' => 'product.order'
+	]);
+
+	Route::post('/storeitems', [
+		'uses' => 'CashboxController@storeItems',
+		'as' => 'storeItems'
 	]);
 
 
@@ -253,5 +263,27 @@ Route::group(['middleware' => 'auth'], function() {
 		'uses' => 'FuelsController@fuelsAdd',
 		'as' => 'fuelspostAdd'
 	]);
+
+	Route::get('/fuels/delete', [
+		'uses' => 'FuelsController@fuelsDelete',
+		'as' => 'fuelsDelete'
+	]);
+
+
+// DISTRIBUTORS
+	Route::get('/fuels/distributors', [
+		'uses' => 'DistributorsController@distributorsView',
+		'as' => 'distributorsView'
+	]);	
+
+	Route::get('/fuels/distributors/add', [
+		'uses' => 'DistributorsController@distributorsAdd',
+		'as' => 'distributorsAdd'
+	]);	
+
+	Route::post('/fuels/distributors/new', [
+		'uses' => 'DistributorsController@distributorsNew',
+		'as' => 'distributorsNew'
+	]);	
 });
 

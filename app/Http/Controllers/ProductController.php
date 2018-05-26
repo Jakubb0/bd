@@ -78,7 +78,6 @@ class ProductController extends Controller
         $cart->add($product, $product->id);
 
         $request->session()->put('cart', $cart);
-       // dd($request->session()->get('cart'));
         return redirect()->route('getProduct');
     }
 
@@ -94,24 +93,7 @@ class ProductController extends Controller
 
         return redirect()->route('useCashbox');
 
-        //dd($cart);
 
-
-
-       /* $product = Products::find($id);
-        $oldCart = Session::has('cashbox') ? Session::get('cashbox') : null;
-        $cart = new Cart($oldCart);
-        dd($product);
-        $qty = $cart->items[$id]['qty'];
-
-        $cart->add($product, $product->id);
-
-        $request->session()->put('cashbox', $cart);
-
-        $_POST['cashbox_number'] = DB::table('cashboxes')->where('employee_id', Auth::id())->pluck('id')->first();
-        
-        return redirect()->route('useCashbox');
-        */
     }
 
     public function getCart() {
@@ -128,13 +110,6 @@ class ProductController extends Controller
         {
             $value = session()->get('cart');
         }
-
-        /*
-        echo '<pre>';
-        print_r($cart);
-        echo '</pre>';*/
-
-        return view('orders.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
 
 
         return view('orders.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
