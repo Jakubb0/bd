@@ -130,4 +130,32 @@ class SearchController extends Controller
     	}
     }
 
+    public function searchNumberClient(Request $request)
+    {
+        if($request->ajax())
+        {
+            $output = "";
+
+            $clientNumber = DB::table('client')->where('clientNumber','LIKE','%'.$request->search.'%')
+                                        ->get();
+            if($clientNumber)
+            {
+                $i = 0;
+
+                $output .= '<ul id="clientList">';
+
+                foreach($clientNumber as $key => $number)
+                {
+                    $output .= '
+                        <li onClick="selectNumberClient(\''. $number->clientNumber .'\');">'. $number->clientNumber .'</li>
+                    ';
+                }
+
+                $output .= '</ul>';
+
+                return $output;
+            }
+        }
+    }
+
 }

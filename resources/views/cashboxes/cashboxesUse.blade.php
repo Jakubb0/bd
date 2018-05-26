@@ -1,6 +1,9 @@
 <?php 
 	use Illuminate\Support\Facades\Storage;
 	$products = session()->get('cashbox');
+
+	$fuelsList = DB::table('fuels')->get();
+
 ?>
 
 @extends('layouts.master')
@@ -62,14 +65,14 @@
 							<td>{{$i++}}</td>
 							<td>{{$product['item']['name']}}</td>
 							<td>{{$product['qty']}}</td>
-							<td>{{$price}} zł</td>
-							<td>{{$t}} zł</td>	
+							<td>{{number_format($price, 2)}} zł</td>
+							<td>{{number_format($t, 2)}} zł</td>	
 						</tr>
 						</form>
 
 						<?php $sum += $t; ?>
 					@endforeach
-					<?php echo '<h2>Łączna cena: '. $sum .' zł</h2>'; ?>
+					<?php echo '<div id="totalValue"><h2 data-value="'. number_format($sum,2) .'">Łączna cena: '. number_format($sum,2) .' zł</h2></div>'; ?>
 				</table>
 			</div>
 		</div>
@@ -77,7 +80,7 @@
 		<form action="{{route('transactionCashbox')}}" method="post">
 
 			<div class="form-group">
-				<h2><i class="fas fa-address-card"></i> Tankowanie</h2>
+				<h2><i class="fas fa-thermometer-three-quarters"></i> Tankowanie</h2>
 				<select id="refueling" name="refueling" class="form-control">
 					<optgroup label = "Tankowanie">
 			          <option value="1">&#xf00c; Tak</option>
@@ -161,6 +164,12 @@
 
 			</div>
 		</div>
+<?php $fuelType = array(); ?>
+@foreach( $fuelsList as $fuel )	
+	<?php $fuelType[] = array($fuel); ?>
+@endforeach	
+
+
 
 <script type="text/javascript">
 	$('#search').on('keyup', function(){
@@ -177,7 +186,7 @@
  
 $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
 
-
+totalValue = document.getElementById("totalValue").getAttribute('data-value');
  
 //------------- ADD PRODUCTS -------------------
 
@@ -200,22 +209,31 @@ $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
 $('#refueling').change(function() {
 	if( $(this).val() == '1' )
 	{
-		$('#clientRefueling').append('<div id="client-refueling"><h2><i class="fas fa-thermometer-three-quarters"></i> Wybierz dystrybutor</h2><div class="form-group"><select name="distributor" id="distributor" class="form-control"><option value="0" selected></option><option value="1">1</option><option value="2">2</option></select><div id="select-distributor"></div></div></div>');
+		$('#clientRefueling').append('<div id="client-refueling"><h2><i class="fas fa-thermometer-three-quarters"></i> Wybierz dystrybutor</h2><div class="form-group"><select name="distributor" id="distributor" class="form-control"><option value="0" selected></option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select><div id="select-distributor"></div></div></div>');
 
 		$('#distributor').change(function () {
 			$('#select-distributor').html("");
 
-			if( $(this).val() == "1" )
+			<?php 
+			for($i = 1; $i < 5; $i ++)
 			{
-				$('#select-distributor').html('<br><div class="form-group"><input type="text" name="fuelQty" class="form-control fuelQty" placeholder="Ilość paliwa" value="<?php echo rand(0,1000)/10;?> L" disabled></div>');
-			}
-			else if ( $(this).val() == "2" )
+				$s = array_rand($fuelType, 1); 
+				$fuelT = $fuelType[$s][0]->type; $fuelP = $fuelType[$s][0]->price; 
+			?>
+			if( $(this).val() == <?=$i;?> )
 			{
-				$('#select-distributor').html('<br><div class="form-group"><input type="text" name="fuelQty" class="form-control fuelQty" placeholder="Ilość paliwa" value="<?php echo rand(0,100)/10;?> L" disabled></div>');
+				<?php $rand = rand(0,1000)/10; ?>
+				$('#select-distributor').html('<br><div class="form-group"><input type="text" name="fuelQty" class="form-control fuelQty" placeholder="Ilość paliwa" value="<?php echo $rand .' L, Typ: '. $fuelT .' Cena za litr: '. $fuelP;?>" disabled>Cena łączna: <?php echo number_format(round($rand*$fuelP, 2),2); ?></div>');
+				$('#totalValue').html('<h2 data-value="<?=number_format($sum,2);?>">Łączna cena: <?=number_format($sum,2) +number_format(round($rand*$fuelP, 2),2);?> zł</h2>');
 			}
+			<?php
+			}
+			?>
+			
 			else
 			{
 				$('#client-number-select').html("");
+				$('#totalValue').html('<h2 data-value="<?=number_format($sum,2);?>">Łączna cena: <?=number_format($sum,2);?> zł</h2>');
 			}
 		})
 	}
@@ -242,7 +260,26 @@ $('#clientNumber').change(function(){
 			}
 			else if ( $(this).val() == "2" )
 			{
-				$('#client-number-select').html('<br><div class="form-group"><input type="text" name="searchClient" class="form-control" placeholder="Szukaj klienta"></div>');
+				$('#client-number-select').html('<br><div class="form-group"><input type="text" id="searchClient" name="searchClient" class="form-control" placeholder="Szukaj klienta"><div id="suggestion-box"></div></div>');
+
+				$("#searchClient").keyup(function(){
+					$value=$(this).val();
+					$.ajax({
+						type :  'get',
+						url  :  '{{URL::to('searchNumberClient')}}',
+						data :  {'search': $value},
+						success:function(data){
+								$('#suggestion-box').show();
+								$('#suggestion-box').html(data);
+						}
+					});
+				});
+
+				function selectNumberClient(val) {
+					$("#searchClient").val(val);
+					$("#suggesstion-box").hide();
+				}
+
 			}
 			else
 			{
@@ -262,7 +299,7 @@ $('#clientNumber').change(function(){
 $('#category').change(function(){
 	if( $(this).val() == '2' )
 	{
-		$('#invoices-new').append('<div id="invoices-form"><h2><i class="fas fa-user-plus"></i> Dodaj</h2><div class="form-group invoices-type-select"><select name="invoices-type" id="invoices-type" class="form-control"><option value="0" selected></option><option value="1" selected>Osoba prywatna</option><option value="2">Firma</option></select><div id="invoices-data"></div></div></div>');
+		$('#invoices-new').append('<div id="invoices-form"><h2><i class="fas fa-user-plus"></i> Dodaj</h2><div class="form-group invoices-type-select"><select name="invoices-type" id="invoices-type" class="form-control"><option value="0" selected></option><option value="1">Osoba prywatna</option><option value="2">Firma</option></select><div id="invoices-data"></div></div></div>');
 
 		$('#invoices-type').change(function () {
 			$('#invoices-data').html("");

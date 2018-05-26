@@ -122,6 +122,8 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('/searchcashbox', 'SearchController@searchCashbox');
 	
 	Route::get('/searchLog', 'SearchController@searchLogs');
+
+	Route::get('/searchNumberClient', 'SearchController@searchNumberClient');
 	
 
 // CASHBOXES
