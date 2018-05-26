@@ -13,7 +13,18 @@
 @section('content')
 
 <h1><i class="fas fa-desktop"></i> Kasuj produkty</h1>
-
+<hr>
+<div class="col-sm-12">
+	    <a href="#" class="menu-link">
+			<div class="card menu-bg">
+				<div class="card-body center">
+					<i class="fas fa-dollar-sign"></i>
+					<h5 class="card-title" data-toggle="modal" data-target="#myModal">Dodaj produkt</h5>
+				</div>
+			</div>
+		</a>
+</div>
+<hr>
 @if(Session::has('cashbox'))
 
 
@@ -62,6 +73,50 @@
 				</table>
 			</div>
 		</div>
+		<hr>
+		<form action="{{route('transactionCashbox')}}" method="post">
+
+			<div class="form-group">
+				<h2><i class="fas fa-address-card"></i> Tankowanie</h2>
+				<select id="refueling" name="refueling" class="form-control">
+					<optgroup label = "Tankowanie">
+			          <option value="1">&#xf00c; Tak</option>
+			          <option value="2" selected>&#xf00d; Nie</option>
+			        </optgroup>
+				</select>
+			</div>
+
+			<div id="clientRefueling"></div>
+
+			<hr>
+			<div class="form-group">
+				<h2><i class="fas fa-address-card"></i> Numer stałego klienta</h2>
+				<select id="clientNumber" name="clientNumber" class="form-control">
+					<optgroup label = "Numer stałego klienta">
+			          <option value="1">&#xf00c; Tak</option>
+			          <option value="2" selected>&#xf00d; Nie</option>
+			        </optgroup>
+				</select>
+			</div>
+
+			<div id="clientFormNumber"></div>
+
+			<hr>
+			<div class="form-group">
+				<h2><i class="fas fa-check-square"></i> Potwierdzenie</h2>
+				<select id="category" name="category" class="form-control">
+			        <optgroup label = " Wybierz potwiedzenie">
+			          <option value="1" selected>&#xf15b; Paragon</option>
+			          <option value="2">&#xf15c; Faktura</option>
+			        </optgroup>
+				</select>
+			</div>
+			<div id="invoices-new"></div>
+
+		  <button type="submit" class="btn btn-primary">Gotowe</button>
+	      <button type="submit" class="btn btn-primary">Wyjdz z kasy</button>
+	      <input type="hidden" name="_token" value="{{ Session::token() }}" />
+	    </form>
 	@else
 		<div class="row">
 			<div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
@@ -72,34 +127,7 @@
 
 
 
-	<div class="col-sm-12">
-	    <form action="{{route('transactionCashbox')}}" method="post">
-
-			<div class="form-group">
-				<select id="category" name="category" class="form-control">
-			        <optgroup label = "Wybierz potwiedzenie">
-			          <option value="1" selected>Paragon</option>
-			          <option value="2">Faktura</option>
-			        </optgroup>
-				</select>
-			</div>
-			<div id="invoices-new">
-
-			</div>
-
-		  <button type="submit" class="btn btn-primary">Gotowe</button>
-	      <button type="submit" class="btn btn-primary">Wyjdz z kasy</button>
-	      <input type="hidden" name="_token" value="{{ Session::token() }}" />
-	    </form>
-	    <a href="#" class="menu-link">
-			<div class="card menu-bg">
-				<div class="card-body center">
-					<i class="fas fa-dollar-sign"></i>
-					<h5 class="card-title" data-toggle="modal" data-target="#myModal">Dodaj produkt</h5>
-				</div>
-			</div>
-		</a>
-	</div>
+	
 
 
 		<div class="modal fade" id="myModal">
@@ -148,6 +176,8 @@
 	})
  
 $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+
+
  
 //------------- ADD PRODUCTS -------------------
 
@@ -165,12 +195,74 @@ $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
 		});
 	});
 
+//------------- REFUELING ----------------------
+
+$('#refueling').change(function() {
+	if( $(this).val() == '1' )
+	{
+		$('#clientRefueling').append('<div id="client-refueling"><h2><i class="fas fa-thermometer-three-quarters"></i> Wybierz dystrybutor</h2><div class="form-group"><select name="distributor" id="distributor" class="form-control"><option value="0" selected></option><option value="1">1</option><option value="2">2</option></select><div id="select-distributor"></div></div></div>');
+
+		$('#distributor').change(function () {
+			$('#select-distributor').html("");
+
+			if( $(this).val() == "1" )
+			{
+				$('#select-distributor').html('<br><div class="form-group"><input type="text" name="fuelQty" class="form-control fuelQty" placeholder="Ilość paliwa" value="<?php echo rand(0,1000)/10;?> L" disabled></div>');
+			}
+			else if ( $(this).val() == "2" )
+			{
+				$('#select-distributor').html('<br><div class="form-group"><input type="text" name="fuelQty" class="form-control fuelQty" placeholder="Ilość paliwa" value="<?php echo rand(0,100)/10;?> L" disabled></div>');
+			}
+			else
+			{
+				$('#client-number-select').html("");
+			}
+		})
+	}
+	else
+	{
+		$('#client-refueling').remove();
+	}
+})
+
+//------------- ADD CLIENT NUMBER --------------
+
+$('#clientNumber').change(function(){
+
+	if( $(this).val() == '1' )
+	{
+		$('#clientFormNumber').append('<div id="client-number-form"><h2><i class="fas fa-user-plus"></i> Dodaj</h2><div class="form-group invoices-type-select"><select name="clientType" id="clientType" class="form-control"><option value="0" selected></option><option value="1">Nowy klient</option><option value="2">Istniejący klient</option></select><div id="client-number-select"></div></div></div>');
+
+		$('#clientType').change(function () {
+			$('#client-number-select').html("");
+
+			if( $(this).val() == "1" )
+			{
+				$('#client-number-select').html('<br><div class="form-group"><input type="text" name="clientFirstname" class="form-control" placeholder="Imię"></div><div class="form-group"><input type="text" name="clientLastname" class="form-control" placeholder="Nazwisko"></div>');
+			}
+			else if ( $(this).val() == "2" )
+			{
+				$('#client-number-select').html('<br><div class="form-group"><input type="text" name="searchClient" class="form-control" placeholder="Szukaj klienta"></div>');
+			}
+			else
+			{
+				$('#client-number-select').html("");
+			}
+		})
+	}
+	else
+	{
+		$('#client-number-form').remove();
+	}
+
+})
+
 //------------- ADD INVOICES -------------------
 	
 $('#category').change(function(){
 	if( $(this).val() == '2' )
 	{
-		$('#invoices-new').append('<div id="invoices-form"><div class="form-group invoices-type-select"><select name="invoices-type" id="invoices-type" class="form-control"><option value="0" selected></option><option value="1">Osoba prywatna</option><option value="2">Firma</option></select><div id="invoices-data"></div></div></div>');
+		$('#invoices-new').append('<div id="invoices-form"><h2><i class="fas fa-user-plus"></i> Dodaj</h2><div class="form-group invoices-type-select"><select name="invoices-type" id="invoices-type" class="form-control"><option value="0" selected></option><option value="1" selected>Osoba prywatna</option><option value="2">Firma</option></select><div id="invoices-data"></div></div></div>');
 
 		$('#invoices-type').change(function () {
 			$('#invoices-data').html("");

@@ -289,6 +289,8 @@ hr.medium-hr {
 	.signature > .invoice-left-bar, .signature > .invoice-right-bar {
 		margin-top: 100px;
 	}
+}
+
 .validate > ul{
 	margin-left: auto;
 	margin-right: auto; 
@@ -297,4 +299,8 @@ hr.medium-hr {
 	width: auto;
 	text-align: center;
 	font-weight: bold;
+}
+
+select {
+	font-family: 'FontAwesome', Verdana !important;
 }
