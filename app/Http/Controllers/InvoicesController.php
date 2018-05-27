@@ -30,4 +30,9 @@ class InvoicesController extends Controller
     {
     	return view("invoices.invoicesAdd");
     }
+
+    public function addInvoicesData(Request $request)
+    {
+        invoices::addInvoicesData();
+    }
 }

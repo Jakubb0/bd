@@ -255,6 +255,14 @@ hr.medium-hr {
 		text-align: right;
 	}
 
+	.invoice-print td {
+		text-align: right;
+	}
+
+	.invoice-print td.td-left {
+		text-align: left;
+	}
+
 	.invoice-center {
 		text-align: center;
 	}
@@ -269,12 +277,14 @@ hr.medium-hr {
 		width: 45%;
 		float: left;
 		background-color: white !important;
+		text-transform: uppercase;
 	}
 
 	.invoice-date > .invoice-right-bar {
 		width: 45%;
 		float: right;
 		text-align: right;
+		text-transform: uppercase;
 	}
 
 	.invoice-product-list {

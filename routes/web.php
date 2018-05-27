@@ -226,6 +226,11 @@ Route::group(['middleware' => 'auth'], function() {
 		'as' => 'newInvoices'
 	]);
 
+	Route::get('/invoices/add-new', [
+		'uses' => 'InvoicesController@addInvoicesData',
+		'as' => 'addInvoicesData'
+	]);
+
 // DEPOTS
 
 	Route::get('/depots', [

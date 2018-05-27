@@ -72,7 +72,7 @@
 
 						<?php $sum += $t; ?>
 					@endforeach
-					<?php echo '<div id="totalValue"><h2 data-value="'. number_format($sum,2) .'">Łączna cena: '. number_format($sum,2) .' zł</h2></div>'; ?>
+					<?php echo '<div id="totalValue"><h2>Łączna cena: '. number_format($sum,2) .' zł</h2></div>'; ?>
 				</table>
 			</div>
 		</div>
@@ -127,10 +127,6 @@
 			</div>
 		</div>
 	@endif
-
-
-
-	
 
 
 		<div class="modal fade" id="myModal">
@@ -220,20 +216,25 @@ $('#refueling').change(function() {
 				$s = array_rand($fuelType, 1); 
 				$fuelT = $fuelType[$s][0]->type; $fuelP = $fuelType[$s][0]->price; 
 			?>
-			if( $(this).val() == <?=$i;?> )
-			{
-				<?php $rand = rand(0,1000)/10; ?>
-				$('#select-distributor').html('<br><div class="form-group"><input type="text" name="fuelQty" class="form-control fuelQty" placeholder="Ilość paliwa" value="<?php echo $rand .' L, Typ: '. $fuelT .' Cena za litr: '. $fuelP;?>" disabled>Cena łączna: <?php echo number_format(round($rand*$fuelP, 2),2); ?></div>');
-				$('#totalValue').html('<h2 data-value="<?=number_format($sum,2);?>">Łączna cena: <?=number_format($sum,2) +number_format(round($rand*$fuelP, 2),2);?> zł</h2>');
-			}
+				if( $(this).val() == <?=$i;?> )
+				{
+					<?php $rand = rand(0,1000)/10; ?>
+					$('#select-distributor').html('<br><div class="form-group"><input type="text" name="fuelQty" class="form-control fuelQty" placeholder="Ilość paliwa" value="<?php echo $rand .' L, Typ: '. $fuelT .' Cena za litr: '. $fuelP;?>" disabled>Cena łączna: <?php echo number_format(round($rand*$fuelP, 2),2); ?><input type="hidden" name="fuelPrice" value="<?php echo number_format(round($rand*$fuelP, 2),2); ?>"><input type="hidden" name="fuelTypeSelect" value="<?php echo $fuelT; ?>"><input type="hidden" name="fuelPriceSelect" value="<?php echo $fuelP; ?>"><input type="hidden" name="fuelQtySelect" value="<?php echo $rand; ?>"></div>');
+					$('#totalValue').html('<h2>Łączna cena: <?=number_format(round($rand*$fuelP, 2),2) + number_format($sum,2);?> zł</h2>');
+				}
 			<?php
 			}
 			?>
+
+			else if( $(this).val() == 0 )
+			{
+
+				$('#totalValue').html('<h2>Łączna cena: <?=number_format($sum,2);?> zł</h2>');
+			}
 			
 			else
 			{
 				$('#client-number-select').html("");
-				$('#totalValue').html('<h2 data-value="<?=number_format($sum,2);?>">Łączna cena: <?=number_format($sum,2);?> zł</h2>');
 			}
 		})
 	}
@@ -304,7 +305,7 @@ $('#category').change(function(){
 		$('#invoices-type').change(function () {
 			$('#invoices-data').html("");
 
-			var invoicesPlace = '<div class="form-group"><input type="text" name="invoicesNIP" class="form-control" placeholder="NIP"></div><div class="form-row"><div class="form-group col-md-6"><input type="text" name="invoicesPostalCode" class="form-control" placeholder="Kod pocztowy"></div><div class="form-group col-md-6"><input type="text" name="invoicesPlace" class="form-control" placeholder="Miejscowość"></div></div><div class="form-row"><div class="form-group col-md-6"><input type="text" name="invoicesStreet" class="form-control" placeholder="Ulica"></div><div class="form-group col-md-6"><input type="text" name="invoicesHouseNumber" class="form-control" placeholder="Nr domu/lokalu"></div></div>'; 
+			var invoicesPlace = '<div class="form-group"><input type="text" name="invoicesNIP" class="form-control" placeholder="NIP"></div><div class="form-row"><div class="form-group col-md-6"><input type="text" name="invoicesPostalCode" class="form-control" placeholder="Kod pocztowy"></div><div class="form-group col-md-6"><input type="text" name="invoicesPlace" class="form-control autocomplete" placeholder="Miejscowość"></div></div><div class="form-row"><div class="form-group col-md-6"><input type="text" name="invoicesStreet" class="form-control" placeholder="Ulica"></div><div class="form-group col-md-6"><input type="text" name="invoicesHouseNumber" class="form-control" placeholder="Nr domu/lokalu"></div></div>'; 
 
 			if ($(this).val() == '1'){
 				$('#invoices-data').html('<h2>Osoba prywatna</h2><div class="form-row"><div class="form-group col-md-6"><input type="text" name="invoicesFirstname" class="form-control" placeholder="Imię"></div><div class="form-group col-md-6"><input type="text" name="invoicesLastname" class="form-control" placeholder="Nazwisko"></div></div>'+invoicesPlace);
@@ -315,9 +316,8 @@ $('#category').change(function(){
 			else {
 				$('#invoices-data').html("");
 			}
-		})
-		
 
+		})
 	}
 	else
 	{

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\cashbox;
+use App\NumberInWords;
 use DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -70,6 +71,10 @@ class CashboxController extends Controller
         }
         elseif ($_POST['category'] == 2)
         {
+
+            if( !DB::select("SELECT * FROM invoices WHERE NIP='". $_POST['invoicesNIP'] ."'") )
+            cashbox::addInvoicesData();
+
             return view("cashboxes.invoice");
         }
         else 
@@ -89,4 +94,6 @@ class CashboxController extends Controller
 
         }
     }
+
+
 }

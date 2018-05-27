@@ -34,13 +34,10 @@
 						</tr>
 					</thead>
 					<?php $i=1; 
-
-
 					$sum = 0;
 					?>
 					@foreach( $products->items as $product )
 						
-
 					<?php
 					
 					if( $product['item']['vat'] == "8" ) { $price = ($product['item']['price'] * 0.08) + $product['item']['price']; }
@@ -62,7 +59,27 @@
 
 						?>
 					@endforeach
-					<?php echo '<h2 class="totalPrice">Łączna cena: '. $sum .' zł</h2>'; ?>
+					<?php
+						if( isset($_POST['fuelPrice']) )
+						{
+							$fPrice = number_format(round($_POST['fuelQtySelect'] * (($_POST['fuelPriceSelect'] * 0.23) + $_POST['fuelPriceSelect']), 2),2);
+							$fPriceVat = ($_POST['fuelQtySelect'] * $_POST['fuelPriceSelect']) + $_POST['fuelPriceSelect'];
+							echo '
+								<tr>
+									<td>'. $i++ .'</td>
+									<td>Paliwo: '. $_POST['fuelTypeSelect'] .'</td>
+									<td>'. number_format(round($_POST['fuelQtySelect'], 2),2) .' l</td>
+									<td>'. $_POST['fuelPriceSelect'] .' zł</td>
+									<td>'. $fPrice .' zł</td>
+								</tr>
+							';
+						}
+						else $fPrice = 0;
+					?>
+					<?php 
+						$allPrice = number_format(round($sum + $fPrice, 2),2);
+						echo '<h2 class="totalPrice">Łączna cena: '. $allPrice .' zł</h2>'; 
+					?>
 				</table>
 			</div>
 		</div>
@@ -116,11 +133,31 @@
 					<div class="receipt-product-list">
 						<div class="receipt-product-name">{{$product['item']['name']}}</div>
 						<div class="receipt-product-qty">*{{$product['qty']}}</div>
-						<div class="receipt-product-price">{{$t}}</div>
+						<div class="receipt-product-price">{{number_format(round($t, 2),2)}}</div>
 					</div>
 					<?php $sum += $t; ?>
 
 				@endforeach
+				<?php
+					if( isset($_POST['fuelPrice']) )
+					{
+				
+						$tPrice = number_format(round(($_POST['fuelPriceSelect'] * 0.23) +  $_POST['fuelPriceSelect'], 2),2);
+						$fuelPriceNetto = number_format(round($_POST['fuelQtySelect']*$_POST['fuelPriceSelect'], 2),2);
+						$fuelPriceBrutto = number_format(round($_POST['fuelQtySelect'] * ( ($_POST['fuelPriceSelect'] * 0.23) + $_POST['fuelPriceSelect']), 2),2);
+						$fuelVAT = $fuelPriceNetto * 0.23;
+						echo '
+						<div class="receipt-product-list">
+								<div class="receipt-product-name">Paliwo: '. $_POST['fuelTypeSelect'] .'</div>
+								<div class="receipt-product-qty">*'. number_format(round($_POST['fuelQtySelect'], 2),2) .'</div>
+								<div class="receipt-product-price">'. $fuelPriceBrutto .'</div>
+							</tr>
+						</div>
+						';
+					}
+					else { $fuelPriceBrutto = 0; $fuelVAT = 0; $fuelPriceNetto = 0; }
+				?>
+				<?php $sum = number_format(round($sum + $fuelPriceBrutto, 2), 2); ?>
 			</div>
 			<br>
 			<hr class="receipt-line">
