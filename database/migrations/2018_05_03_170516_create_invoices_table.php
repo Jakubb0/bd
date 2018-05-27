@@ -17,7 +17,10 @@ class CreateInvoicesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('NIP');
-            $table->float('tax_percent');
+            $table->string('place');
+            $table->string('postalCode');
+            $table->string('street');
+            $table->string('houseNumber');
         });
     }
 

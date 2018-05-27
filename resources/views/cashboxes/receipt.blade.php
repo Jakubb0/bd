@@ -95,13 +95,29 @@
 	   
 		  <button onclick="printReceipt()" class="btn btn-primary">Drukuj paragon</button>
 	      <input type="hidden" name="_token" value="{{ Session::token() }}" />
+<div class="clientCode"><?=$_POST['clientCode'];?></div>
+		<button onclick="printClientCode()" id="printCode" class="btn btn-primary">Drukuj kod klienta</button>
 
 	      <script>
 	      	function printReceipt() {
 			    window.print();
 			}
-	      </script>
-	    
+
+			$("#printCode").click(function() {
+				printcontent($(".clientCode").html());
+			});
+
+			function printcontent(content)
+			{
+				var mywindow = window.open('', '', '');
+			    mywindow.document.write('<html><title>Print</title><body><div style="text-align: center;><img src="https:////www.barcoding.com//wp-content//uploads//2016//09//Picture-111.png" alt="kod kreskowy"><br>');
+			    mywindow.document.write(content);
+			    mywindow.document.write('</body></html>');
+			    mywindow.document.close();
+			    mywindow.print();
+			    return true;
+			}
+	      </script>	    
 	</div>
 
 

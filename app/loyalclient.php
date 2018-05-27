@@ -9,18 +9,19 @@ class loyalclient extends Model
 {
 	public $timestamps = false;
 	
-	public static function loyalAdd(Request $request)
-	{
-		$name = $request["name"];
-		$surn = $request["surn"];
-		$tel = $request["tel"];
-		$city = $request["city"];
-		$loyalclient = new loyalclient();
-		$loyalclient->name = $name;
-		$loyalclient->surname = $surn;
-		$loyalclient->phone = $tel;
-		$loyalclient->city = $city;
-		
-		$loyalclient->save();
-	}
+	public static function addClientCard()
+    {
+    	$firstname = $_POST['clientFirstname'];
+    	$lastname = $_POST['clientLastname'];
+    	$phone = $_POST['clientPhone'];
+    	$clientCode = $_POST['clientCode'];
+
+    	$addClientCard = new loyalclient();
+    	$addClientCard->firstname = $firstname;
+    	$addClientCard->lastname = $lastname;
+    	$addClientCard->phone = $phone;
+    	$addClientCard->clientCode = $clientCode;
+
+    	$addClientCard->save();
+    }
 }

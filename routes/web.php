@@ -160,6 +160,11 @@ Route::group(['middleware' => 'auth'], function() {
 		'as' => 'transactionCashbox'
 	]);
 
+	Route::post('/cashboxes/clientCode', [
+		'uses' => 'CashboxController@clientCode',
+		'as' => 'clientCode'
+	]);
+
 
 // CART
 

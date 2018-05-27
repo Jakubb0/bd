@@ -15,9 +15,9 @@ class CreateLoyalclientsTable extends Migration
     {
         Schema::create('loyalclients', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('surname');
-            $table->string('city');
+            $table->string('clientCode');
+            $table->string('firstname');
+            $table->string('lastname');
             $table->integer('phone');
             $table->integer('points')->unsigned()->default(0);
         });

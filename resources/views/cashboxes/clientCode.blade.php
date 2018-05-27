@@ -83,38 +83,18 @@
 		</div>
 	@endif
 
-	<?php 
-		$cCode = $_POST['clientCode'];
-		$loyalclientID = DB::select("SELECT id FROM loyalclients WHERE clientCode = '". $cCode ."'");
-		//dd($loyalclientID);
-		echo "ID klienta: ". $loyalclientID[0]->id .'<br>';
-	?>
-
 	<div class="col-sm-12 print-hidden">
 		  <button onclick="printReceipt()" class="btn btn-primary">Drukuj fakturę</button>
 	      <input type="hidden" name="_token" value="{{ Session::token() }}" />
 
-		<div class="clientCode"><?=$_POST['clientCode'];?></div>
-		<button onclick="printClientCode()" id="printCode" class="btn btn-primary">Drukuj kod klienta</button>
+	      
+	      	@if( isset($_POST['clientCode']) )
+	      		<a href="{{route('clientCode')}}">Numer klienta</a>
+	      	@endif
 
 	      <script>
 	      	function printReceipt() {
 			    window.print();
-			}
-
-			$("#printCode").click(function() {
-				printcontent($(".clientCode").html());
-			});
-
-			function printcontent(content)
-			{
-				var mywindow = window.open('', '', '');
-			    mywindow.document.write('<html><title>Print</title><body><div style="text-align: center;><img src="https:////www.barcoding.com//wp-content//uploads//2016//09//Picture-111.png" alt="kod kreskowy"><br>');
-			    mywindow.document.write(content);
-			    mywindow.document.write('</body></html>');
-			    mywindow.document.close();
-			    mywindow.print();
-			    return true;
 			}
 	      </script>
 	</div>

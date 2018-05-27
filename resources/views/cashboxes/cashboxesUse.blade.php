@@ -27,6 +27,7 @@
 			</div>
 		</a>
 </div>
+<?php $sum = 0; ?>
 <hr>
 @if(Session::has('cashbox'))
 
@@ -42,7 +43,6 @@
 							<th>Ilość</th>
 							<th>Cena</th>
 							<th>Łączna cena</th>
-							<th></th>
 						</tr>
 					</thead>
 					<?php $i=1; 
@@ -64,7 +64,7 @@
 						<tr>
 							<td>{{$i++}}</td>
 							<td>{{$product['item']['name']}}</td>
-							<td>{{$product['qty']}}</td>
+							<td class="productQty">{{$product['qty']}}</td>
 							<td>{{number_format($price, 2)}} zł</td>
 							<td>{{number_format($t, 2)}} zł</td>	
 						</tr>
@@ -77,7 +77,45 @@
 			</div>
 		</div>
 		<hr>
-		<form action="{{route('transactionCashbox')}}" method="post">
+
+<script>
+	var $this;
+	$(document).on("click", ".productQty", function() {
+		var currentElementModelAttr = $(this).attr('data-model-attr');
+		$this = $(this);
+		var input = $('<input>', {
+			'type': 'text',
+			'name': 'totalQ',
+			'class': 'form-control',
+			'value': $(this).text()
+		});
+		$(this).replaceWith(input);
+		input.datepicker({
+			onSelect: function (date) {
+				$this.text(date);
+				input.replaceWith($this);
+			}
+		}).focus()
+		$(document).on("blur change", "input", function () {
+	        setTimeout(function () {
+	            var value = input.val();
+
+	            $this.text(value);
+	            input.replaceWith($this);
+	        }, 100);
+		});
+	});
+</script>
+		
+	@else
+		<div class="row">
+			<div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+				<h2>Nie ma żadnego zamówienia</h2>
+			</div>
+		</div>
+	@endif
+
+	<form action="{{route('transactionCashbox')}}" method="post">
 
 			<div class="form-group">
 				<h2><i class="fas fa-thermometer-three-quarters"></i> Tankowanie</h2>
@@ -120,13 +158,6 @@
 	      <button type="submit" class="btn btn-primary">Wyjdz z kasy</button>
 	      <input type="hidden" name="_token" value="{{ Session::token() }}" />
 	    </form>
-	@else
-		<div class="row">
-			<div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-				<h2>Nie ma żadnego zamówienia</h2>
-			</div>
-		</div>
-	@endif
 
 
 		<div class="modal fade" id="myModal">
@@ -257,7 +288,7 @@ $('#clientNumber').change(function(){
 
 			if( $(this).val() == "1" )
 			{
-				$('#client-number-select').html('<br><div class="form-group"><input type="text" name="clientFirstname" class="form-control" placeholder="Imię"></div><div class="form-group"><input type="text" name="clientLastname" class="form-control" placeholder="Nazwisko"></div>');
+				$('#client-number-select').html('<br><div class="form-group"><input type="text" name="clientFirstname" class="form-control" placeholder="Imię"></div><div class="form-group"><input type="text" name="clientLastname" class="form-control" placeholder="Nazwisko"></div><div class="form-group"><input type="text" name="clientPhone" class="form-control" placeholder="Numer telefonu"></div><input type="hidden" name="clientCode" value="<?php $d = "12". date('YmdHis'); echo $d;?>">');
 			}
 			else if ( $(this).val() == "2" )
 			{
