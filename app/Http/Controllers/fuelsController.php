@@ -9,6 +9,11 @@ use DB;
 
 class fuelsController extends Controller
 {
+	public function dashboard()
+	{
+		return view("station.index");
+	}
+	
     public function fuelsView()
     {
     	return view("fuels.fuelsList");
