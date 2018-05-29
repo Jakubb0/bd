@@ -16,7 +16,7 @@
     <thead class="table-th">
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Imię</th>
+        <th scope="col">Imie</th>
         <th scope="col">Nazwisko</th>
         <th scope="col">Miasto</th>
         <th scope="col">Telefon</th>

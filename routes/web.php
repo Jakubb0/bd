@@ -58,10 +58,17 @@ Route::group(['middleware' => 'auth'], function() {
 	]);
 
 	Route::get('/usun',[
-	'uses' => 'LoginController@employeeDelete',
-	'as' => 'employeeDelete',
-	'middleware' => 'not_admin'
+		'uses' => 'LoginController@employeeDelete',
+		'as' => 'employeeDelete',
+		'middleware' => 'not_admin'
 	]);
+
+	Route::post('/nowedane',[
+		'uses' => 'LoginController@postUpdate',
+		'as' => 'employeeUpdate',
+		'middleware' => 'not_admin'
+	]);
+
 
 	Route::get('/call', 'LoginController@call');
 
@@ -124,6 +131,8 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('/searchLog', 'SearchController@searchLogs');
 
 	Route::get('/searchNumberClient', 'SearchController@searchNumberClient');
+
+	Route::get('/ordersAjax', 'SearchController@orderHistory');
 	
 
 // CASHBOXES
@@ -211,8 +220,10 @@ Route::group(['middleware' => 'auth'], function() {
 		'as' => 'storeItems'
 	]);
 
-
-
+	Route::get('/orders/history', [
+		'uses' => 'ProductController@ordersHistory',
+		'as' => 'ordersHistory'
+	]);
 
 // INVOICES
 
@@ -296,6 +307,23 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::post('/fuels/distributors/new', [
 		'uses' => 'DistributorsController@distributorsNew',
 		'as' => 'distributorsNew'
+	]);	
+
+ // PROVIDERS
+
+	Route::get('/providers', [
+		'uses' => 'ProvidersController@providersList',
+		'as' => 'providersList'
+	]);	
+
+	Route::get('/providers/add', [
+		'uses' => 'ProvidersController@providersAdd',
+		'as' => 'providersAdd'
+	]);
+
+	Route::post('/providers/new', [
+		'uses' => 'ProvidersController@providersNew',
+		'as' => 'providersNew'
 	]);	
 });
 

@@ -29,7 +29,7 @@
 	        <input type="text" class="form-control" name="surn" id="surn">
 	      </div>
 	      <div class="form-group">
-	        <label for="city">Miejscowość</label>
+	        <label for="city">Miejscowosc</label>
 	        <input type="text" class="form-control" name="city" id="city">
 	      </div>
 	      <div class="form-group">
@@ -37,7 +37,7 @@
 	        <input type="number" class="form-control" name="tel" id="tel">
 	      </div>
 		  
-	      <button type="submit" class="btn btn-primary">Zarejestruj</button>
+	      <button type="submit" class="btn btn-primary">Zajerestruj</button>
 	      <input type="hidden" name="_token" value="{{ Session::token() }}" />
 	    </form>
 	</div>

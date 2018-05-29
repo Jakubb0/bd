@@ -68,6 +68,7 @@ class CashboxController extends Controller
 
     public function postTransaction()
     {
+        dd(session('cashbox'));
         if($_POST['category'] == 1)
         {
            return view("cashboxes.receipt");
@@ -95,6 +96,7 @@ class CashboxController extends Controller
                 'created_at' => date("Y-m-d H:i:s"),
                 'updated_at' => date("Y-m-d H:i:s")    
             ]);
+
 
             /*
             if (Session::has('cashbox'))

@@ -192,6 +192,11 @@ class ProductController extends Controller
         }
     }
 
+    public function ordersHistory()
+    {
+        return view("product.orderList");
+    }
+
 
 
 } 

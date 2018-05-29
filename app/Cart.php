@@ -28,6 +28,7 @@ class Cart
 				$storedItem = $this->items[$id];
 			}
 		}
+/*	
 		if($_GET['qty'] != '')
 		{
 			$storedItem['qty'] += $_GET['qty'];
@@ -36,6 +37,7 @@ class Cart
 		{
 			$storedItem['qty']++;
 		}
+		*/
 
 		
 		$storedItem['price'] = $item->price * $storedItem['qty'];

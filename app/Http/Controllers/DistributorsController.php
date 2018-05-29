@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\distributors;
+use App\logs
 use DB;
 
 
@@ -36,6 +37,7 @@ class DistributorsController extends Controller
     		
     	}
 
+        logs::addLog("Dodano dystrybutor", "good", "distributors");
     	return redirect()->route("distributorsView");
     }
     
