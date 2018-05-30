@@ -165,6 +165,11 @@ Route::group(['middleware' => 'auth'], function() {
 		'as' => 'clientCode'
 	]);
 
+	Route::get('/cashboxes/back', [
+		'uses' => 'CashboxController@back',
+		'as' => 'cashbox.back'
+	]);
+
 
 // CART
 
