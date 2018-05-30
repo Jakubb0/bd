@@ -17,7 +17,7 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col">Status</th>
-        <th scope="col">Imie</th>
+        <th scope="col">Imię</th>
         <th scope="col">Nazwisko</th>
         <th scope="col">Telefon</th>
         <th scope="col">Data dołączenia</th>

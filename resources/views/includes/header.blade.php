@@ -90,7 +90,7 @@
 
           <li class={{ DB::table('pracownicy')->where('id', Auth::id())->pluck('status')[0]=='kierownik' ? "nav-item dropdown" : "d-none" }}>
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Pracownicy</a>
-            <div class="dropdown-menu">
+            <div class="dropdown-menu fix">
               <a class="dropdown-item" href="{{route('employeeAdd')}}">Dodaj pracownika</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="{{route('employeeList')}}">Lista pracowników</a>

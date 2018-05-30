@@ -45,7 +45,7 @@
 	        <input type="checkbox" value="kierownik" class="form-control" name="status" id="status">
 	      </div>
 		  
-	      <button type="submit" class="btn btn-primary">Zajerestruj</button>
+	      <button type="submit" class="btn btn-primary">Zarejestruj</button>
 	      <input type="hidden" name="_token" value="{{ Session::token() }}" />
 	    </form>
 	</div>
