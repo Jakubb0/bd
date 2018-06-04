@@ -3,7 +3,7 @@
 	use App\NumberInWords;
 	$products = session()->get('cashbox');
 ?>
-
+ 
 @extends('layouts.master')
 
 @section('title')

@@ -85,9 +85,13 @@ class CashboxController extends Controller
                     $distributor = $_POST['distributor']; 
                     $fuelQty = $_POST['fuelQtySelect'];
 
-                    $selectActualAmount = DB::select("SELECT amount FROM fuels WHERE type = '". $_POST['fuelTypeSelect'] ."'");
-                    dd($selectActualAmount[0]);
-                    $fuelAmount = $selectActualAmount[0]-$fuelQty;
+                    //$selectActualAmount = DB::select("SELECT amount FROM fuels WHERE type = '". $_POST['fuelTypeSelect'] ."'");
+
+                    $selectActualAmount = DB::table('fuels')->where('type', $_POST['fuelTypeSelect'])->first();
+                    $actualAmount = $selectActualAmount->amount;
+                    
+                    
+                    $fuelAmount = $actualAmount-$fuelQty;
 
                     DB::table('fuels')->where('type', $_POST['fuelTypeSelect'])->update(array(
                      'amount'=>$fuelAmount));
@@ -113,7 +117,7 @@ class CashboxController extends Controller
 
                 $products = session()->get('cashbox');
                 //dd($products);
-                if( $products != 'null' )
+                if( $products != '' )
                 {
                     $i = 0;
 
