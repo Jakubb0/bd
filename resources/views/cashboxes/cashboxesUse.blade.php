@@ -1,9 +1,7 @@
 <?php 
 	use Illuminate\Support\Facades\Storage;
 	$products = session()->get('cashbox');
-
 	$fuelsList = DB::table('fuels')->get();
-
 ?>
 
 @extends('layouts.master')
@@ -46,8 +44,6 @@
 						</tr>
 					</thead>
 					<?php $i=1; 
-
-
 					$sum = 0;
 					?>
 					@foreach( $products->items as $product )
@@ -56,9 +52,7 @@
 					
 					if( $product['item']['vat'] == "8" ) { $price = ($product['item']['price'] * 0.08) + $product['item']['price']; }
 					else { $price = ($product['item']['price'] * 0.23) + $product['item']['price']; }
-
 					$t = $price*$product['qty'];
-
 					?>
 						<form>
 						<tr>
@@ -99,7 +93,6 @@
 		$(document).on("blur change", "input", function () {
 	        setTimeout(function () {
 	            var value = input.val();
-
 	            $this.text(value);
 	            input.replaceWith($this);
 	        }, 100);
@@ -156,7 +149,8 @@
 
 		  <button type="submit" class="btn btn-primary">Gotowe</button>
 	      <button type="submit" class="btn btn-primary">Wyjdz z kasy</button>
-	      <input type="hidden" name="_token" value="{{ Session::token() }}" />
+	      <input type="hidden" name="_token" value="{{ Session::token() }}">
+	      <input type="hidden" name="datatoken" value="<?=date('YmdHis');?>">
 	    </form>
 
 
@@ -213,10 +207,10 @@
  
 $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
 
-totalValue = document.getElementById("totalValue").getAttribute('data-value');
+totalValue = document.getElementById("totalValue"); 
+
  
 //------------- ADD PRODUCTS -------------------
-
 	$(document).ready(function(){
 		$(".product-list").click(function(){
 			$qty = $('#qty').val();
@@ -230,17 +224,13 @@ totalValue = document.getElementById("totalValue").getAttribute('data-value');
 			});
 		});
 	});
-
 //------------- REFUELING ----------------------
-
 $('#refueling').change(function() {
 	if( $(this).val() == '1' )
 	{
 		$('#clientRefueling').append('<div id="client-refueling"><h2><i class="fas fa-thermometer-three-quarters"></i> Wybierz dystrybutor</h2><div class="form-group"><select name="distributor" id="distributor" class="form-control"><option value="0" selected></option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select><div id="select-distributor"></div></div></div>');
-
 		$('#distributor').change(function () {
 			$('#select-distributor').html("");
-
 			<?php 
 			for($i = 1; $i < 5; $i ++)
 			{
@@ -249,17 +239,15 @@ $('#refueling').change(function() {
 			?>
 				if( $(this).val() == <?=$i;?> )
 				{
-					<?php $rand = rand(0,1000)/10; ?>
+					<?php $rand = rand(0,100)/10; ?>
 					$('#select-distributor').html('<br><div class="form-group"><input type="text" name="fuelQty" class="form-control fuelQty" placeholder="Ilość paliwa" value="<?php echo $rand .' L, Typ: '. $fuelT .' Cena za litr: '. $fuelP;?>" disabled>Cena łączna: <?php echo number_format(round($rand*$fuelP, 2),2); ?><input type="hidden" name="fuelPrice" value="<?php echo number_format(round($rand*$fuelP, 2),2); ?>"><input type="hidden" name="fuelTypeSelect" value="<?php echo $fuelT; ?>"><input type="hidden" name="fuelPriceSelect" value="<?php echo $fuelP; ?>"><input type="hidden" name="fuelQtySelect" value="<?php echo $rand; ?>"></div>');
 					$('#totalValue').html('<h2>Łączna cena: <?=number_format(round($rand*$fuelP, 2),2) + number_format($sum,2);?> zł</h2>');
 				}
 			<?php
 			}
 			?>
-
 			else if( $(this).val() == 0 )
 			{
-
 				$('#totalValue').html('<h2>Łączna cena: <?=number_format($sum,2);?> zł</h2>');
 			}
 			
@@ -274,18 +262,13 @@ $('#refueling').change(function() {
 		$('#client-refueling').remove();
 	}
 })
-
 //------------- ADD CLIENT NUMBER --------------
-
 $('#clientNumber').change(function(){
-
 	if( $(this).val() == '1' )
 	{
 		$('#clientFormNumber').append('<div id="client-number-form"><h2><i class="fas fa-user-plus"></i> Dodaj</h2><div class="form-group invoices-type-select"><select name="clientType" id="clientType" class="form-control"><option value="0" selected></option><option value="1">Nowy klient</option><option value="2">Istniejący klient</option></select><div id="client-number-select"></div></div></div>');
-
 		$('#clientType').change(function () {
 			$('#client-number-select').html("");
-
 			if( $(this).val() == "1" )
 			{
 				$('#client-number-select').html('<br><div class="form-group"><input type="text" name="clientFirstname" class="form-control" placeholder="Imię"></div><div class="form-group"><input type="text" name="clientLastname" class="form-control" placeholder="Nazwisko"></div><div class="form-group"><input type="text" name="clientPhone" class="form-control" placeholder="Numer telefonu"></div><input type="hidden" name="clientCode" value="<?php $d = "12". date('YmdHis'); echo $d;?>">');
@@ -293,7 +276,6 @@ $('#clientNumber').change(function(){
 			else if ( $(this).val() == "2" )
 			{
 				$('#client-number-select').html('<br><div class="form-group"><input type="text" id="searchClient" name="searchClient" class="form-control" placeholder="Szukaj klienta"><div id="suggestion-box"></div></div>');
-
 				$("#searchClient").keyup(function(){
 					$value=$(this).val();
 					$.ajax({
@@ -306,12 +288,10 @@ $('#clientNumber').change(function(){
 						}
 					});
 				});
-
 				function selectNumberClient(val) {
 					$("#searchClient").val(val);
 					$("#suggesstion-box").hide();
 				}
-
 			}
 			else
 			{
@@ -323,21 +303,16 @@ $('#clientNumber').change(function(){
 	{
 		$('#client-number-form').remove();
 	}
-
 })
-
 //------------- ADD INVOICES -------------------
 	
 $('#category').change(function(){
 	if( $(this).val() == '2' )
 	{
 		$('#invoices-new').append('<div id="invoices-form"><h2><i class="fas fa-user-plus"></i> Dodaj</h2><div class="form-group invoices-type-select"><select name="invoices-type" id="invoices-type" class="form-control"><option value="0" selected></option><option value="1">Osoba prywatna</option><option value="2">Firma</option></select><div id="invoices-data"></div></div></div>');
-
 		$('#invoices-type').change(function () {
 			$('#invoices-data').html("");
-
 			var invoicesPlace = '<div class="form-group"><input type="text" name="invoicesNIP" class="form-control" placeholder="NIP"></div><div class="form-row"><div class="form-group col-md-6"><input type="text" name="invoicesPostalCode" class="form-control" placeholder="Kod pocztowy"></div><div class="form-group col-md-6"><input type="text" name="invoicesPlace" class="form-control autocomplete" placeholder="Miejscowość"></div></div><div class="form-row"><div class="form-group col-md-6"><input type="text" name="invoicesStreet" class="form-control" placeholder="Ulica"></div><div class="form-group col-md-6"><input type="text" name="invoicesHouseNumber" class="form-control" placeholder="Nr domu/lokalu"></div></div>'; 
-
 			if ($(this).val() == '1'){
 				$('#invoices-data').html('<h2>Osoba prywatna</h2><div class="form-row"><div class="form-group col-md-6"><input type="text" name="invoicesFirstname" class="form-control" placeholder="Imię"></div><div class="form-group col-md-6"><input type="text" name="invoicesLastname" class="form-control" placeholder="Nazwisko"></div></div>'+invoicesPlace);
 			}
@@ -347,7 +322,6 @@ $('#category').change(function(){
 			else {
 				$('#invoices-data').html("");
 			}
-
 		})
 	}
 	else
@@ -356,10 +330,5 @@ $('#category').change(function(){
 	}
 })
 	
-
 </script>
-
-
-
-
 @endsection
