@@ -158,4 +158,30 @@ class SearchController extends Controller
         }
     }
 
+
+    public function orderHistory(Request $request)
+    {
+        if($request->ajax())
+        {
+            $output = "";
+
+            $products = DB::table('products_in_order')->where('orders_id',$request->id)
+                                             ->get();
+
+            if($products)
+            {
+                foreach($products as $key => $prod)
+                { 
+                    $output .= '<tr>
+                                    <td>'. DB::table('products')->where('id',$prod->products_id)->pluck('name')->first() .'</td>
+                                    <td>'. $prod->buying_price .'</td>
+                                    <td>'. $prod->amount .'</td>
+                                </tr>';
+                }
+
+                return Response($output);
+            }
+        }
+    }
+
 }

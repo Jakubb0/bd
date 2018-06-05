@@ -51,8 +51,8 @@ class LoginController extends Controller
 	}
 	public function postUpdate(Request $request)
 	{
-
-		$this->validate($request, [
+/*
+		$request->validate([
 
 			'login' => 'required|min:3',
 			'pass' => 'required|min:8',
@@ -61,7 +61,7 @@ class LoginController extends Controller
 			'tel' => 'required|regex:/[1-9]{1}[0-9]{8}/|max:9'
 
 		]);
-
+*/
 		pracownik::loginupdate($request);	
 		logs::addLog("Zaktualizowano dane", "good", "employee");	
 
@@ -75,8 +75,7 @@ class LoginController extends Controller
     	]);
     	
 		if (Auth::attempt(['login' => $request['login'], 'password' => $request['pass']])) {
-			
-
+		
 
 			DB::table('pracownicy')->where('id', Auth::id())->update(array(
                                  'login_date'=>date("Y-m-d H:i:s"),

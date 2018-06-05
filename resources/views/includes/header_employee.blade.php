@@ -27,7 +27,7 @@
         <ul class="navbar-nav">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> <?=$witaj[0]?> <span class="caret"></span></a>
-            <div class="dropdown-menu">
+            <div class="dropdown-menu fix">
               <a class="dropdown-item" href="#"><i class="fa fa-cogs"></i> Panel Użytkownika</a>
               <a class="dropdown-item" href="#"><i class="fa fa-history"></i> Historia</a></a>
               <div class="dropdown-divider"></div>

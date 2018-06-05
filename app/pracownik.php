@@ -63,11 +63,13 @@ class pracownik extends Model implements Authenticatable
              'password_changed'=>1,
 		));
 
+/*
 		DB::update('update pracownicy set login = ? where id = 1' , [$login]);
 		DB::update('update pracownicy set password =? where id = 1' , [$pass]);
 		DB::update('update pracownicy set name = ? where id = 1' , [$name]);
 		DB::update('update pracownicy set surname = ? where id = 1' , [$surn]);
 		DB::update('update pracownicy set phone = ? where id = 1' , [$tel]);
+		*/
 
 	}
     

@@ -45,7 +45,7 @@
 	        <label for="tel">Telefon</label>
 	        <input type="number" class="form-control" name="tel" id="tel">
 	      </div>
-	      <button type="submit" class="btn btn-primary">Zajerestruj</button>
+	      <button type="submit" class="btn btn-primary">Zarejestruj</button>
 	      <input type="hidden" name="_token" value="{{ Session::token() }}" />
 	    </form>
 	</div>
