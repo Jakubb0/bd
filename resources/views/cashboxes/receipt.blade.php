@@ -14,13 +14,13 @@
 
 <h1><i class="fas fa-desktop"></i> Paragon</h1>
 
-
+@if(Session::has('cashbox'))
 
 
 		<div class="row">
 	
 
-			 
+			
 			<div class="col-sm-12 col-md-12 col-md-offset-3 col-sm-offset-3">
 				<table class="table table-hover">
 					<thead class="table-th">
@@ -36,31 +36,29 @@
 					<?php $i=1; 
 					$sum = 0;
 					?>
-					@if(Session::has('cashbox'))
-						@foreach( $products->items as $product )
-							
-						<?php
+					@foreach( $products->items as $product )
 						
-						if( $product['item']['vat'] == "8" ) { $price = ($product['item']['price'] * 0.08) + $product['item']['price']; }
-						else { $price = ($product['item']['price'] * 0.23) + $product['item']['price']; }
+					<?php
+					
+					if( $product['item']['vat'] == "8" ) { $price = ($product['item']['price'] * 0.08) + $product['item']['price']; }
+					else { $price = ($product['item']['price'] * 0.23) + $product['item']['price']; }
 
-						$t = $price*$product['qty'];
+					$t = $price*$product['qty'];
+
+					?>
+						<tr>
+							<td>{{$i++}}</td>
+							<td>{{$product['item']['name']}}</td>
+							<td>{{$product['qty']}}</td>
+							<td>{{$price}} zł</td>
+							<td>{{$t}} zł</td>	
+						</tr>
+
+						<?php 
+						$sum += $t; 
 
 						?>
-							<tr>
-								<td>{{$i++}}</td>
-								<td>{{$product['item']['name']}}</td>
-								<td>{{$product['qty']}}</td>
-								<td>{{$price}} zł</td>
-								<td>{{$t}} zł</td>	
-							</tr>
-
-							<?php 
-							$sum += $t; 
-
-							?>
-						@endforeach
-					@endif
+					@endforeach
 					<?php
 						if( isset($_POST['fuelPrice']) )
 						{
@@ -85,17 +83,21 @@
 				</table>
 			</div>
 		</div>
-	
-	
+	@else
+		<div class="row">
+			<div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+				<h2>Nie ma żadnego zamówienia</h2>
+			</div>
+		</div>
+	@endif
 
 	<div class="col-sm-12 print-hidden">
 	   
 		  <button onclick="printReceipt()" class="btn btn-primary">Drukuj paragon</button>
 	      <input type="hidden" name="_token" value="{{ Session::token() }}" />
-	@if(isset($_POST['clientCode'] ))
-		<div class="clientCode"><?=$_POST['clientCode'];?></div>
+<div class="clientCode"><?=$_POST['clientCode'];?></div>
 		<button onclick="printClientCode()" id="printCode" class="btn btn-primary">Drukuj kod klienta</button>
-	@endif
+
 	      <script>
 	      	function printReceipt() {
 			    window.print();
@@ -134,7 +136,6 @@
 			<hr class="receipt-line">
 			<div class="receipt-product">
 				<?php $sum = 0; ?>
-				@if(Session::has('cashbox'))
 				@foreach( $products->items as $product )
 				
 				<?php
@@ -153,7 +154,6 @@
 					<?php $sum += $t; ?>
 
 				@endforeach
-				@endif
 				<?php
 					if( isset($_POST['fuelPrice']) )
 					{
