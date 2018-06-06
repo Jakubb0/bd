@@ -1,6 +1,5 @@
 <?php 
 	use Illuminate\Support\Facades\Storage;
-	$fuelsList = DB::table('fuels')->get();
 ?>
 
 @extends('layouts.master')
@@ -35,7 +34,7 @@
 							<td>{{$product['item']['price']}} zł</td>
 							<td>{{$product['price']}} zł</td>
 							<td>
-								<a href="#" class="btn btn-info">Usuń 1 sztukę</a>
+								<a href="#" class="btn btn-info">Usuń 1 szukę</a>
 								<a href="#" class="btn btn-info">Usuń wszystko</a>
 							</td>
 						</tr>

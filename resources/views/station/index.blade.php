@@ -11,14 +11,13 @@
 
 <?php $loyal = DB::table('fuels')->get(); ?>
 
-<div class="jumbotron">
 @foreach ($loyal as $i => $data) 
 <h2>{{$data->type}}</h2>
 <div class="progress" style="width:300px;">
 @if ($data->amount > 2500)
 <div class="progress-bar progress-bar-animated bg-success" style="width:{{$data->amount/50}}%"></div>
 </div>
-@elseif ($data->amount < 500) 
+@elseif ($data->amount < 500)
 <div class="progress-bar progress-bar-animated bg-danger" style="width:{{$data->amount/50}}%"></div>
 </div>
 @else

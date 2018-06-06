@@ -54,7 +54,6 @@ class CashboxController extends Controller
         
         return view("cashboxes.cashboxesUse");   
     }
-
     public function postTransaction()
     {
         dd(session('cashbox'));
@@ -95,8 +94,10 @@ class CashboxController extends Controller
                     
                     $fuelAmount = $actualAmount-$fuelQty;
 
+
                     DB::table('fuels')->where('type', $_POST['fuelTypeSelect'])->update(array(
                      'amount'=>$fuelAmount));
+
 
             /*
             if (Session::has('cashbox'))
