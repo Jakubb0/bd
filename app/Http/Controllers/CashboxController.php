@@ -8,7 +8,6 @@ use App\Cart;
 use DB;
 use Session;
 use Illuminate\Support\Facades\Auth;
-
 class CashboxController extends Controller
 {
     public function view()
@@ -61,7 +60,6 @@ class CashboxController extends Controller
         {
            return view("cashboxes.receipt");
         }
-
         elseif ($_POST['category'] == 2)
         {
             $token = $_POST['datatoken'].$_POST['_token'];
@@ -80,31 +78,25 @@ class CashboxController extends Controller
                 {
                     $loyalID = 1;
                 }
-
                 if( isset($_POST['fuelPrice']) ) 
                 {
                     $distributor = $_POST['distributor']; 
                     $fuelQty = $_POST['fuelQtySelect'];
-
                     //$selectActualAmount = DB::select("SELECT amount FROM fuels WHERE type = '". $_POST['fuelTypeSelect'] ."'");
-
                     $selectActualAmount = DB::table('fuels')->where('type', $_POST['fuelTypeSelect'])->first();
                     $actualAmount = $selectActualAmount->amount;
                     
                     
                     $fuelAmount = $actualAmount-$fuelQty;
-
-
                     DB::table('fuels')->where('type', $_POST['fuelTypeSelect'])->update(array(
                      'amount'=>$fuelAmount));
-
+} } } } }
 
             /*
             if (Session::has('cashbox'))
             {
                 $value = session()->get('cashbox');
 >>>>>>> 859df6b053dce1818e0e98afc5fdc40d98c7774d
-
                 }
                 else 
                 {
@@ -123,22 +115,18 @@ class CashboxController extends Controller
                     'created_at' => date("Y-m-d H:i:s"),
                     'updated_at' => date("Y-m-d H:i:s")    
                 ]);
-
                 $products = session()->get('cashbox');
                 //dd($products);
                 if( $products != '' )
                 {
                     $i = 0;
-
                     foreach( $products->items as $product )
                     {
                         $productID = DB::select("SELECT id FROM products WHERE name = '". $product['item']['name'] ."'");
-
                         foreach($productID as $key => $s)
                         {
                             $productID = $s->id;
                         }
-
                         DB::table('products_in_transaction')->insert([
                             'transactions_id' => $idTransaction,
                             'products_id' => $productID,
@@ -147,14 +135,12 @@ class CashboxController extends Controller
                     }
                 }
                 
-
                 return view("cashboxes.invoice");
             }
             else
             {
                 return view("cashboxes.invoice");
             }
-
         }
         else 
         {
@@ -175,7 +161,6 @@ class CashboxController extends Controller
     {
         return view("cashboxes.clientCode");
     }
-
     public function back()
     {
         session()->forget('cashbox');

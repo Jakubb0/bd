@@ -41,7 +41,7 @@
 					<a href="{{ route('product.getCart') }}"><i class="fas fa-file-alt"></i> Zamówienia</a>
 				</li>
 				<li>
-					<a href="{{ route('ordersHistory') }}"><i class="fas fa-file-alt"></i>Histoira zamówień</a>
+					<a href="{{ route('ordersHistory') }}"><i class="fas fa-file-alt"></i> Historia zamówień</a>
 				</li>
 				<li>
 					<a href="{{ route('loyalView') }}"><i class="fas fa-address-card"></i> Numer stałego klienta</a>
