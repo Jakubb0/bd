@@ -13,21 +13,6 @@
 	@if(Session::has('cart'))
 		<div class="row">
 
-			<div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-				<ul class="list-group">
-
-					@foreach($products as $product)
-						<li class="list-group-item">
-							<span class="badge badge-secondary">{{ $product['qty'] }}</span>
-							<strong>{{ $product['item']['name'] }}</strong>
-							<span class="label label-success">{{ $product['price'] }}</span>
-							
-
-								
-						</li>
-					@endforeach
-				</ul>
-
 			<div class="col-sm-12 col-md-12 col-md-offset-3 col-sm-offset-3">
 				<table class="table table-hover">
 					<thead class="table-th">
@@ -40,7 +25,7 @@
 							<th></th>
 						</tr>
 					</thead>
-					<?php $i = 0; ?>
+					<?php $i = 1;  $ttl = 0; ?>
 					@foreach($products as $product)
 						<tr>
 							<td>{{$i++}}</td>
@@ -48,8 +33,9 @@
 							<td>{{$product['qty']}}</td>
 							<td>{{$product['item']['price']}} zł</td>
 							<td>{{$product['price']}} zł</td>
-							
 						</tr>
+
+						<?php $ttl += $product['item']['price']*$product['qty']; ?>
 					@endforeach
 				</table>
 
@@ -57,19 +43,13 @@
 		</div>
 		<div class="row">
 			<div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-
-				<strong>Cena łącznie: {{ $totalPrice }}</strong>
-
-				<strong>Razem: {{ $totalPrice }}</strong>
-
-				<strong>Cena łącznie: {{ $totalPrice }}</strong>
-
+				<strong>Cena łącznie: {{ $ttl }} zł</strong>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
 
-				<a href="{{ route('tCart') }}" class="btn btn-success">Zamów</a>
+				
 
 				<form action="{{route('product.order')}}" method="get">
 					<button type="submit" name="test" value="1" class="btn btn-success">Zamów</button>

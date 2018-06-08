@@ -15,7 +15,6 @@
 
 			<div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
 				<ul class="list-group">
-
 					@foreach($products as $product)
 						<li class="list-group-item">
 							<span class="badge badge-secondary">{{ $product['qty'] }}</span>

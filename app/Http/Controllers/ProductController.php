@@ -136,7 +136,7 @@ class ProductController extends Controller
         {
             $value = session()->get('cart');
 
-            for( $i=1; $i <= count($value->items); ++$i )
+            for( $i=1; $i <= count($value->items); $i++ )
             {
 
                 $price = $value->items[$i]['price'];
@@ -178,19 +178,77 @@ class ProductController extends Controller
 
         
 
-        if (Session::has('cart'))
-        {
-
-            $value = $request->session()->get('cart');
-
-            echo $qty = $value->items[1]['qty'];
-            echo $price = $value->items[1]['price'];
-            echo $item = $value->items[1]['item']->name;
-            dd($value);
-            
-            dd($value);
+        if(!Session::has('cart')) {
+            return redirect()->route('product.shoppingCart');
         }
+
+       $oldCart = Session::get('cart');
+       $cart = new Cart($oldCart);
+
+        $id = DB::table('orders')->insertGetId([     
+                'providers_id' => 1,
+                'pracownicy_id' => 1,
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s")    
+        ]);
+
+       
+        foreach( $cart->items as $product ) 
+        {
+            //dd($product['item']['id']);
+            $price = $product['price'];
+            $amount = $product['qty'];
+            $productID = $product['item']['id'];
+
+
+            DB::table('products_in_order')->insert([
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
+                'orders_id' => $id,
+                'products_id' => $productID,
+                'buying_price' => $price,
+                'amount' => $amount
+            ]);
+
+
+            $selectProduct = DB::table('products_in_depots')->select('products_id')->where('products_id', '!=', $productID)->get();
+
+
+           // dd($productID);
+
+            if( DB::table('products_in_depots')->where('products_id', '=', $productID)->first() )
+            {
+                
+
+                
+                $productAMOUNT = DB::table('products_in_depots')->where('products_id', '=', $productID)->get();
+                $actualAmountProd = $productAMOUNT[0]->amount_in_depot;
+
+                $newAmount = $actualAmountProd+$amount;
+
+                DB::table('products_in_depots')
+                    ->where('products_id', $productID)
+                    ->update(['amount_in_depot' => $newAmount]);
+                
+            }
+            else
+            {
+                DB::table('products_in_depots')->insert([
+                    'created_at' => date("Y-m-d H:i:s"),
+                    'updated_at' => date("Y-m-d H:i:s"),
+                    'depots_id' => 1,
+                    'products_id' => $productID,
+                    'amount_in_depot' => $amount
+                ]);
+                
+            }
+            
+        }       
+
+         session()->forget('cart');
+         return redirect()->route('product.getCart');
     }
+
 
     public function ordersHistory()
     {

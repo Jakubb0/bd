@@ -14,19 +14,12 @@
 
 <h2><i class="fas fa-shopping-basket"></i> Produkty</h2>
 <a href="{{ route('getNewProduct') }}" class="btn btn-info">Nowy produkt</a>
-<table class="table">
-	<thead class="table-th">
-		<tr>
-			<th scope="col">#</th>
-			<th scope="col">Nazwa produktu</th>
-			<th scope="col">Zdjęcie</th>
-			<th scope="col">Cena netto</th>
-			<th scope="col">Stawka VAT</th>
-			<th scope="col">Cena brutto</th>
-			<th scope="col">Kategoria</th>
-		</tr>
-	</thead>
-	<?php $i = 0; ?>
+
+	<?php $i = 0; $x = 0; ?>
+	
+
+<div class="divTable">
+	<div class="divTableBody">
 	@foreach($products as $product => $data)
 
 		<?php
@@ -38,20 +31,40 @@
 			list($wi,$he)=getimagesize(__DIR__.'/../../../public/images/product/'.($data->image));
 				if( $wi>$he ) { $he *= 300/$wi; $wi = 300; }
 				else { $wi *= 300/$he; $he = 300; }
-			
 		?>
-		<tr>
-			<td><?php echo ++$i ?></td>
-			<td><a href="#" class="edit" data-toggle="modal" data-target="#myModal{{$data->id}}">{{$data->name}}</a></td>
-			<td><img src="/images/product/{{ $data->image }}" class="small-icon-product"></td>
-			<td>{{$data->price}} zł</td>
-			<td>{{$data->vat}}%</td>
-			<td>{{round($p,2)}} zł</td>
-			<td>{{$data->category}}</td>
-			<td><a href="{{ route('product.addToCart', ['id' => $data->id]) }}" class="btn btn-success" role="button">Zamów</a></td>
-		</tr>
+			
+			
+			<div class="divTableRow">
+				
+				<div class="divTableCell"><?php echo ++$i ?></div>
+				<div class="divTableCell"><a href="#" class="edit" data-toggle="modal" data-target="#myModal{{$data->id}}">{{$data->name}}</a></div>
+				<div class="divTableCell"><img src="/images/product/{{ $data->image }}" class="small-icon-product"></div>
+				<div class="divTableCell">{{$data->price}} zł</div>
+				<div class="divTableCell">{{$data->vat}}%</div>
+				<div class="divTableCell">{{round($p,2)}} zł</div>
+				<div class="divTableCell">{{$data->category}}</div>
+				<div class="divTableCell"><form action="{{ route('product.addToCart', ['id' => $data->id]) }}" method="GET"><input type="number" name="qty" id="qty" value="1"><button class="btn btn-success" role="button">Zamów</button></form></div>
+				
+			</div>
+			
 
+	@endforeach
+	</div>
+</div>
+		
+ 
+@foreach($products as $product => $data)
 
+<?php
+			if( $data->vat == "8" ) { $p = ($data->price * 0.08) + $data->price; }
+			else { $p = ($data->price * 0.23) + $data->price; }
+			
+			if( $data->image == '' ) $data->image = 'no-product-image-available.png'; 
+
+			list($wi,$he)=getimagesize(__DIR__.'/../../../public/images/product/'.($data->image));
+				if( $wi>$he ) { $he *= 300/$wi; $wi = 300; }
+				else { $wi *= 300/$he; $he = 300; }
+		?>
 		<div class="modal fade" id="myModal{{$data->id}}">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
@@ -87,6 +100,6 @@
 		</div>
 
 	@endforeach
-</table>
+
 
 @endsection

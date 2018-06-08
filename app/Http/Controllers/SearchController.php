@@ -43,24 +43,36 @@ class SearchController extends Controller
 
             $products = DB::table('products')->where('name','LIKE','%'.$request->search.'%')
                                              ->orWhere('barcode', 'LIKE', '%'.$request->search.'%')->get();
-            if($products)
+
+            $prod2 = DB::table('products_in_depots')
+                    ->leftJoin('products', 'products_in_depots.products_id', '=', 'products.id')
+                    ->orWhere('products.name', 'LIKE', '%'.$request->search.'%')
+                    ->orWhere('barcode', 'LIKE', '%'.$request->search.'%')
+                    ->where('products_in_depots.amount_in_depot', '>', 0)
+                    ->get();
+
+            if($prod2)
             {
                 $i = 0;
 
-                foreach($products as $key => $prod)
+                foreach($prod2 as $key => $prod)
                 {
                         
                     if( $prod->vat == "8" ) { $p = ($prod->price * 0.08) + $prod->price; }
                     else { $p = ($prod->price * 0.23) + $prod->price; }
 
                     $output .= '
-                        <form action="'. route('product.addToCashbox', ['id' => $prod->id]) .'" method="GET">
-                                '. $prod->id .'
-                                '. $prod->name .'
-                                '. $p .'
-                                <input type="number" name="qty" id="qty">
-                                <input type="submit" name="add_product" class="btn btn-success product-list" role="button" value="Zamów">  
-                        </form>
+                        <div class="search-product">
+                            <form action="'. route('product.addToCashbox', ['id' => $prod->id]) .'" method="GET">
+                                    '. $prod->id .'
+                                    '. $prod->name .'
+                                    '. $p .'
+                                    <div class="input-right">
+                                        <input type="number" name="qty" id="qty" value="1">
+                                        <input type="submit" name="add_product" class="btn btn-success product-list" role="button" value="Zamów">  
+                                    </div>
+                            </form>
+                        </div>
                     ';
                 }
 

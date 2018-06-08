@@ -92,6 +92,8 @@
 	   
 		  <button onclick="printReceipt()" class="btn btn-primary">Drukuj paragon</button>
 	      <input type="hidden" name="_token" value="{{ Session::token() }}" />
+
+	      <a href="{{ route('cashbox.back') }}" class="btn btn-primary">Powrót do kasy</a>
 	@if(isset($_POST['clientCode'] ))
 		<div class="clientCode"><?=$_POST['clientCode'];?></div>
 		<button onclick="printClientCode()" id="printCode" class="btn btn-primary">Drukuj kod klienta</button>

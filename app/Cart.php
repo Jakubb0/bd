@@ -28,16 +28,24 @@ class Cart
 				$storedItem = $this->items[$id];
 			}
 		}
-/*	
-		if($_GET['qty'] != '')
+
+		if( isset($_GET['qty']) )
 		{
-			$storedItem['qty'] += $_GET['qty'];
+			if($_GET['qty'] != '')
+			{
+				$storedItem['qty'] += $_GET['qty'];
+			}
+			else
+			{
+				$storedItem['qty']++;
+			}
 		}
 		else
 		{
 			$storedItem['qty']++;
 		}
-		*/
+		
+		
 
 		
 		$storedItem['price'] = $item->price * $storedItem['qty'];

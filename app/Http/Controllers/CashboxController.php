@@ -28,7 +28,7 @@ class CashboxController extends Controller
     }
     public function selectPOST() 
     {
-        if(!session()->has('cashbox_active'))
+        if(!session()->has('cashbox_actie'))
         {
             session()->put('cashbox_active', $_POST['cashbox_number']);
             return redirect()->route("useCashbox");
@@ -53,20 +53,16 @@ class CashboxController extends Controller
         
         return view("cashboxes.cashboxesUse");   
     }
+
     public function postTransaction()
     {
-        dd(session('cashbox'));
         if($_POST['category'] == 1)
         {
-           return view("cashboxes.receipt");
-        }
-        elseif ($_POST['category'] == 2)
-        {
+
             $token = $_POST['datatoken'].$_POST['_token'];
             if( !DB::select("SELECT * FROM transactions WHERE token='". $token ."'") )
             {
-                if( !DB::select("SELECT * FROM invoices WHERE NIP='". $_POST['invoicesNIP'] ."'") )
-                cashbox::addInvoicesData();
+                
                 if(isset($_POST['clientPhone']))
                 {
                     if( !DB::select("SELECT * FROM loyalclients WHERE phone='". $_POST['clientPhone'] ."'"))
@@ -82,7 +78,6 @@ class CashboxController extends Controller
                 {
                     $distributor = $_POST['distributor']; 
                     $fuelQty = $_POST['fuelQtySelect'];
-                    //$selectActualAmount = DB::select("SELECT amount FROM fuels WHERE type = '". $_POST['fuelTypeSelect'] ."'");
                     $selectActualAmount = DB::table('fuels')->where('type', $_POST['fuelTypeSelect'])->first();
                     $actualAmount = $selectActualAmount->amount;
                     
@@ -90,13 +85,6 @@ class CashboxController extends Controller
                     $fuelAmount = $actualAmount-$fuelQty;
                     DB::table('fuels')->where('type', $_POST['fuelTypeSelect'])->update(array(
                      'amount'=>$fuelAmount));
-} } } } }
-
-            /*
-            if (Session::has('cashbox'))
-            {
-                $value = session()->get('cashbox');
->>>>>>> 859df6b053dce1818e0e98afc5fdc40d98c7774d
                 }
                 else 
                 {
@@ -132,6 +120,102 @@ class CashboxController extends Controller
                             'products_id' => $productID,
                             'amount' => $product['qty']
                         ]);   
+
+                        $productAMOUNT = DB::table('products_in_depots')->where('products_id', $productID)->get();
+                        $actualAmountProd = $productAMOUNT[$i]->amount_in_depot;
+
+                        $productNewAmount = $actualAmountProd-$product['qty'];
+
+                        //dd($productNewAmount);
+
+                        $x = DB::table('products_in_depots')->where('products_id', $productID)->update(array(
+                     'amount_in_depot'=>$productNewAmount));
+
+
+                    }
+                }
+                
+                return view("cashboxes.receipt");
+            }
+            else
+            {
+                return view("cashboxes.receipt");
+            }
+
+        }
+        elseif ($_POST['category'] == 2)
+        {
+            $token = $_POST['datatoken'].$_POST['_token'];
+            if( !DB::select("SELECT * FROM transactions WHERE token='". $token ."'") )
+            {
+                if( !DB::select("SELECT * FROM invoices WHERE NIP='". $_POST['invoicesNIP'] ."'") )
+                cashbox::addInvoicesData();
+                if(isset($_POST['clientPhone']))
+                {
+                    if( !DB::select("SELECT * FROM loyalclients WHERE phone='". $_POST['clientPhone'] ."'"))
+                    loyalclient::addClientCard();
+                    $cCode = $_POST['clientCode'];
+                    $loyalID = $loyalclientID = DB::select("SELECT id FROM loyalclients WHERE clientCode = '". $cCode ."'");
+                }
+                else 
+                {
+                    $loyalID = 1;
+                }
+                if( isset($_POST['fuelPrice']) ) 
+                {
+                    $distributor = $_POST['distributor']; 
+                    $fuelQty = $_POST['fuelQtySelect'];
+                    $selectActualAmount = DB::table('fuels')->where('type', $_POST['fuelTypeSelect'])->first();
+                    $actualAmount = $selectActualAmount->amount;
+                    
+                    
+                    $fuelAmount = $actualAmount-$fuelQty;
+                    DB::table('fuels')->where('type', $_POST['fuelTypeSelect'])->update(array(
+                     'amount'=>$fuelAmount));
+                }
+                else 
+                {
+                    $distributor = 1;
+                }
+                
+                $idTransaction = DB::table('transactions')->insertGetId([     
+                    'client_id' => 1,
+                    'sum' => 1,
+                    'loyalclients_id' => $loyalID,
+                    'distributor_id' => $distributor,
+                    'payment_method' => 'cash',
+                    'proof' => '0',
+                    'cashboxes_id' => '1',
+                    'token' => $token,
+                    'created_at' => date("Y-m-d H:i:s"),
+                    'updated_at' => date("Y-m-d H:i:s")    
+                ]);
+                $products = session()->get('cashbox');
+                //dd($products);
+                if( $products != '' )
+                {
+                    $i = 0;
+                    foreach( $products->items as $product )
+                    {
+                        $productID = DB::select("SELECT id FROM products WHERE name = '". $product['item']['name'] ."'");
+                        foreach($productID as $key => $s)
+                        {
+                            $productID = $s->id;
+                        }
+                        DB::table('products_in_transaction')->insert([
+                            'transactions_id' => $idTransaction,
+                            'products_id' => $productID,
+                            'amount' => $product['qty']
+                        ]);   
+
+                        $productAMOUNT = DB::table('products_in_depots')->where('products_id', $productID)->get();
+                        $actualAmountProd = $productAMOUNT->amount_in_depot;
+
+                        $productNewAmount = $actualAmountProd-$product['qty'];
+
+                        DB::table('products_in_depots')->where('products_id', $productID)->update(array(
+                     'amount_in_depot'=>$productNewAmount));
+
                     }
                 }
                 
