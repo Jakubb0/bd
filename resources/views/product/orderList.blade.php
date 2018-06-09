@@ -25,8 +25,8 @@
 	    <tbody class="table-bordered">
 	      <tr class="showproducts" data-value="{{$data->id}}">  
 	        <td>{{$data->id}}</td>
-	        <td>{{$data->providers_id}}</td>
-	        <td>{{$data->pracownicy_id}}</td>             
+	        <td>{{DB::Table("providers")->where("id", $data->providers_id)->pluck("name")->first()}}</td>
+	        <td>{{DB::Table("pracownicy")->where("id", $data->pracownicy_id)->pluck("name")->first() . ' ' . DB::Table("pracownicy")->where("id", $data->pracownicy_id)->pluck("surname")->first()}}</td>             
 	      </tr>
 	    </tbody>
 	@endforeach
