@@ -136,6 +136,12 @@ hr.medium-hr {
 	visibility: hidden !important;
 }
 
+.fuel-icon {
+	max-width: 25px;
+	margin-top: -5px;
+	margin-right: 10px;
+}
+
 @media print {
 
 	/* cyrillic */

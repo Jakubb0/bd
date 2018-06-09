@@ -12,7 +12,7 @@
 <?php $loyal = DB::table('fuels')->get(); ?>
 
 @foreach ($loyal as $i => $data) 
-<h2>{{$data->type}}</h2>
+<h2><img src="{{ URL::to('images/fuels/'. $data->type  .'') }}.png" class="fuel-icon">{{$data->type}} ({{$data->price}} zł)</h2>
 <div class="progress" style="width:300px;">
 @if ($data->amount > 2500)
 <div class="progress-bar progress-bar-animated bg-success" style="width:{{$data->amount/50}}%"></div>
