@@ -13,7 +13,6 @@
 <?php $products = DB::table('products')->get(); ?>
 
 <h2><i class="fas fa-shopping-basket"></i> Produkty</h2>
-<a href="{{ route('getNewProduct') }}" class="btn btn-info">Nowy produkt</a>
 <table class="table">
 	<thead class="table-th">
 		<tr>
@@ -25,13 +24,12 @@
 			<th scope="col">Cena brutto</th>
 			<th scope="col">Kategoria</th>
 			<th scope="col">Ilość</th>
-			<th></th>
+
 		</tr>
 	</thead>
 	<?php $i = 0; $x = 0; ?>
-	<form action="{{route('product.addToCart2')}}" method="GET">
-		<input type="submit" class="btn btn-success" value="Zamów">
-	@foreach($products as $product => $data)
+	
+	@foreach($products_depots as $product => $data)
 
 		<?php
 			if( $data->vat == "8" ) { $p = ($data->price * 0.08) + $data->price; }
@@ -53,8 +51,8 @@
 			<td>{{$data->vat}}%</td>
 			<td>{{round($p,2)}} zł</td>
 			<td>{{$data->category}}</td>
-			<td><input type="number" name="qty[{{$data->id}}]" value="0"></td>
-			<td></td>
+			<td>{{$data->amount_in_depot}}</td>
+
 		</tr>
 		
 		
@@ -81,7 +79,7 @@
 						  <ul class="list-group list-group-flush">
 						  	<li class="list-group-item"><b>Kategoria: </b> {{ $data->category }}</li>
 						    <li class="list-group-item"><b>Cena: </b>{{ round($p,2) }}</li>
-						    <li class="list-group-item"><b>Ilość w magazynie: </b> ...</li>
+						    <li class="list-group-item"><b>Ilość w magazynie: </b> {{ $data->amount_in_depot }}</li>
 						  </ul>
 						</div>
 					</div>
@@ -95,7 +93,7 @@
 		</div>
 
 	@endforeach
-	</form>
+
 </table>
 
 @endsection

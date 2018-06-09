@@ -209,11 +209,13 @@ class CashboxController extends Controller
                         ]);   
 
                         $productAMOUNT = DB::table('products_in_depots')->where('products_id', $productID)->get();
-                        $actualAmountProd = $productAMOUNT->amount_in_depot;
+                        $actualAmountProd = $productAMOUNT[$i]->amount_in_depot;
 
                         $productNewAmount = $actualAmountProd-$product['qty'];
 
-                        DB::table('products_in_depots')->where('products_id', $productID)->update(array(
+                        //dd($productNewAmount);
+
+                        $x = DB::table('products_in_depots')->where('products_id', $productID)->update(array(
                      'amount_in_depot'=>$productNewAmount));
 
                     }

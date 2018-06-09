@@ -80,6 +80,11 @@ Route::group(['middleware' => 'auth'], function() {
 		'as' => 'getProduct'
 	]);
 
+	Route::get('/product-list-cash', [
+		'uses' => 'ProductController@getProductCash',
+		'as' => 'getProductCash'
+	]);
+
 	Route::get('/new-product', [
 		'uses' => 'ProductController@getNewProduct',
 		'as' => 'getNewProduct'
@@ -185,6 +190,11 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('/add-to-cart/{id}', [
 		'uses' => 'ProductController@getAddToCart',
 		'as' => 'product.addToCart'
+	]);
+
+	Route::get('/add-to-cart', [
+		'uses' => 'ProductController@getAddToCart2',
+		'as' => 'product.addToCart2'
 	]);
 
 	Route::get('/add-to-cashbox/{id}', [

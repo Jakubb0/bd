@@ -75,7 +75,6 @@
 <script>
 	var $this;
 	$(document).on("click", ".productQty", function() {
-		var currentElementModelAttr = $(this).attr('data-model-attr');
 		$this = $(this);
 		var input = $('<input>', {
 			'type': 'text',

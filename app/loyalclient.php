@@ -24,4 +24,20 @@ class loyalclient extends Model
 
     	$addClientCard->save();
     }
+
+    public static function loyalAdd()
+    {
+        $firstname = $_POST['firstname'];
+        $lastname = $_POST['lastname'];
+        $phone = $_POST['phone'];
+        $clientCode = $_POST['clientCode'];
+
+        $addClientCard = new loyalclient();
+        $addClientCard->firstname = $firstname;
+        $addClientCard->lastname = $lastname;
+        $addClientCard->phone = $phone;
+        $addClientCard->clientCode = $clientCode;
+
+        $addClientCard->save();
+    }
 }

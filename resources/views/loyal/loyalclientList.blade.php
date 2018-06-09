@@ -18,7 +18,6 @@
         <th scope="col">#</th>
         <th scope="col">Imię</th>
         <th scope="col">Nazwisko</th>
-        <th scope="col">Miasto</th>
         <th scope="col">Telefon</th>
         <th scope="col">Punkty</th>
         <th scope="col">Usuń</th>
@@ -28,9 +27,8 @@
     <tbody class="table-bordered">
       <tr>    
         <td>{{$data->id}}</td>
-        <td>{{$data->name}}</td>
-        <td>{{$data->surname}}</td>
-        <td>{{$data->city}}</td>
+        <td>{{$data->firstname}}</td>
+        <td>{{$data->lastname}}</td>
         <td>{{$data->phone}}</td>
         <td>{{$data->points}}</td>
         

@@ -21,6 +21,15 @@ class ProductController extends Controller
     	return view("product.product", ['products' => $products]);
     }
 
+    public function getProductCash()
+    {
+        $products = DB::table('products_in_depots')
+                        ->leftJoin('products', 'products_in_depots.products_id', '=', 'products.id')
+                        ->get();
+        
+        return view("product.productCash", ['products_depots' => $products]);
+    }
+
     public function getNewProduct()
     {
     	return view("product.newProduct");
@@ -81,6 +90,40 @@ class ProductController extends Controller
         return redirect()->route('getProduct');
     }
 
+
+    public function getAddToCart2(Request $request) {
+
+        foreach($request['qty'] as $r => $data)
+        {
+            
+                $id = $r;
+                $qty2 = $data;
+            
+
+            if($qty2 == 0) continue;
+            
+           
+
+            $product = DB::table('products')->select('id')->where('id', '=', $id)->first();
+
+            $oldCart = Session::has('cart') ? Session::get('cart') : null;
+            $cart = new Cart($oldCart);
+
+            //dd($product);
+            $cart->add2($product, $id);
+
+            
+        }
+       
+        /*$product = Products::find($id);
+
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->add($product, $product->id);
+        */
+        $request->session()->put('cart', $cart);
+        return redirect()->route('getProduct');
+    }
 
     public function getAddToCashbox(Request $request, $id) {
       
@@ -198,7 +241,7 @@ class ProductController extends Controller
             //dd($product['item']['id']);
             $price = $product['price'];
             $amount = $product['qty'];
-            $productID = $product['item']['id'];
+            $productID = $product['item']->id;
 
 
             DB::table('products_in_order')->insert([

@@ -42,7 +42,7 @@
 
 	<div class="row">
 		<div class="col-sm-6 small-card-menu">
-			<a href="{{ route('getProduct') }}" class="menu-link">
+			<a href="{{ route('getProductCash') }}" class="menu-link">
 				<div class="card menu-bg">
 					<div class="card-body center">
 						<i class="fas fa-shopping-basket"></i>
@@ -88,19 +88,8 @@
 
 	<div class="row">
 
-		<div class="col-sm-6 small-card-menu">
-			<a href="{{route('product.getCart')}}" class="menu-link">
-				<div class="card menu-bg">
-					<div class="card-body center">
-						<i class="fas fa-shipping-fast"></i>
-						<h5 class="card-title">Zamówienia</h5>
-					</div>
-				</div>
-			</a>
-		</div>
 
-
-		<div class="col-sm-6 small-card-menu">
+		<div class="col-sm-12 small-card-menu">
 			<a href="#" class="menu-link" id="call">
 				<div class="card menu-bg">
 					<div class="card-body center">

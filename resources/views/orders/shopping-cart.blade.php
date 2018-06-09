@@ -27,15 +27,16 @@
 					</thead>
 					<?php $i = 1;  $ttl = 0; ?>
 					@foreach($products as $product)
+					<?php //dd($product['item']->name); ?>
 						<tr>
 							<td>{{$i++}}</td>
-							<td>{{$product['item']['name']}}</td>
+							<td>{{$product['item']->name}}</td>
 							<td>{{$product['qty']}}</td>
-							<td>{{$product['item']['price']}} zł</td>
+							<td>{{$product['item']->price}} zł</td>
 							<td>{{$product['price']}} zł</td>
 						</tr>
 
-						<?php $ttl += $product['item']['price']*$product['qty']; ?>
+						<?php $ttl += $product['item']->price*$product['qty']; ?>
 					@endforeach
 				</table>
 

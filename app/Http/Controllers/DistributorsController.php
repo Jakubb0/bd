@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\distributors;
-use App\logs
+use App\logs;
 use DB;
 
 

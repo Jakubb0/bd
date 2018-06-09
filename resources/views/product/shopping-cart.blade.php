@@ -12,19 +12,19 @@
 
 	@if(Session::has('cart'))
 		<div class="row">
+			<?php dd(Session::has('cart')); exit;?>
 
 			<div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
 				<ul class="list-group">
 					@foreach($products as $product)
+
 						<li class="list-group-item">
 							<span class="badge badge-secondary">{{ $product['qty'] }}</span>
 							<strong>{{ $product['item']['name'] }}</strong>
 							<span class="label label-success">{{ $product['price'] }}</span>
 							
 							<a href="#" class="btn btn-info">Usuń 1 szukę</a>
-							<a href="#" class="btn btn-info">Usuń wszystko</a>
-
-								
+							<a href="#" class="btn btn-info">Usuń wszystko</a>	
 						</li>
 					@endforeach
 				</ul>
