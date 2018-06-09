@@ -1,3 +1,32 @@
+<?php 
+
+$selectAllFuels = DB::table('fuels')->get();
+$today = date("Y-m-d");
+$i = 0;
+foreach($selectAllFuels as $id => $data)
+{
+    $i++;
+    $old = $data->price;
+    $change = rand( $data->price-0.15, $data->price+0.15 )/50;
+    $newPrice = $old-$change;
+    
+    $updateData = explode(" ", $data->updated_at);
+
+    
+    if($updateData[0] != $today)
+    {
+        DB::table('fuels')
+            ->where('id', $data->id)
+            ->update(['price' => $newPrice]);
+    }
+
+}
+
+
+
+
+?>
+
 @extends('layouts.master')
 
 @section('title')

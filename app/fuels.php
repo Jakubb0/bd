@@ -7,8 +7,6 @@ use Illuminate\Http\Request;
 
 class fuels extends Model
 {
-	public $timestamps = false;
-	
 	public static function fuelsAdd(Request $request)
 	{
 		$type = $request["type"];
